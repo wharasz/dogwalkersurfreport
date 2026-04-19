@@ -179,17 +179,21 @@ footer a:hover{color:var(--teal)}
 </div>
 
 <!-- HEADER -->
-<header>
-  <div class="site-name">Dog Walker<span>Surf Report</span></div>
-  <div class="site-tagline">Checked on foot, several times daily · Real buoys, real eyes, real conditions</div>
-  <nav>
-    <a href="#report" class="active">Today's Report</a>
-    <a href="#conditions">Live Data</a>
-    <a href="#launches">Launches</a>
-    <a href="#archive">Archive</a>
-    <a href="#subscribe">Alerts</a>
-    <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a>
-  </nav>
+<header style="padding:0;position:relative;overflow:hidden">
+  <!-- Banner photo: upload your banner.jpg to GitHub alongside index.html -->
+  <img src="banner.jpg" alt="31st St Cocoa Beach" style="width:100%;height:320px;object-fit:cover;object-position:center 40%;display:block;opacity:0.7">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(13,27,42,0.3) 0%, rgba(13,27,42,0.85) 100%);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:24px 20px 20px;border-bottom:3px solid var(--teal)">
+    <div class="site-name">Dog Walker<span>Surf Report</span></div>
+    <div class="site-tagline">Checked on foot, several times daily · Real buoys, real eyes, real conditions</div>
+    <nav>
+      <a href="#report" class="active">Today's Report</a>
+      <a href="#conditions">Live Data</a>
+      <a href="#launches">Launches</a>
+      <a href="#archive">Archive</a>
+      <a href="#subscribe">Alerts</a>
+      <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a>
+    </nav>
+  </div>
 </header>
 
 <!-- CONDITIONS STRIP -->
@@ -238,41 +242,39 @@ footer a:hover{color:var(--teal)}
       </div>
 
       <!-- PHOTO PANE -->
-      <!-- ╔══════════════════════════════════════════════════════╗
-           ║  HOW TO UPDATE YOUR PHOTO EACH REPORT:              ║
-           ║  1. Upload your photo to your GitHub repo           ║
-           ║  2. Change "YOUR_PHOTO.jpg" below to the filename   ║
-           ║  3. Remove the placeholder div, uncomment the <img> ║
-           ╚══════════════════════════════════════════════════════╝ -->
       <div class="media-pane active" id="tab-photo">
-        <!-- <img src="YOUR_PHOTO.jpg" alt="Surf at Picnic Tables" class="report-photo"> -->
-        <div class="report-photo-placeholder">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Add your photo — see comments in HTML</span>
+        <!-- Photo gallery: upload report1.jpg, report2.jpg, report3.jpg to GitHub -->
+        <div id="photo-gallery" style="position:relative;background:#000">
+          <img id="gallery-img" src="report1.jpg" alt="Surf at Picnic Tables" class="report-photo" onerror="this.style.display='none';document.getElementById('gallery-placeholder').style.display='flex'">
+          <div id="gallery-placeholder" class="report-photo-placeholder" style="display:none">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>Upload report1.jpg, report2.jpg, report3.jpg to GitHub</span>
+          </div>
+          <!-- Thumbnail strip -->
+          <div style="display:flex;gap:4px;padding:4px;background:#000">
+            <img src="report1.jpg" onclick="document.getElementById('gallery-img').src=this.src" style="width:64px;height:48px;object-fit:cover;cursor:pointer;opacity:1;border:2px solid var(--teal)" onerror="this.style.display='none'">
+            <img src="report2.jpg" onclick="document.getElementById('gallery-img').src=this.src" style="width:64px;height:48px;object-fit:cover;cursor:pointer;opacity:0.6;border:2px solid transparent" onerror="this.style.display='none'">
+            <img src="report3.jpg" onclick="document.getElementById('gallery-img').src=this.src" style="width:64px;height:48px;object-fit:cover;cursor:pointer;opacity:0.6;border:2px solid transparent" onerror="this.style.display='none'">
+          </div>
         </div>
       </div>
 
       <!-- VIDEO PANE -->
-      <!-- ╔══════════════════════════════════════════════════════╗
-           ║  HOW TO ADD YOUR VIDEO:                             ║
-           ║  1. Upload your .mp4 to your GitHub repo           ║
-           ║  2. Change "YOUR_VIDEO.mp4" below to the filename  ║
-           ║  3. Remove the placeholder div, uncomment <video>  ║
-           ╚══════════════════════════════════════════════════════╝ -->
       <div class="media-pane" id="tab-video">
-        <!-- <video src="YOUR_VIDEO.mp4" class="report-video" controls playsinline></video> -->
-        <div class="report-photo-placeholder" style="background:linear-gradient(160deg,#1a2a3a 0%,#0d1b2a 100%)">
+        <!-- Upload report-video.mp4 to GitHub to activate -->
+        <video src="report-video.mp4" class="report-video" controls playsinline onerror="this.style.display='none';document.getElementById('vid-placeholder').style.display='flex'"></video>
+        <div id="vid-placeholder" class="report-photo-placeholder" style="background:linear-gradient(160deg,#1a2a3a 0%,#0d1b2a 100%)">
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>Add your video — see comments in HTML</span>
+          <span>Upload report-video.mp4 to GitHub</span>
         </div>
       </div>
 
       <div class="report-body">
-        <!-- ↓↓ UPDATE THESE THREE THINGS EACH REPORT ↓↓ -->
-        <div class="report-ts" id="report-ts">Friday, April 18 · 7:14 AM</div>
-        <div class="report-hed">Knee-to-waist with occasional sets — glassy early, SE wind filling in</div>
-        <div class="report-txt">Walked down at first light with the dog. Glassy and clean, sets coming in around waist high with decent shape on the peaks north of the pier. The outside bar is showing some potential if the swell ticks up this afternoon. Wind was dead calm at check — that SE onshore is forecast to kick in around 10am so get out early. Water is warm, no wetsuit needed. Boil was visible on the horizon from last night's launch.</div>
-        <!-- ↑↑ ––––––––––––––––––––––––––––––––––––––––– ↑↑ -->
+        <div class="report-ts">Sunday, April 19 · 7:27 AM</div>
+        <div class="report-hed">2' with occasional 3' — clean, fading swell. Best day this week for the longboard crew.</div>
+        <div class="report-txt">
+          Walked down at first light this morning — beautiful sunrise, warm air, glassy conditions. Swell is fading and this is the smallest it's been all week, running 2' with occasional clean 3' sets. Despite the size it's actually really fun out there — the faces are clean and peeling nicely. Water temp is hitting 76° and air will top out around 82° today, so it's a gorgeous beach day regardless. This wave is made for a longboard or anything floaty. Get on it early before the onshore wind does. Don't sleep on it.
+        </div>
         <div class="report-byline">Checked at 31st St · Picnic Tables · Cocoa Beach, FL</div>
       </div>
     </div>
@@ -313,7 +315,7 @@ footer a:hover{color:var(--teal)}
   <div class="surfline-box">
     <div class="slabel">Surfline — Picnic Tables / Cocoa Beach Pier</div>
     <p>Surfline's official forecast for the Picnic Tables break — combined with our buoy readings and on-the-ground reports above for the full picture.</p>
-    <a href="https://www.surfline.com/surf-report/cocoa-beach-pier/5842041f4e65fad6a7708976" target="_blank" class="btn-surfline">View Surfline Forecast →</a>
+    <a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="btn-surfline">View Surfline Picnic Tables Forecast →</a>
     <div class="data-note" style="margin-top:10px">Surfline does not offer a free embed API. This links directly to their report.</div>
   </div>
 
@@ -433,7 +435,7 @@ footer a:hover{color:var(--teal)}
 <script>
 // ─── UTILITIES ───────────────────────────────────────────────────────────────
 
-const PROXY = url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+const PROXY = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
 
 function degToCompass(d) {
   if (d == null || isNaN(d)) return '—';
@@ -492,11 +494,25 @@ function updateStrip(data) {
   document.getElementById('updated-ts').textContent = 'Updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 }
 
+async function fetchWithProxy(url) {
+  const proxies = [
+    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  ];
+  for (const proxy of proxies) {
+    try {
+      const res = await fetch(proxy(url));
+      if (res.ok) return await res.text();
+    } catch(e) { continue; }
+  }
+  return null;
+}
+
 async function loadBuoys() {
   try {
     const [t1, t2] = await Promise.all([
-      fetch(PROXY(`https://www.ndbc.noaa.gov/data/realtime2/41113.txt`)).then(r=>r.text()).catch(()=>null),
-      fetch(PROXY(`https://www.ndbc.noaa.gov/data/realtime2/41009.txt`)).then(r=>r.text()).catch(()=>null),
+      fetchWithProxy(`https://www.ndbc.noaa.gov/data/realtime2/41113.txt`),
+      fetchWithProxy(`https://www.ndbc.noaa.gov/data/realtime2/41009.txt`),
     ]);
     const d1 = t1 ? parseBuoy(t1) : null;
     const d2 = t2 ? parseBuoy(t2) : null;
@@ -567,7 +583,7 @@ async function loadLaunches() {
   try {
     // Filter to Cape Canaveral (location IDs 12 = CCSFS, 27 = KSC)
     const url = 'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?location__ids=12,27&limit=5&mode=list';
-    const res = await fetch(PROXY(url));
+    const res = await fetch(url);
     const d = await res.json();
     const launches = d.results || [];
 
