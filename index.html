@@ -13,24 +13,28 @@
 body{font-family:var(--font-body);color:var(--text-primary);background:var(--sand);line-height:1.6}
 a{color:var(--teal-dark);text-decoration:none}a:hover{text-decoration:underline}
 
+/* === TOP BAR === */
 .top-bar{background:var(--navy);padding:6px 20px;display:flex;justify-content:flex-end;align-items:center;gap:12px}
 .social-icon{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white);text-decoration:none;transition:transform .2s}
 .social-icon:hover{transform:scale(1.15);text-decoration:none}
 .si-fb{background:#1877f2}.si-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}.si-x{background:#333}
 
-header{position:relative;min-height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 20px 20px;overflow:hidden}
-.banner-bg{position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('banner.webp');background-size:cover;background-position:center 40%;z-index:0}
-.banner-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(26,35,50,.85) 0%,rgba(26,35,50,.65) 50%,rgba(26,35,50,.9) 100%);z-index:1}
-header>*:not(.banner-bg):not(.banner-overlay){position:relative;z-index:2}
-.site-name{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);color:var(--white);letter-spacing:-1px;line-height:1.1;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+/* === HEADER — SOLID NAVY === */
+header{background:var(--navy);padding:28px 20px 18px;text-align:center}
+.site-name{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);color:var(--white);letter-spacing:-1px;line-height:1.1}
 .site-name span{color:var(--teal)}
-.site-tagline{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px;letter-spacing:.5px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.site-tagline{font-size:13px;color:#8a95a5;margin-top:6px;letter-spacing:.5px}
 nav{margin-top:16px;display:flex;justify-content:center;flex-wrap:wrap;gap:4px}
-nav a{color:rgba(255,255,255,.75);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:8px 14px;border-radius:4px;transition:all .2s}
-nav a:hover,nav a.active{color:var(--white);background:rgba(44,181,160,.25);text-decoration:none}
+nav a{color:#c0c8d4;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:8px 14px;border-radius:4px;transition:all .2s}
+nav a:hover,nav a.active{color:var(--white);background:rgba(44,181,160,.2);text-decoration:none}
 nav a.active{color:var(--teal)}
 .header-border{height:4px;background:var(--teal)}
 
+/* === HERO / SUNRISE PHOTO === */
+.hero-photo{width:100%;display:block}
+.hero-photo img{width:100%;max-height:500px;object-fit:cover;display:block}
+
+/* === BUOY DATA BAR === */
 .buoy-bar{background:var(--white);border-bottom:1px solid var(--border);padding:20px;overflow-x:auto}
 .buoy-bar-inner{max-width:1100px;margin:0 auto}
 .buoy-bar h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);text-align:center;margin-bottom:16px;font-style:italic}
@@ -46,10 +50,12 @@ nav a.active{color:var(--teal)}
 .buoy-value.loading{color:var(--text-light);font-size:13px}
 .buoy-value.error{color:#c0392b;font-size:12px}
 
+/* === LAYOUT === */
 .container{max-width:1100px;margin:0 auto;padding:0 20px}
 .main-grid{display:grid;grid-template-columns:1fr 300px;gap:30px;padding:30px 0}
 @media(max-width:800px){.main-grid{grid-template-columns:1fr}}
 
+/* === TODAY'S REPORT === */
 .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-light);margin-bottom:16px}
 .report-card{background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px}
 .report-photo-main{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
@@ -63,6 +69,7 @@ nav a.active{color:var(--teal)}
 .surfline-link{display:inline-block;margin-top:16px;padding:10px 20px;background:var(--teal);color:var(--white);font-weight:700;font-size:14px;border-radius:6px;transition:background .2s}
 .surfline-link:hover{background:var(--teal-dark);text-decoration:none}
 
+/* === TIDE TABLE === */
 .tide-section{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px}
 .tide-section h3{font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
 .tide-table{width:100%;border-collapse:collapse;font-size:13px}
@@ -70,6 +77,7 @@ nav a.active{color:var(--teal)}
 .tide-table td{padding:8px;border-bottom:1px solid #eee;font-family:var(--font-mono);font-size:13px}
 .tide-high{color:var(--teal-dark);font-weight:600}.tide-low{color:var(--text-light)}
 
+/* === SIDEBAR === */
 .ad-slot{background:var(--sand-dark);border:2px dashed var(--border);border-radius:8px;padding:30px 20px;text-align:center;margin-bottom:20px}
 .ad-slot-size{font-family:var(--font-mono);font-size:13px;color:var(--text-light);margin-bottom:4px}
 .ad-slot-cta{font-size:12px}
@@ -94,6 +102,7 @@ nav a.active{color:var(--teal)}
 .launch-detail{font-size:13px;color:var(--text-secondary);margin-top:4px}
 #launch-content{min-height:40px}
 
+/* === QUICK LINKS === */
 .quick-links{background:var(--navy);padding:40px 20px;color:#8a95a5;margin-top:30px}
 .quick-links-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
 .quick-links h4{font-family:var(--font-display);font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--white);margin-bottom:12px}
@@ -107,15 +116,15 @@ footer a{color:var(--teal)}
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="top-bar">
   <a href="https://facebook.com" target="_blank" class="social-icon si-fb">f</a>
   <a href="https://instagram.com" target="_blank" class="social-icon si-ig">ig</a>
   <a href="https://x.com" target="_blank" class="social-icon si-x">X</a>
 </div>
 
+<!-- HEADER — SOLID NAVY -->
 <header>
-  <div class="banner-bg"></div>
-  <div class="banner-overlay"></div>
   <div class="site-name">Dog Walker<span>Surf Report</span></div>
   <div class="site-tagline">Checked on foot, several times daily &middot; Real buoys, real eyes, real conditions</div>
   <nav>
@@ -129,6 +138,12 @@ footer a{color:var(--teal)}
 </header>
 <div class="header-border"></div>
 
+<!-- SUNRISE HERO PHOTO -->
+<div class="hero-photo">
+  <img src="banner.webp" alt="Sunrise over Cocoa Beach from 31st Street">
+</div>
+
+<!-- BUOY DATA BAR -->
 <div class="buoy-bar" id="conditions">
   <div class="buoy-bar-inner">
     <h3>Cocoa Beach Live Weather, Winds, &amp; Offshore Buoys <em>[<a href="https://www.ndbc.noaa.gov/" target="_blank">Linked to Source</a>]</em></h3>
@@ -164,6 +179,7 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
+<!-- LEADERBOARD AD -->
 <div class="ad-leaderboard">
   <div class="ad-slot">
     <div class="ad-slot-size">728&times;90 &middot; Leaderboard</div>
@@ -171,18 +187,19 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
+<!-- MAIN CONTENT -->
 <div class="container">
   <div class="main-grid">
     <main>
       <div class="section-label" id="report">Today's Report</div>
       <div class="report-card">
-        <img src="photo1.jpg" alt="Cocoa Beach surf conditions" class="report-photo-main" id="main-photo">
-        <div class="report-thumbnails" id="thumb-strip">
-          <img src="photo1.jpg" alt="Surf shot 1" class="active" onclick="switchPhoto(this)">
-          <img src="photo2.jpg" alt="Surf shot 2" onclick="switchPhoto(this)">
-          <img src="photo3.jpg" alt="Surf shot 3" onclick="switchPhoto(this)">
-          <img src="photo4.jpg" alt="Surf shot 4" onclick="switchPhoto(this)">
-          <img src="photo5.jpg" alt="Surf shot 5" onclick="switchPhoto(this)">
+        <img src="photos/2026-04-20/1.jpg" alt="Cocoa Beach surf conditions" class="report-photo-main" id="main-photo">
+        <div class="report-thumbnails">
+          <img src="photos/2026-04-20/1.jpg" alt="Surf shot 1" class="active" onclick="switchPhoto(this)">
+          <img src="photos/2026-04-20/2.jpg" alt="Surf shot 2" onclick="switchPhoto(this)">
+          <img src="photos/2026-04-20/3.jpg" alt="Surf shot 3" onclick="switchPhoto(this)">
+          <img src="photos/2026-04-20/4.jpg" alt="Surf shot 4" onclick="switchPhoto(this)">
+          <img src="photos/2026-04-20/5.jpg" alt="Surf shot 5" onclick="switchPhoto(this)">
         </div>
         <div class="report-body">
           <div class="report-meta">Monday, April 20 &middot; 8:28 AM</div>
@@ -247,6 +264,7 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
+<!-- QUICK LINKS -->
 <div class="quick-links">
   <div class="quick-links-grid">
     <div><h4>Data Sources</h4><ul>
@@ -274,20 +292,76 @@ footer a{color:var(--teal)}
 <footer>&copy; 2026 Dog Walker Surf Report &middot; 31st St, Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
+// === PHOTO GALLERY ===
 function switchPhoto(thumb){
   document.getElementById('main-photo').src=thumb.src;
   document.querySelectorAll('.report-thumbnails img').forEach(t=>t.classList.remove('active'));
   thumb.classList.add('active');
 }
 
-async function fetchBuoy(station){
-  // 1) Try your Vercel API route (works once api/buoy.js is in your repo)
+// === HELPERS ===
+const DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+function degToCompass(d){return DIRS[Math.round(d/22.5)%16]}
+function cToF(c){return Math.round(c*9/5+32)}
+function mpsToKts(m){return Math.round(m*1.944)}
+function mToFt(m){return(m*3.281).toFixed(1)}
+
+function setVal(id,html,err){
+  const el=document.getElementById(id);
+  el.innerHTML=html;el.classList.remove('loading');
+  if(err)el.classList.add('error');
+}
+
+// =============================================================
+// BUOY DATA — THREE SOURCES, TRIED IN ORDER
+// 1. Your own Vercel API route (/api/buoy) — best, no CORS
+// 2. NOAA ERDDAP server — public API with CORS support
+// 3. CORS proxy fallback
+// =============================================================
+
+// --- SOURCE 1: Vercel API route ---
+async function fetchFromVercelAPI(station){
   try{
-    const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(6000)});
+    const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(5000)});
     if(r.ok)return await r.json();
   }catch(e){}
+  return null;
+}
 
-  // 2) Fallback: CORS proxies
+// --- SOURCE 2: NOAA ERDDAP (has CORS) ---
+async function fetchFromERDDAP(station){
+  try{
+    // ERDDAP only has standard buoys (numeric IDs), not coastal stations like TRDF1
+    if(!/^\d+$/.test(station))return null;
+    const now=new Date();
+    const hours3=new Date(now.getTime()-3*60*60*1000).toISOString();
+    const url='https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json'
+      +'?station,time,wd,wspd,gst,wvht,dpd,apd,mwd,atmp,wtmp'
+      +'&station=%22'+station+'%22'
+      +'&time>='+encodeURIComponent(hours3)
+      +'&orderByMax(%22time%22)';
+    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
+    if(!r.ok)return null;
+    const json=await r.json();
+    const cols=json.table.columnNames;
+    const row=json.table.rows[json.table.rows.length-1];
+    const d={};cols.forEach((c,i)=>{d[c]=row[i]});
+    return{
+      air_temp_f:d.atmp!=null?cToF(d.atmp):null,
+      water_temp_f:d.wtmp!=null?cToF(d.wtmp):null,
+      wind_speed_kts:d.wspd!=null?mpsToKts(d.wspd):null,
+      wind_gust_kts:d.gst!=null?mpsToKts(d.gst):null,
+      wind_dir_compass:d.wd!=null?degToCompass(d.wd):null,
+      wave_height_ft:d.wvht!=null?mToFt(d.wvht):null,
+      dom_period_sec:d.dpd!=null?d.dpd:null,
+      wave_dir_compass:d.mwd!=null?degToCompass(d.mwd):null,
+    };
+  }catch(e){console.log('ERDDAP error for '+station,e)}
+  return null;
+}
+
+// --- SOURCE 3: CORS proxy fallback ---
+async function fetchFromProxy(station){
   const proxies=[
     u=>'https://corsproxy.io/?'+encodeURIComponent(u),
     u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
@@ -304,50 +378,69 @@ async function fetchBuoy(station){
       const hdr=lines[0].replace('#','').trim().split(/\s+/);
       const vals=lines[2].trim().split(/\s+/);
       const d={};hdr.forEach((h,i)=>{d[h]=vals[i]==='MM'?null:vals[i]});
-      const dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
       return{
-        air_temp_f:d.ATMP?Math.round(parseFloat(d.ATMP)*9/5+32):null,
-        water_temp_f:d.WTMP?Math.round(parseFloat(d.WTMP)*9/5+32):null,
-        wind_speed_kts:d.WSPD?Math.round(parseFloat(d.WSPD)*1.944):null,
-        wind_gust_kts:d.GST?Math.round(parseFloat(d.GST)*1.944):null,
-        wind_dir_compass:d.WDIR?dirs[Math.round(parseFloat(d.WDIR)/22.5)%16]:null,
-        wave_height_ft:d.WVHT?(parseFloat(d.WVHT)*3.281).toFixed(1):null,
+        air_temp_f:d.ATMP?cToF(parseFloat(d.ATMP)):null,
+        water_temp_f:d.WTMP?cToF(parseFloat(d.WTMP)):null,
+        wind_speed_kts:d.WSPD?mpsToKts(parseFloat(d.WSPD)):null,
+        wind_gust_kts:d.GST?mpsToKts(parseFloat(d.GST)):null,
+        wind_dir_compass:d.WDIR?degToCompass(parseFloat(d.WDIR)):null,
+        wave_height_ft:d.WVHT?mToFt(parseFloat(d.WVHT)):null,
         dom_period_sec:d.DPD?parseFloat(d.DPD):null,
-        wave_dir_compass:d.MWD?dirs[Math.round(parseFloat(d.MWD)/22.5)%16]:null,
+        wave_dir_compass:d.MWD?degToCompass(parseFloat(d.MWD)):null,
       };
     }catch(e){}
   }
   return null;
 }
 
-function setVal(id,html,err){
-  const el=document.getElementById(id);
-  el.innerHTML=html;el.classList.remove('loading');
-  if(err)el.classList.add('error');
+// --- MASTER FETCH: try all three sources ---
+async function fetchBuoy(station){
+  let data=await fetchFromVercelAPI(station);
+  if(data)return data;
+  data=await fetchFromERDDAP(station);
+  if(data)return data;
+  data=await fetchFromProxy(station);
+  return data;
 }
 
+// === LOAD ALL BUOY DATA ===
 async function loadAllBuoys(){
+  // Weather station TRDF1 (coastal station — ERDDAP won't have it, needs API route or proxy)
   const w=await fetchBuoy('TRDF1');
   if(w){
-    setVal('air-temp',w.air_temp_f?w.air_temp_f+'°F':'N/A');
-    setVal('water-temp',w.water_temp_f?w.water_temp_f+'°F':'N/A');
-    if(w.wind_speed_kts!==null){
+    setVal('air-temp',w.air_temp_f?w.air_temp_f+'&deg;F':'N/A');
+    setVal('water-temp',w.water_temp_f?w.water_temp_f+'&deg;F':'N/A');
+    if(w.wind_speed_kts!=null){
       let s=w.wind_speed_kts+' kts '+(w.wind_dir_compass||'');
       if(w.wind_gust_kts)s+='<br>Gusts '+w.wind_gust_kts+' kts';
       setVal('wind-data',s);
     }else setVal('wind-data','N/A');
   }else{
-    setVal('air-temp','Unavailable',true);
-    setVal('water-temp','Unavailable',true);
-    setVal('wind-data','Unavailable',true);
+    // Fallback: try 41009 for wind/temp data if TRDF1 fails
+    const fallback=await fetchBuoy('41009');
+    if(fallback){
+      setVal('air-temp',fallback.air_temp_f?fallback.air_temp_f+'&deg;F':'N/A');
+      setVal('water-temp',fallback.water_temp_f?fallback.water_temp_f+'&deg;F':'N/A');
+      if(fallback.wind_speed_kts!=null){
+        let s=fallback.wind_speed_kts+' kts '+(fallback.wind_dir_compass||'');
+        if(fallback.wind_gust_kts)s+='<br>Gusts '+fallback.wind_gust_kts+' kts';
+        setVal('wind-data',s);
+      }else setVal('wind-data','N/A');
+    }else{
+      setVal('air-temp','Unavailable',true);
+      setVal('water-temp','Unavailable',true);
+      setVal('wind-data','Unavailable',true);
+    }
   }
 
+  // Buoy 41113 — ERDDAP should have this
   const b113=await fetchBuoy('41113');
   if(b113&&b113.wave_height_ft){
     const d=b113.wave_dir_compass||'',p=b113.dom_period_sec?b113.dom_period_sec+'s':'';
     setVal('buoy-41113',b113.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
   }else setVal('buoy-41113',b113?'Flat / No data':'Unavailable',!b113);
 
+  // Buoy 41009 — ERDDAP should have this
   const b009=await fetchBuoy('41009');
   if(b009&&b009.wave_height_ft){
     const d=b009.wave_dir_compass||'',p=b009.dom_period_sec?b009.dom_period_sec+'s':'';
@@ -359,6 +452,7 @@ async function loadAllBuoys(){
   }
 }
 
+// === LAUNCH DATA ===
 async function loadLaunches(){
   try{
     const r=await fetch('https://fdo.rocketlaunch.live/json/launches/next/1');
@@ -375,6 +469,7 @@ async function loadLaunches(){
   document.getElementById('launch-content').innerHTML='<div style="font-size:13px">Check <a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal-dark)">KSC Schedule</a></div>';
 }
 
+// === INIT ===
 loadAllBuoys();
 loadLaunches();
 setInterval(loadAllBuoys,600000);
