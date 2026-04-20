@@ -4,681 +4,380 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dog Walker Surf Report — Picnic Tables, Cocoa Beach</title>
-<meta name="description" content="Live surf report from a local who walks his dog to 31st St several times a day. Real buoy data, real eyes, real conditions.">
+<meta name="description" content="Live surf conditions at Cocoa Beach Picnic Tables. Checked on foot, several times daily. Real buoys, real eyes, real conditions.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:#0d1b2a;--ocean:#1b4f72;--teal:#1a7f74;--sand:#f5f0e8;
-  --foam:#fff;--ink:#1a1a1a;--muted:#6b7280;--rule:#e2ddd4;
-  --accent:#e07b39;--good:#1a7f74;--fair:#b45309;--poor:#9b1c1c;
-}
-body{font-family:'IBM Plex Sans',sans-serif;background:var(--sand);color:var(--ink);font-size:16px;line-height:1.6}
+:root{--navy:#1a2332;--navy-light:#243044;--teal:#2cb5a0;--teal-dark:#1f8e7d;--sand:#f5f0e8;--sand-dark:#e8e0d0;--white:#fff;--text-primary:#1a2332;--text-secondary:#5a6577;--text-light:#8a95a5;--border:#d8dce3;--font-display:'Archivo Black',sans-serif;--font-body:'Source Sans 3',sans-serif;--font-mono:'JetBrains Mono',monospace}
+body{font-family:var(--font-body);color:var(--text-primary);background:var(--sand);line-height:1.6}
+a{color:var(--teal-dark);text-decoration:none}a:hover{text-decoration:underline}
 
-/* TOPBAR */
-.topbar{background:#060f1a;color:rgba(255,255,255,0.55);font-size:11px;font-family:'IBM Plex Mono',monospace;padding:5px 0;text-align:center;letter-spacing:0.04em}
-.topbar a{color:rgba(255,255,255,0.45);text-decoration:none}
-.topbar span{margin:0 10px}
+.top-bar{background:var(--navy);padding:6px 20px;display:flex;justify-content:flex-end;align-items:center;gap:12px}
+.social-icon{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white);text-decoration:none;transition:transform .2s}
+.social-icon:hover{transform:scale(1.15);text-decoration:none}
+.si-fb{background:#1877f2}.si-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}.si-x{background:#333}
 
-/* HEADER */
-header{background:var(--navy);padding:24px 20px 20px;text-align:center;border-bottom:3px solid var(--teal)}
-.site-name{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,50px);font-weight:700;color:#fff;letter-spacing:-0.5px;line-height:1.1}
+header{position:relative;min-height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 20px 20px;overflow:hidden}
+.banner-bg{position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('banner.webp');background-size:cover;background-position:center 40%;z-index:0}
+.banner-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(26,35,50,.85) 0%,rgba(26,35,50,.65) 50%,rgba(26,35,50,.9) 100%);z-index:1}
+header>*:not(.banner-bg):not(.banner-overlay){position:relative;z-index:2}
+.site-name{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);color:var(--white);letter-spacing:-1px;line-height:1.1;text-shadow:0 2px 20px rgba(0,0,0,.4)}
 .site-name span{color:var(--teal)}
-.site-tagline{font-size:12px;color:rgba(255,255,255,0.45);margin-top:5px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.05em}
-nav{margin-top:18px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-nav a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
-nav a:hover,nav a.active{color:var(--teal)}
+.site-tagline{font-size:13px;color:rgba(255,255,255,.7);margin-top:6px;letter-spacing:.5px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+nav{margin-top:16px;display:flex;justify-content:center;flex-wrap:wrap;gap:4px}
+nav a{color:rgba(255,255,255,.75);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:8px 14px;border-radius:4px;transition:all .2s}
+nav a:hover,nav a.active{color:var(--white);background:rgba(44,181,160,.25);text-decoration:none}
+nav a.active{color:var(--teal)}
+.header-border{height:4px;background:var(--teal)}
 
-/* CONDITIONS STRIP */
-.cond-strip{background:var(--navy);padding:18px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
-.cond-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.cond-left{display:flex;align-items:baseline;gap:12px}
-.wave-big{font-family:'Playfair Display',serif;font-size:56px;font-weight:700;color:#fff;line-height:1}
-.wave-unit{font-size:18px;color:rgba(255,255,255,0.4)}
-.rating-badge{padding:5px 14px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
-.r-good{background:var(--teal);color:#fff}
-.r-fair{background:var(--fair);color:#fff}
-.r-poor{background:var(--poor);color:#fff}
-.r-flat{background:#374151;color:rgba(255,255,255,0.6)}
-.cond-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px}
-.stats-row{display:flex;gap:24px;flex-wrap:wrap}
-.stat-box{text-align:center}
-.stat-val{font-family:'IBM Plex Mono',monospace;font-size:18px;color:#fff}
-.stat-lbl{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;margin-top:2px}
+.buoy-bar{background:var(--white);border-bottom:1px solid var(--border);padding:20px;overflow-x:auto}
+.buoy-bar-inner{max-width:1100px;margin:0 auto}
+.buoy-bar h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);text-align:center;margin-bottom:16px;font-style:italic}
+.buoy-bar h3 a{color:var(--text-light)}.buoy-bar h3 a:hover{color:var(--teal-dark)}
+.buoy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;text-align:center}
+.buoy-card{padding:12px 8px;border-radius:8px;background:var(--sand);border:1px solid var(--border);transition:transform .2s}
+.buoy-card:hover{transform:translateY(-2px)}
+.buoy-card a{color:inherit;text-decoration:none;display:block}
+.buoy-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text-light);margin-bottom:4px}
+.buoy-icon{font-size:28px;margin:4px 0}
+.buoy-value{font-family:var(--font-mono);font-size:15px;font-weight:500;color:var(--text-primary);line-height:1.3}
+.buoy-sub{font-size:11px;color:var(--text-light)}
+.buoy-value.loading{color:var(--text-light);font-size:13px}
+.buoy-value.error{color:#c0392b;font-size:12px}
 
-/* LAYOUT */
 .container{max-width:1100px;margin:0 auto;padding:0 20px}
-.main-grid{display:grid;grid-template-columns:1fr 300px;gap:28px;padding:28px 0 48px}
-@media(max-width:780px){.main-grid{grid-template-columns:1fr}}
+.main-grid{display:grid;grid-template-columns:1fr 300px;gap:30px;padding:30px 0}
+@media(max-width:800px){.main-grid{grid-template-columns:1fr}}
 
-/* SECTION LABEL */
-.slabel{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:7px;margin-bottom:14px}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-light);margin-bottom:16px}
+.report-card{background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px}
+.report-photo-main{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.report-thumbnails{display:flex;gap:4px;padding:4px;background:var(--navy);overflow-x:auto}
+.report-thumbnails img{height:60px;width:80px;object-fit:cover;border-radius:4px;cursor:pointer;opacity:.6;transition:opacity .2s;flex-shrink:0}
+.report-thumbnails img:hover,.report-thumbnails img.active{opacity:1}
+.report-body{padding:20px 24px}
+.report-meta{font-family:var(--font-mono);font-size:12px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.report-headline{font-family:var(--font-display);font-size:clamp(18px,3vw,24px);line-height:1.25;margin-bottom:14px;color:var(--text-primary)}
+.report-text{font-size:16px;color:var(--text-secondary);line-height:1.7}
+.surfline-link{display:inline-block;margin-top:16px;padding:10px 20px;background:var(--teal);color:var(--white);font-weight:700;font-size:14px;border-radius:6px;transition:background .2s}
+.surfline-link:hover{background:var(--teal-dark);text-decoration:none}
 
-/* AD SLOTS */
-.ad-wrap{text-align:center;padding:10px 0}
-.ad-lbl{font-size:10px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:5px}
-.ad-slot{display:inline-flex;align-items:center;justify-content:center;background:#ede8df;border:1px dashed #c5bfb3;color:var(--muted);font-size:11px;font-family:'IBM Plex Mono',monospace;text-align:center;padding:8px}
-.ad-leader{width:728px;max-width:100%;height:90px}
-.ad-rect{width:100%;height:250px}
+.tide-section{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px}
+.tide-section h3{font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.tide-table{width:100%;border-collapse:collapse;font-size:13px}
+.tide-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);padding:6px 8px;border-bottom:2px solid var(--border)}
+.tide-table td{padding:8px;border-bottom:1px solid #eee;font-family:var(--font-mono);font-size:13px}
+.tide-high{color:var(--teal-dark);font-weight:600}.tide-low{color:var(--text-light)}
 
-/* TODAY'S REPORT */
-.report-card{background:var(--foam);border:1px solid var(--rule);margin-bottom:28px}
-.report-media{position:relative;width:100%;background:#c8d8e4}
+.ad-slot{background:var(--sand-dark);border:2px dashed var(--border);border-radius:8px;padding:30px 20px;text-align:center;margin-bottom:20px}
+.ad-slot-size{font-family:var(--font-mono);font-size:13px;color:var(--text-light);margin-bottom:4px}
+.ad-slot-cta{font-size:12px}
+.ad-leaderboard{max-width:1100px;margin:20px auto;padding:0 20px}
 
-/* PHOTO */
-.report-photo{width:100%;max-height:480px;object-fit:cover;display:block}
-.report-photo-placeholder{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:rgba(255,255,255,0.6);font-family:'IBM Plex Mono',monospace;font-size:12px;background:linear-gradient(160deg,#7baec4 0%,#4a87a8 100%)}
+.alerts-box{background:var(--navy);border-radius:10px;padding:24px 20px;color:var(--white);margin-bottom:20px}
+.alerts-box h3{font-family:var(--font-display);font-size:18px;margin-bottom:4px}
+.alerts-box p{font-size:13px;color:#8a95a5;margin-bottom:16px}
+.alert-tier{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.alert-tier:last-of-type{border-bottom:none}
+.alert-tier-name{font-weight:700;font-size:14px}
+.alert-tier-desc{font-size:12px;color:#8a95a5}
+.alert-tier-price{font-family:var(--font-mono);font-size:14px;color:var(--teal);font-weight:600}
+.alert-email{width:100%;padding:12px 14px;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:rgba(255,255,255,.08);color:var(--white);font-size:14px;margin-top:12px}
+.alert-email::placeholder{color:#5a6577}
+.alert-btn{width:100%;padding:12px;background:var(--teal);color:var(--white);border:none;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;margin-top:8px;transition:background .2s}
+.alert-btn:hover{background:var(--teal-dark)}
 
-/* VIDEO */
-.report-video{width:100%;max-height:480px;display:block;background:#000}
+.launch-box{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:20px;margin-bottom:20px}
+.launch-box h3{font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);margin-bottom:10px}
+.launch-name{font-weight:700;font-size:15px}
+.launch-detail{font-size:13px;color:var(--text-secondary);margin-top:4px}
+#launch-content{min-height:40px}
 
-/* MEDIA TABS */
-.media-tabs{display:flex;border-bottom:1px solid var(--rule)}
-.media-tab{padding:8px 16px;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);transition:all 0.2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'IBM Plex Sans',sans-serif}
-.media-tab.active{color:var(--teal);border-bottom-color:var(--teal)}
-.media-pane{display:none}.media-pane.active{display:block}
+.quick-links{background:var(--navy);padding:40px 20px;color:#8a95a5;margin-top:30px}
+.quick-links-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
+.quick-links h4{font-family:var(--font-display);font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--white);margin-bottom:12px}
+.quick-links ul{list-style:none}.quick-links li{margin-bottom:6px}
+.quick-links a{color:#8a95a5;font-size:13px;transition:color .2s}.quick-links a:hover{color:var(--teal);text-decoration:none}
 
-.report-body{padding:22px 26px}
-.report-ts{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px}
-.report-hed{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;line-height:1.2;margin-bottom:10px;color:var(--navy)}
-.report-txt{font-size:15px;line-height:1.8;color:#374151}
-.report-byline{margin-top:14px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted);font-style:italic}
-
-/* BUOY CARDS */
-.buoy-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
-@media(max-width:500px){.buoy-grid{grid-template-columns:1fr}}
-.buoy-card{background:var(--foam);border:1px solid var(--rule);padding:14px 16px}
-.buoy-name{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;line-height:1.5}
-.brow{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid var(--rule)}
-.brow:last-child{border-bottom:none}
-.bkey{font-size:12px;color:var(--muted)}
-.bval{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--navy);font-weight:500}
-
-/* WEATHER */
-.wx-card{background:var(--foam);border:1px solid var(--rule);padding:16px 18px;margin-bottom:28px}
-.wx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px;margin-top:10px}
-.wx-item{background:#f5f0e8;padding:10px 12px;text-align:center}
-.wx-val{font-family:'IBM Plex Mono',monospace;font-size:18px;color:var(--navy)}
-.wx-lbl{font-size:11px;color:var(--muted);margin-top:2px}
-.wx-condition{font-size:13px;color:var(--teal);font-weight:500;margin-top:6px}
-
-/* LAUNCHES */
-.launch-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
-.launch-item{background:var(--foam);border:1px solid var(--rule);border-top:none;padding:14px 16px}
-.launch-item:first-child{border-top:1px solid var(--rule)}
-.launch-name{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:3px}
-.launch-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
-.launch-status{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;margin-top:5px}
-.ls-go{background:#d1fae5;color:#065f46}
-.ls-tbd{background:#fef3c7;color:#92400e}
-.ls-hold{background:#fee2e2;color:#991b1b}
-.countdown{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);margin-top:4px}
-
-/* SURFLINE */
-.surfline-box{background:var(--foam);border:1px solid var(--rule);padding:16px 18px;margin-bottom:28px}
-.surfline-box p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px}
-.btn-surfline{display:inline-block;background:var(--navy);color:#fff;padding:9px 18px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:background 0.2s}
-.btn-surfline:hover{background:var(--ocean)}
-
-/* ARCHIVE */
-.archive-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
-.arch-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
-.arch-item:first-child{border-top:1px solid var(--rule)}
-.arch-thumb{width:64px;height:48px;object-fit:cover;flex-shrink:0;background:#c8d8e4}
-.arch-meta{flex:1}
-.arch-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)}
-.arch-title{font-size:13px;font-weight:500;color:var(--navy);line-height:1.3;margin-top:2px}
-.arch-rating{font-size:11px;margin-top:3px}
-
-/* SIDEBAR */
-.sidebar{display:flex;flex-direction:column;gap:22px}
-
-/* SUB BOX */
-.sub-box{background:var(--navy);padding:22px;color:#fff}
-.sub-box h3{font-family:'Playfair Display',serif;font-size:19px;margin-bottom:5px}
-.sub-box p{font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:14px;line-height:1.5}
-.sub-options{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-.sub-opt{display:flex;align-items:flex-start;gap:9px;background:rgba(255,255,255,0.05);padding:11px 13px;border:1px solid rgba(255,255,255,0.1);cursor:pointer}
-.sub-opt input[type=radio]{margin-top:3px;accent-color:var(--teal)}
-.sub-opt-label{font-size:13px;font-weight:600;color:#fff}
-.sub-opt-desc{font-size:11px;color:rgba(255,255,255,0.45);margin-top:1px}
-.sub-opt-price{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);margin-left:auto;white-space:nowrap}
-.sub-input{width:100%;padding:9px 11px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:13px;font-family:'IBM Plex Sans',sans-serif;margin-bottom:9px;outline:none}
-.sub-input::placeholder{color:rgba(255,255,255,0.28)}
-.sub-input:focus{border-color:var(--teal)}
-.btn-sub{width:100%;background:var(--teal);color:#fff;border:none;padding:10px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;font-family:'IBM Plex Sans',sans-serif}
-.btn-sub:hover{background:#158f83}
-.sub-note{font-size:10px;color:rgba(255,255,255,0.28);margin-top:8px;text-align:center}
-.sub-success{display:none;text-align:center;padding:14px;color:var(--teal);font-size:13px;font-weight:500}
-
-/* ADVERTISE */
-.adv-box{background:var(--foam);border:1px solid var(--rule);padding:18px}
-.adv-box h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:5px;color:var(--navy)}
-.adv-box p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:11px}
-.btn-adv{display:block;text-align:center;background:transparent;border:1px solid var(--navy);color:var(--navy);padding:8px;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;transition:all 0.2s}
-.btn-adv:hover{background:var(--navy);color:#fff}
-
-/* FOOTER */
-footer{background:var(--navy);color:rgba(255,255,255,0.35);text-align:center;padding:24px 20px;font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:0.04em;line-height:2}
-footer a{color:rgba(255,255,255,0.35);text-decoration:none}
-footer a:hover{color:var(--teal)}
-
-.loading{color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:11px}
-.err{color:var(--poor);font-family:'IBM Plex Mono',monospace;font-size:11px}
-.data-note{font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-top:6px}
+footer{background:var(--navy-light);padding:20px;text-align:center;font-size:12px;color:#5a6577;border-top:1px solid rgba(255,255,255,.05)}
+footer a{color:var(--teal)}
+::-webkit-scrollbar{height:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <span>📍 31st St · Picnic Tables · Cocoa Beach, FL</span>
-  <span id="updated-ts">—</span>
-  <span><a href="mailto:ads@dogwalkersurfreport.com">Advertise</a></span>
+<div class="top-bar">
+  <a href="https://facebook.com" target="_blank" class="social-icon si-fb">f</a>
+  <a href="https://instagram.com" target="_blank" class="social-icon si-ig">ig</a>
+  <a href="https://x.com" target="_blank" class="social-icon si-x">X</a>
 </div>
 
-<!-- HEADER -->
-<header style="padding:0;position:relative;overflow:hidden">
-  <!-- Banner photo: upload your banner.jpg to GitHub alongside index.html -->
-  <img src="banner.webp" alt="31st St Cocoa Beach" style="width:100%;height:320px;object-fit:cover;object-position:center 40%;display:block;opacity:0.7">
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(13,27,42,0.3) 0%, rgba(13,27,42,0.85) 100%);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:24px 20px 20px;border-bottom:3px solid var(--teal)">
-    <div class="site-name">Dog Walker<span>Surf Report</span></div>
-    <div class="site-tagline">Checked on foot, several times daily · Real buoys, real eyes, real conditions</div>
-    <nav>
-      <a href="#report" class="active">Today's Report</a>
-      <a href="#conditions">Live Data</a>
-      <a href="#launches">Launches</a>
-      <a href="#archive">Archive</a>
-      <a href="#subscribe">Alerts</a>
-      <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a>
-    </nav>
-  </div>
+<header>
+  <div class="banner-bg"></div>
+  <div class="banner-overlay"></div>
+  <div class="site-name">Dog Walker<span>Surf Report</span></div>
+  <div class="site-tagline">Checked on foot, several times daily &middot; Real buoys, real eyes, real conditions</div>
+  <nav>
+    <a href="#report" class="active">Today's Report</a>
+    <a href="#conditions">Live Data</a>
+    <a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank">Surfline</a>
+    <a href="#archive">Archive</a>
+    <a href="#subscribe">Alerts</a>
+    <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a>
+  </nav>
 </header>
+<div class="header-border"></div>
 
-<!-- CONDITIONS STRIP -->
-<div class="cond-strip" id="conditions">
-  <div class="cond-inner">
-    <div>
-      <div class="cond-left">
-        <div class="wave-big" id="wave-main">—</div>
-        <div class="wave-unit">ft</div>
-        <div class="rating-badge r-flat" id="rating-badge">Loading</div>
-      </div>
-      <div class="cond-meta" id="cond-meta">Fetching buoy data...</div>
-    </div>
-    <div class="stats-row">
-      <div class="stat-box"><div class="stat-val" id="s-period">—</div><div class="stat-lbl">Period</div></div>
-      <div class="stat-box"><div class="stat-val" id="s-wind">—</div><div class="stat-lbl">Wind</div></div>
-      <div class="stat-box"><div class="stat-val" id="s-dir">—</div><div class="stat-lbl">Direction</div></div>
-      <div class="stat-box"><div class="stat-val" id="s-water">—</div><div class="stat-lbl">Water</div></div>
-      <div class="stat-box"><div class="stat-val" id="s-air">—</div><div class="stat-lbl">Air</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- LEADERBOARD AD -->
-<div class="ad-wrap" style="background:#f0ebe2;border-bottom:1px solid var(--rule)">
-  <div class="ad-lbl">Advertisement</div>
-  <div class="ad-slot ad-leader">728×90 · Leaderboard · ads@dogwalkersurfreport.com</div>
-</div>
-
-<!-- MAIN -->
-<div class="container">
-<div class="main-grid">
-
-<!-- ═══ LEFT COLUMN ═══ -->
-<main>
-
-  <!-- TODAY'S REPORT -->
-  <div id="report" style="margin-bottom:28px">
-    <div class="slabel">Today's Report</div>
-    <div class="report-card">
-
-      <!-- MEDIA TABS: photo + video -->
-      <div class="media-tabs">
-        <button class="media-tab active" onclick="switchTab(this,'tab-photo')">Photo</button>
-        <button class="media-tab" onclick="switchTab(this,'tab-video')">Video</button>
-      </div>
-
-      <!-- PHOTO PANE -->
-      <div class="media-pane active" id="tab-photo">
-        <!-- Photo gallery: upload report1.jpg, report2.jpg, report3.jpg to GitHub -->
-        <div id="photo-gallery" style="position:relative;background:#000">
-          <img id="gallery-img" src="report1.webp" alt="Surf at Picnic Tables" class="report-photo" onerror="this.style.display='none';document.getElementById('gallery-placeholder').style.display='flex'">
-          <div id="gallery-placeholder" class="report-photo-placeholder" style="display:none">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Photos loading...</span>
-          </div>
-          <div style="display:flex;gap:4px;padding:4px;background:#000;overflow-x:auto">
-            <img src="report1.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid var(--teal);flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report2.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report3.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report4.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report5.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report6.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report7.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report8.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-            <img src="report9.webp" onclick="setMain(this)" style="width:64px;height:48px;object-fit:cover;cursor:pointer;border:2px solid transparent;flex-shrink:0" onerror="this.style.display='none'">
-          </div>
-        </div>
-      </div>
-
-      <!-- VIDEO PANE -->
-      <div class="media-pane" id="tab-video">
-        <!-- Upload report-video.mp4 to GitHub to activate -->
-        <video src="report-video.mp4" class="report-video" controls playsinline onerror="this.style.display='none';document.getElementById('vid-placeholder').style.display='flex'"></video>
-        <div id="vid-placeholder" class="report-photo-placeholder" style="background:linear-gradient(160deg,#1a2a3a 0%,#0d1b2a 100%)">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          <span>Upload report-video.mp4 to GitHub</span>
-        </div>
-      </div>
-
-      <div class="report-body">
-        <div class="report-ts">Sunday, April 19 · 7:27 AM</div>
-        <div class="report-hed">2' with occasional 3' — clean, fading swell. Best day this week for the longboard crew.</div>
-        <div class="report-txt">
-          Walked down at first light this morning — beautiful sunrise, warm air, glassy conditions. Swell is fading and this is the smallest it's been all week, running 2' with occasional clean 3' sets. Despite the size it's actually really fun out there — the faces are clean and peeling nicely. Water temp is hitting 76° and air will top out around 82° today, so it's a gorgeous beach day regardless. This wave is made for a longboard or anything floaty. Get on it early before the onshore wind does. Don't sleep on it.
-        </div>
-        <div class="report-byline">Checked at 31st St · Picnic Tables · Cocoa Beach, FL</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BUOY DATA -->
-  <div style="margin-bottom:28px">
-    <div class="slabel">Live Buoy Data</div>
+<div class="buoy-bar" id="conditions">
+  <div class="buoy-bar-inner">
+    <h3>Cocoa Beach Live Weather, Winds, &amp; Offshore Buoys <em>[<a href="https://www.ndbc.noaa.gov/" target="_blank">Linked to Source</a>]</em></h3>
     <div class="buoy-grid">
-      <div class="buoy-card">
-        <div class="buoy-name">NDBC 41113<br>Canaveral Nearshore</div>
-        <div id="buoy-41113"><div class="loading">Fetching...</div></div>
-      </div>
-      <div class="buoy-card">
-        <div class="buoy-name">NDBC 41009<br>Canaveral 20NM Offshore</div>
-        <div id="buoy-41009"><div class="loading">Fetching...</div></div>
-      </div>
-    </div>
-    <div class="data-note">NOAA/NDBC · updates hourly · <a href="https://www.ndbc.noaa.gov" target="_blank" style="color:var(--teal)">ndbc.noaa.gov</a></div>
-  </div>
-
-  <!-- WEATHER -->
-  <div class="wx-card" style="margin-bottom:28px">
-    <div class="slabel">Cocoa Beach Weather</div>
-    <div id="wx-condition" class="wx-condition">Loading...</div>
-    <div class="wx-grid" id="wx-grid">
-      <div class="wx-item"><div class="wx-val" id="wx-temp">—</div><div class="wx-lbl">Air Temp</div></div>
-      <div class="wx-item"><div class="wx-val" id="wx-feels">—</div><div class="wx-lbl">Feels Like</div></div>
-      <div class="wx-item"><div class="wx-val" id="wx-wind">—</div><div class="wx-lbl">Wind</div></div>
-      <div class="wx-item"><div class="wx-val" id="wx-wdir">—</div><div class="wx-lbl">Wind Dir</div></div>
-      <div class="wx-item"><div class="wx-val" id="wx-humid">—</div><div class="wx-lbl">Humidity</div></div>
-      <div class="wx-item"><div class="wx-val" id="wx-uv">—</div><div class="wx-lbl">UV Index</div></div>
-    </div>
-    <div class="data-note" style="margin-top:8px">Open-Meteo · <a href="https://open-meteo.com" target="_blank" style="color:var(--teal)">open-meteo.com</a></div>
-  </div>
-
-  <!-- SURFLINE -->
-  <div class="surfline-box">
-    <div class="slabel">Surfline — Picnic Tables / Cocoa Beach Pier</div>
-    <p>Surfline's official forecast for the Picnic Tables break — combined with our buoy readings and on-the-ground reports above for the full picture.</p>
-    <a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="btn-surfline">View Surfline Picnic Tables Forecast →</a>
-    <div class="data-note" style="margin-top:10px">Surfline does not offer a free embed API. This links directly to their report.</div>
-  </div>
-
-  <!-- UPCOMING LAUNCHES -->
-  <div id="launches" style="margin-bottom:28px">
-    <div class="slabel">Upcoming Space Coast Launches</div>
-    <div class="launch-list" id="launch-list">
-      <div style="padding:14px;background:var(--foam);border:1px solid var(--rule)" class="loading">Fetching launches from Cape Canaveral...</div>
-    </div>
-    <div class="data-note">Launch Library 2 API · <a href="https://thespacedevs.com" target="_blank" style="color:var(--teal)">thespacedevs.com</a></div>
-  </div>
-
-  <!-- ARCHIVE -->
-  <div id="archive">
-    <div class="slabel">Recent Reports</div>
-    <div class="archive-list">
-      <!-- ↓↓ ADD A NEW ROW HERE EACH REPORT ↓↓ -->
-      <a href="#" class="arch-item">
-        <div class="arch-thumb" style="background:#7baec4"></div>
-        <div class="arch-meta">
-          <div class="arch-date">Thu Apr 17 · 6:58 AM</div>
-          <div class="arch-title">Small but clean — waist high glassy sets at dawn</div>
-          <div class="arch-rating" style="color:var(--good)">● Fair-Good</div>
-        </div>
-      </a>
-      <a href="#" class="arch-item">
-        <div class="arch-thumb" style="background:#5a8ea8"></div>
-        <div class="arch-meta">
-          <div class="arch-date">Wed Apr 16 · 7:30 AM</div>
-          <div class="arch-title">Onshore mess — choppy, period down to 6 seconds</div>
-          <div class="arch-rating" style="color:var(--poor)">● Poor</div>
-        </div>
-      </a>
-      <a href="#" class="arch-item">
-        <div class="arch-thumb" style="background:#3a7a98"></div>
-        <div class="arch-meta">
-          <div class="arch-date">Tue Apr 15 · 7:05 AM</div>
-          <div class="arch-title">Shoulder-high and pumping — best session this month</div>
-          <div class="arch-rating" style="color:var(--good)">● Good</div>
-        </div>
-      </a>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
+        <div class="buoy-label">Air</div><div class="buoy-icon">🌡️</div>
+        <div class="buoy-value loading" id="air-temp">Loading...</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
+        <div class="buoy-label">Water</div><div class="buoy-icon">🌊</div>
+        <div class="buoy-value loading" id="water-temp">Loading...</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
+        <div class="buoy-label">Winds</div><div class="buoy-icon">💨</div>
+        <div class="buoy-value loading" id="wind-data">Loading...</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41113" target="_blank">
+        <div class="buoy-label">41113 (WvH)</div><div class="buoy-icon">⚓</div>
+        <div class="buoy-value loading" id="buoy-41113">Loading...</div>
+        <div class="buoy-sub">Cape Canaveral Nearshore</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">
+        <div class="buoy-label">41009 (SwH)</div><div class="buoy-icon">⚓</div>
+        <div class="buoy-value loading" id="buoy-41009">Loading...</div>
+        <div class="buoy-sub">Canaveral 20nm Offshore</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">
+        <div class="buoy-label">Swell</div><div class="buoy-icon">〰️</div>
+        <div class="buoy-value loading" id="swell-data">Loading...</div>
+        <div class="buoy-sub">Period &amp; Direction</div>
+      </a></div>
     </div>
   </div>
-
-</main>
-
-<!-- ═══ SIDEBAR ═══ -->
-<aside class="sidebar">
-
-  <!-- AD 1 -->
-  <div>
-    <div class="ad-lbl">Advertisement</div>
-    <div class="ad-slot ad-rect">300×250<br>ads@dogwalkersurfreport.com</div>
-  </div>
-
-  <!-- SUBSCRIBE -->
-  <div class="sub-box" id="subscribe">
-    <h3>Surf Alerts</h3>
-    <p>Get notified when conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
-    <div class="sub-options">
-      <label class="sub-opt">
-        <input type="radio" name="tier" value="free" checked>
-        <div><div class="sub-opt-label">Daily Report</div><div class="sub-opt-desc">Morning email with conditions + photo</div></div>
-        <div class="sub-opt-price">Free</div>
-      </label>
-      <label class="sub-opt">
-        <input type="radio" name="tier" value="pro">
-        <div><div class="sub-opt-label">Surf Alerts</div><div class="sub-opt-desc">SMS + email when it fires. Set your threshold.</div></div>
-        <div class="sub-opt-price">$5/mo</div>
-      </label>
-    </div>
-    <div id="sub-form">
-      <input type="email" class="sub-input" placeholder="your@email.com" id="sub-email">
-      <!-- Replace YOUR_FORM_ID with your Formspree.io form ID -->
-      <button class="btn-sub" onclick="handleSub()">Get Alerts</button>
-    </div>
-    <div class="sub-success" id="sub-success">✓ You're in. Check your inbox.</div>
-    <div class="sub-note">No spam. Unsubscribe any time.</div>
-  </div>
-
-  <!-- NEXT LAUNCH MINI -->
-  <div style="background:var(--navy);padding:18px;color:#fff">
-    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px">Next Space Coast Launch</div>
-    <div id="next-launch-mini" style="font-size:13px;line-height:1.6;color:rgba(255,255,255,0.75)">Loading...</div>
-  </div>
-
-  <!-- AD 2 -->
-  <div>
-    <div class="ad-lbl">Advertisement</div>
-    <div class="ad-slot ad-rect">300×250<br>ads@dogwalkersurfreport.com</div>
-  </div>
-
-  <!-- ADVERTISE CTA -->
-  <div class="adv-box">
-    <h4>Advertise Here</h4>
-    <p>Reach local surfers, visitors, and beachgoers checking conditions at Cocoa Beach's most popular break. Leaderboard, sidebar, and newsletter placements available.</p>
-    <a href="mailto:ads@dogwalkersurfreport.com" class="btn-adv">Get Rates →</a>
-  </div>
-
-</aside>
-</div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div>Dog Walker Surf Report · 31st St &amp; A1A, Cocoa Beach, FL 32931</div>
-  <div>
-    <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a> ·
-    <a href="mailto:hello@dogwalkersurfreport.com">Contact</a> ·
-    <a href="https://www.ndbc.noaa.gov" target="_blank">NOAA/NDBC</a> ·
-    <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> ·
-    <a href="https://thespacedevs.com" target="_blank">TheSpaceDevs</a>
+<div class="ad-leaderboard">
+  <div class="ad-slot">
+    <div class="ad-slot-size">728&times;90 &middot; Leaderboard</div>
+    <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">ads@dogwalkersurfreport.com</a></div>
   </div>
-  <div style="margin-top:6px;font-size:10px;opacity:0.4">Go check it yourself before you paddle out.</div>
-</footer>
+</div>
+
+<div class="container">
+  <div class="main-grid">
+    <main>
+      <div class="section-label" id="report">Today's Report</div>
+      <div class="report-card">
+        <img src="photo1.jpg" alt="Cocoa Beach surf conditions" class="report-photo-main" id="main-photo">
+        <div class="report-thumbnails" id="thumb-strip">
+          <img src="photo1.jpg" alt="Surf shot 1" class="active" onclick="switchPhoto(this)">
+          <img src="photo2.jpg" alt="Surf shot 2" onclick="switchPhoto(this)">
+          <img src="photo3.jpg" alt="Surf shot 3" onclick="switchPhoto(this)">
+          <img src="photo4.jpg" alt="Surf shot 4" onclick="switchPhoto(this)">
+          <img src="photo5.jpg" alt="Surf shot 5" onclick="switchPhoto(this)">
+        </div>
+        <div class="report-body">
+          <div class="report-meta">Monday, April 20 &middot; 8:28 AM</div>
+          <h2 class="report-headline">2-3'+ wind driven victory at sea conditions.</h2>
+          <p class="report-text">A fast drift and maybe a surfable wave at high tide incoming at report time. Feels like a Monday, happy high holiday to those who celebrate.</p>
+          <a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="surfline-link">View Surfline Picnic Tables Forecast &rarr;</a>
+        </div>
+      </div>
+
+      <div class="tide-section">
+        <h3>Cocoa Beach Tides</h3>
+        <table class="tide-table">
+          <thead><tr><th>Day</th><th>Tide</th><th>Time</th><th>Height</th></tr></thead>
+          <tbody>
+            <tr><td>20 Mon</td><td class="tide-low">Low</td><td>3:41 AM</td><td>0.0 ft</td></tr>
+            <tr><td>20 Mon</td><td class="tide-high">High</td><td>9:56 AM</td><td>3.6 ft</td></tr>
+            <tr><td>20 Mon</td><td class="tide-low">Low</td><td>3:54 PM</td><td>0.5 ft</td></tr>
+            <tr><td>20 Mon</td><td class="tide-high">High</td><td>10:18 PM</td><td>3.8 ft</td></tr>
+            <tr><td>21 Tue</td><td class="tide-low">Low</td><td>4:33 AM</td><td>0.1 ft</td></tr>
+            <tr><td>21 Tue</td><td class="tide-high">High</td><td>10:46 AM</td><td>3.5 ft</td></tr>
+            <tr><td>21 Tue</td><td class="tide-low">Low</td><td>4:47 PM</td><td>0.6 ft</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-label" id="archive">Recent Reports</div>
+      <div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">
+        <p>Archive coming soon &mdash; daily reports will stack here.</p>
+      </div>
+    </main>
+
+    <aside>
+      <div class="ad-slot">
+        <div class="ad-slot-size">300&times;250</div>
+        <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Your Ad Here</a></div>
+      </div>
+
+      <div class="alerts-box" id="subscribe">
+        <h3>Surf Alerts</h3>
+        <p>Get notified when conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
+        <div class="alert-tier"><div><div class="alert-tier-name">Daily Report</div><div class="alert-tier-desc">Morning email with conditions + photo</div></div><div class="alert-tier-price">Free</div></div>
+        <div class="alert-tier"><div><div class="alert-tier-name">Surf Alerts</div><div class="alert-tier-desc">SMS + email when it fires</div></div><div class="alert-tier-price">$6/mo</div></div>
+        <input type="email" class="alert-email" placeholder="your@email.com">
+        <button class="alert-btn">GET ALERTS</button>
+        <p style="font-size:11px;text-align:center;margin-top:8px;color:#5a6577">No spam. Unsubscribe any time.</p>
+      </div>
+
+      <div class="launch-box">
+        <h3>Next Space Coast Launch</h3>
+        <div id="launch-content"><div class="buoy-value loading">Loading...</div></div>
+      </div>
+
+      <div class="ad-slot">
+        <div class="ad-slot-size">300&times;250</div>
+        <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Your Ad Here</a></div>
+      </div>
+      <div class="ad-slot">
+        <div class="ad-slot-size">300&times;100</div>
+        <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Your Ad Here</a></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="quick-links">
+  <div class="quick-links-grid">
+    <div><h4>Data Sources</h4><ul>
+      <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">Buoy 41009 &mdash; Canaveral 20nm</a></li>
+      <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=41113" target="_blank">Buoy 41113 &mdash; Cape Canaveral Nearshore</a></li>
+      <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">Trident Pier, Port Canaveral</a></li>
+      <li><a href="https://www.ndbc.noaa.gov/" target="_blank">All NDBC Buoys</a></li>
+      <li><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank">NOAA Tides &mdash; Trident Pier</a></li>
+    </ul></div>
+    <div><h4>Forecasts</h4><ul>
+      <li><a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank">Surfline &mdash; Picnic Tables</a></li>
+      <li><a href="https://magicseaweed.com/Cocoa-Beach-Surf-Report/350/" target="_blank">Magic Seaweed &mdash; Cocoa Beach</a></li>
+      <li><a href="https://www.nhc.noaa.gov" target="_blank">Tropical Outlook &mdash; NHC</a></li>
+      <li><a href="https://www.weather.gov/mlb/" target="_blank">NWS Melbourne</a></li>
+    </ul></div>
+    <div><h4>Community</h4><ul>
+      <li><a href="https://911surfreport.com" target="_blank">911 Surf Report &mdash; Jax</a></li>
+      <li><a href="https://www.surfguru.com" target="_blank">Surf Guru</a></li>
+      <li><a href="https://www.ocearch.org" target="_blank">OCEARCH Shark Tracker</a></li>
+      <li><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank">KSC Launch Schedule</a></li>
+    </ul></div>
+  </div>
+</div>
+
+<footer>&copy; 2026 Dog Walker Surf Report &middot; 31st St, Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
-// ─── UTILITIES ───────────────────────────────────────────────────────────────
-
-const PROXY = url => `https://corsproxy.io/?${encodeURIComponent(url)}`;
-
-function degToCompass(d) {
-  if (d == null || isNaN(d)) return '—';
-  return ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(d/22.5)%16];
-}
-function mToFt(m) { return (m * 3.28084).toFixed(1); }
-function msToMph(ms) { return Math.round(ms * 2.23694); }
-function cToF(c) { return Math.round(c * 9/5 + 32); }
-
-function rating(ft) {
-  const f = parseFloat(ft);
-  if (isNaN(f) || f < 0.5) return {t:'Flat', c:'r-flat'};
-  if (f < 2)   return {t:'Poor', c:'r-poor'};
-  if (f < 3.5) return {t:'Fair', c:'r-fair'};
-  if (f < 6)   return {t:'Good', c:'r-good'};
-  return {t:'Epic', c:'r-good'};
+function switchPhoto(thumb){
+  document.getElementById('main-photo').src=thumb.src;
+  document.querySelectorAll('.report-thumbnails img').forEach(t=>t.classList.remove('active'));
+  thumb.classList.add('active');
 }
 
-function parseBuoy(txt) {
-  const lines = txt.split('\n').filter(l => l && !l.startsWith('#'));
-  if (!lines.length) return null;
-  const p = lines[0].trim().split(/\s+/);
-  const v = (i) => p[i] !== 'MM' ? parseFloat(p[i]) : null;
-  return { wdir:v(5), wspd:v(6), wvht:v(8), dpd:v(9), wtmp:v(14), atmp:v(13) };
-}
+async function fetchBuoy(station){
+  // 1) Try your Vercel API route (works once api/buoy.js is in your repo)
+  try{
+    const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(6000)});
+    if(r.ok)return await r.json();
+  }catch(e){}
 
-function renderBuoy(id, data) {
-  const el = document.getElementById(id);
-  if (!data) { el.innerHTML = '<div class="err">No data · check ndbc.noaa.gov</div>'; return; }
-  const rows = [
-    ['Wave height', data.wvht != null ? mToFt(data.wvht) + ' ft' : '—'],
-    ['Period',      data.dpd  != null ? data.dpd.toFixed(0) + 's'   : '—'],
-    ['Wind speed',  data.wspd != null ? msToMph(data.wspd) + ' mph' : '—'],
-    ['Wind dir',    data.wdir != null ? degToCompass(data.wdir)      : '—'],
-    ['Water temp',  data.wtmp != null ? cToF(data.wtmp) + '°F'      : '—'],
-    ['Air temp',    data.atmp != null ? cToF(data.atmp) + '°F'      : '—'],
+  // 2) Fallback: CORS proxies
+  const proxies=[
+    u=>'https://corsproxy.io/?'+encodeURIComponent(u),
+    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
   ];
-  el.innerHTML = rows.map(r => `<div class="brow"><span class="bkey">${r[0]}</span><span class="bval">${r[1]}</span></div>`).join('');
-}
-
-function updateStrip(data) {
-  if (!data) return;
-  const ft = data.wvht != null ? mToFt(data.wvht) : null;
-  document.getElementById('wave-main').textContent = ft || '—';
-  if (ft) {
-    const r = rating(ft);
-    const b = document.getElementById('rating-badge');
-    b.textContent = r.t; b.className = 'rating-badge ' + r.c;
-  }
-  document.getElementById('s-period').textContent = data.dpd  ? data.dpd.toFixed(0)+'s'     : '—';
-  document.getElementById('s-wind').textContent   = data.wspd ? msToMph(data.wspd)+' mph'   : '—';
-  document.getElementById('s-dir').textContent    = data.wdir ? degToCompass(data.wdir)      : '—';
-  document.getElementById('s-water').textContent  = data.wtmp ? cToF(data.wtmp)+'°F'         : '—';
-  document.getElementById('s-air').textContent    = data.atmp ? cToF(data.atmp)+'°F'         : '—';
-  document.getElementById('cond-meta').textContent = `Buoy 41113 nearshore · ${data.wdir ? degToCompass(data.wdir) : '—'} swell · ${data.dpd ? data.dpd.toFixed(0)+'s period' : ''} · Live NOAA data`;
-  document.getElementById('updated-ts').textContent = 'Updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-}
-
-async function fetchWithProxy(url) {
-  const proxies = [
-    u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
-    u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  ];
-  for (const proxy of proxies) {
-    try {
-      const res = await fetch(proxy(url));
-      if (res.ok) return await res.text();
-    } catch(e) { continue; }
+  const ndbc='https://www.ndbc.noaa.gov/data/realtime2/'+station+'.txt';
+  for(const px of proxies){
+    try{
+      const r=await fetch(px(ndbc),{signal:AbortSignal.timeout(8000)});
+      if(!r.ok)continue;
+      const text=await r.text();
+      if(text.length<50)continue;
+      const lines=text.trim().split('\n');
+      if(lines.length<3)continue;
+      const hdr=lines[0].replace('#','').trim().split(/\s+/);
+      const vals=lines[2].trim().split(/\s+/);
+      const d={};hdr.forEach((h,i)=>{d[h]=vals[i]==='MM'?null:vals[i]});
+      const dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+      return{
+        air_temp_f:d.ATMP?Math.round(parseFloat(d.ATMP)*9/5+32):null,
+        water_temp_f:d.WTMP?Math.round(parseFloat(d.WTMP)*9/5+32):null,
+        wind_speed_kts:d.WSPD?Math.round(parseFloat(d.WSPD)*1.944):null,
+        wind_gust_kts:d.GST?Math.round(parseFloat(d.GST)*1.944):null,
+        wind_dir_compass:d.WDIR?dirs[Math.round(parseFloat(d.WDIR)/22.5)%16]:null,
+        wave_height_ft:d.WVHT?(parseFloat(d.WVHT)*3.281).toFixed(1):null,
+        dom_period_sec:d.DPD?parseFloat(d.DPD):null,
+        wave_dir_compass:d.MWD?dirs[Math.round(parseFloat(d.MWD)/22.5)%16]:null,
+      };
+    }catch(e){}
   }
   return null;
 }
 
-async function loadBuoys() {
-  try {
-    const [t1, t2] = await Promise.all([
-      fetchWithProxy(`https://www.ndbc.noaa.gov/data/realtime2/41113.txt`),
-      fetchWithProxy(`https://www.ndbc.noaa.gov/data/realtime2/41009.txt`),
-    ]);
-    const d1 = t1 ? parseBuoy(t1) : null;
-    const d2 = t2 ? parseBuoy(t2) : null;
-    renderBuoy('buoy-41113', d1);
-    renderBuoy('buoy-41009', d2);
-    updateStrip(d1 || d2);
-  } catch(e) {
-    ['buoy-41113','buoy-41009'].forEach(id => {
-      document.getElementById(id).innerHTML = '<div class="err">Could not load · check ndbc.noaa.gov</div>';
-    });
+function setVal(id,html,err){
+  const el=document.getElementById(id);
+  el.innerHTML=html;el.classList.remove('loading');
+  if(err)el.classList.add('error');
+}
+
+async function loadAllBuoys(){
+  const w=await fetchBuoy('TRDF1');
+  if(w){
+    setVal('air-temp',w.air_temp_f?w.air_temp_f+'°F':'N/A');
+    setVal('water-temp',w.water_temp_f?w.water_temp_f+'°F':'N/A');
+    if(w.wind_speed_kts!==null){
+      let s=w.wind_speed_kts+' kts '+(w.wind_dir_compass||'');
+      if(w.wind_gust_kts)s+='<br>Gusts '+w.wind_gust_kts+' kts';
+      setVal('wind-data',s);
+    }else setVal('wind-data','N/A');
+  }else{
+    setVal('air-temp','Unavailable',true);
+    setVal('water-temp','Unavailable',true);
+    setVal('wind-data','Unavailable',true);
+  }
+
+  const b113=await fetchBuoy('41113');
+  if(b113&&b113.wave_height_ft){
+    const d=b113.wave_dir_compass||'',p=b113.dom_period_sec?b113.dom_period_sec+'s':'';
+    setVal('buoy-41113',b113.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
+  }else setVal('buoy-41113',b113?'Flat / No data':'Unavailable',!b113);
+
+  const b009=await fetchBuoy('41009');
+  if(b009&&b009.wave_height_ft){
+    const d=b009.wave_dir_compass||'',p=b009.dom_period_sec?b009.dom_period_sec+'s':'';
+    setVal('buoy-41009',b009.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
+    setVal('swell-data',b009.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
+  }else{
+    setVal('buoy-41009',b009?'Flat / No data':'Unavailable',!b009);
+    setVal('swell-data',b009?'N/A':'Unavailable',!b009);
   }
 }
 
-// ─── WEATHER (Open-Meteo, free, no key) ─────────────────────────────────────
-
-const WX_CODES = {
-  0:'Clear sky', 1:'Mainly clear', 2:'Partly cloudy', 3:'Overcast',
-  45:'Fog', 48:'Icy fog', 51:'Light drizzle', 53:'Drizzle', 55:'Heavy drizzle',
-  61:'Slight rain', 63:'Rain', 65:'Heavy rain',
-  71:'Slight snow', 73:'Snow', 75:'Heavy snow',
-  80:'Showers', 81:'Rain showers', 82:'Violent showers',
-  95:'Thunderstorm', 96:'Thunderstorm w/ hail', 99:'Severe thunderstorm'
-};
-
-async function loadWeather() {
-  try {
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude=28.3200&longitude=-80.6076' +
-      '&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,' +
-      'wind_direction_10m,uv_index,weather_code' +
-      '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York';
-    const res = await fetch(url);
-    const d = await res.json();
-    const c = d.current;
-    document.getElementById('wx-condition').textContent = WX_CODES[c.weather_code] || 'Unknown';
-    document.getElementById('wx-temp').textContent   = Math.round(c.temperature_2m) + '°F';
-    document.getElementById('wx-feels').textContent  = Math.round(c.apparent_temperature) + '°F';
-    document.getElementById('wx-wind').textContent   = Math.round(c.wind_speed_10m) + ' mph';
-    document.getElementById('wx-wdir').textContent   = degToCompass(c.wind_direction_10m);
-    document.getElementById('wx-humid').textContent  = Math.round(c.relative_humidity_2m) + '%';
-    document.getElementById('wx-uv').textContent     = c.uv_index != null ? c.uv_index.toFixed(1) : '—';
-  } catch(e) {
-    document.getElementById('wx-condition').innerHTML = '<span class="err">Could not load weather</span>';
-  }
+async function loadLaunches(){
+  try{
+    const r=await fetch('https://fdo.rocketlaunch.live/json/launches/next/1');
+    const d=await r.json();
+    if(d.result&&d.result.length>0){const l=d.result[0];
+      document.getElementById('launch-content').innerHTML='<div class="launch-name">'+(l.name||'TBD')+'</div><div class="launch-detail">'+(l.provider?.name||'')+'</div><div class="launch-detail">'+(l.pad?.name||'')+'</div><div class="launch-detail" style="margin-top:6px;font-family:var(--font-mono);color:var(--teal-dark)">'+(l.date_str||l.t0||'TBD')+'</div>';return;}
+  }catch(e){}
+  try{
+    const r=await fetch('https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=1&location__ids=12,27');
+    const d=await r.json();
+    if(d.results?.length>0){const l=d.results[0];
+      document.getElementById('launch-content').innerHTML='<div class="launch-name">'+l.name+'</div><div class="launch-detail">'+(l.net?new Date(l.net).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'TBD')+'</div>';return;}
+  }catch(e){}
+  document.getElementById('launch-content').innerHTML='<div style="font-size:13px">Check <a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal-dark)">KSC Schedule</a></div>';
 }
 
-// ─── LAUNCHES (Launch Library 2 · Cape Canaveral location IDs 12 & 27) ──────
-
-function launchStatus(status) {
-  const n = status?.name || '';
-  if (n.toLowerCase().includes('go'))   return {t:'Go', c:'ls-go'};
-  if (n.toLowerCase().includes('hold')) return {t:'Hold', c:'ls-hold'};
-  return {t:'TBD', c:'ls-tbd'};
-}
-
-function countdown(netStr) {
-  const net = new Date(netStr);
-  const diff = net - Date.now();
-  if (diff < 0) return 'Launched';
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor((diff%86400000)/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  if (d > 0) return `T-${d}d ${h}h`;
-  if (h > 0) return `T-${h}h ${m}m`;
-  return `T-${m}m`;
-}
-
-async function loadLaunches() {
-  try {
-    // Filter to Cape Canaveral (location IDs 12 = CCSFS, 27 = KSC)
-    const url = 'https://ll.thespacedevs.com/2.2.0/launch/upcoming/?location__ids=12,27&limit=5&mode=list';
-    const res = await fetch(url);
-    const d = await res.json();
-    const launches = d.results || [];
-
-    if (!launches.length) {
-      document.getElementById('launch-list').innerHTML =
-        '<div style="padding:14px;background:var(--foam);border:1px solid var(--rule);font-size:13px;color:var(--muted)">No upcoming launches found.</div>';
-      return;
-    }
-
-    document.getElementById('launch-list').innerHTML = launches.map(l => {
-      const st = launchStatus(l.status);
-      const net = new Date(l.net);
-      const netStr = net.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}) +
-        ' · ' + net.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'});
-      const cd = countdown(l.net);
-      return `<div class="launch-item">
-        <div class="launch-name">${l.name}</div>
-        <div class="launch-meta">${netStr} · ${l.pad?.name || l.launch_service_provider?.name || ''}</div>
-        <span class="launch-status ${st.c}">${st.t}</span>
-        <div class="countdown">${cd}</div>
-      </div>`;
-    }).join('');
-
-    // Populate sidebar mini widget
-    const first = launches[0];
-    const fNet = new Date(first.net);
-    document.getElementById('next-launch-mini').innerHTML =
-      `<div style="font-weight:600;color:#fff;font-size:14px;margin-bottom:4px">${first.name}</div>` +
-      `<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.5)">${fNet.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}</div>` +
-      `<div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--teal);margin-top:4px">${countdown(first.net)}</div>`;
-
-  } catch(e) {
-    document.getElementById('launch-list').innerHTML =
-      '<div style="padding:14px;background:var(--foam);border:1px solid var(--rule)" class="err">Could not load launch data · <a href="https://thespacedevs.com" target="_blank" style="color:var(--teal)">thespacedevs.com</a></div>';
-  }
-}
-
-// ─── MEDIA TABS ──────────────────────────────────────────────────────────────
-
-function setMain(thumb) {
-  document.getElementById('gallery-img').src = thumb.src;
-  document.querySelectorAll('#photo-gallery img[onclick]').forEach(t => t.style.border = '2px solid transparent');
-  thumb.style.border = '2px solid var(--teal)';
-}
-
-function switchTab(btn, paneId) {
-  document.querySelectorAll('.media-tab').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.media-pane').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(paneId).classList.add('active');
-}
-
-// ─── SUBSCRIBE ───────────────────────────────────────────────────────────────
-
-async function handleSub() {
-  const email = document.getElementById('sub-email').value.trim();
-  const tier  = document.querySelector('input[name="tier"]:checked')?.value || 'free';
-  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
-  // Replace YOUR_FORM_ID with your Formspree.io form ID
-  const FORMSPREE = 'YOUR_FORM_ID';
-  try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE}`, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({email, tier})
-    });
-    if (res.ok || FORMSPREE === 'YOUR_FORM_ID') {
-      document.getElementById('sub-form').style.display = 'none';
-      document.getElementById('sub-success').style.display = 'block';
-    } else {
-      alert('Something went wrong. Email us: hello@dogwalkersurfreport.com');
-    }
-  } catch { 
-    document.getElementById('sub-form').style.display = 'none';
-    document.getElementById('sub-success').style.display = 'block';
-  }
-}
-
-// ─── TIMESTAMP ───────────────────────────────────────────────────────────────
-
-document.getElementById('report-ts').textContent =
-  new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) + ' · ' +
-  new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-
-loadBuoys();
-loadWeather();
+loadAllBuoys();
 loadLaunches();
-setInterval(loadBuoys, 30*60*1000);
-setInterval(loadWeather, 30*60*1000);
+setInterval(loadAllBuoys,600000);
 </script>
 </body>
 </html>
