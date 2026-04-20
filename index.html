@@ -13,13 +13,11 @@
 body{font-family:var(--font-body);color:var(--text-primary);background:var(--sand);line-height:1.6}
 a{color:var(--teal-dark);text-decoration:none}a:hover{text-decoration:underline}
 
-/* === TOP BAR === */
 .top-bar{background:var(--navy);padding:6px 20px;display:flex;justify-content:flex-end;align-items:center;gap:12px}
 .social-icon{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white);text-decoration:none;transition:transform .2s}
 .social-icon:hover{transform:scale(1.15);text-decoration:none}
 .si-fb{background:#1877f2}.si-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}.si-x{background:#333}
 
-/* === HEADER — SOLID NAVY === */
 header{background:var(--navy);padding:28px 20px 18px;text-align:center}
 .site-name{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);color:var(--white);letter-spacing:-1px;line-height:1.1}
 .site-name span{color:var(--teal)}
@@ -30,11 +28,9 @@ nav a:hover,nav a.active{color:var(--white);background:rgba(44,181,160,.2);text-
 nav a.active{color:var(--teal)}
 .header-border{height:4px;background:var(--teal)}
 
-/* === HERO / SUNRISE PHOTO === */
 .hero-photo{width:100%;display:block}
-.hero-photo img{width:100%;max-height:500px;object-fit:cover;display:block}
+.hero-photo img{width:100%;display:block}
 
-/* === BUOY DATA BAR === */
 .buoy-bar{background:var(--white);border-bottom:1px solid var(--border);padding:20px;overflow-x:auto}
 .buoy-bar-inner{max-width:1100px;margin:0 auto}
 .buoy-bar h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);text-align:center;margin-bottom:16px;font-style:italic}
@@ -50,12 +46,10 @@ nav a.active{color:var(--teal)}
 .buoy-value.loading{color:var(--text-light);font-size:13px}
 .buoy-value.error{color:#c0392b;font-size:12px}
 
-/* === LAYOUT === */
 .container{max-width:1100px;margin:0 auto;padding:0 20px}
 .main-grid{display:grid;grid-template-columns:1fr 300px;gap:30px;padding:30px 0}
 @media(max-width:800px){.main-grid{grid-template-columns:1fr}}
 
-/* === TODAY'S REPORT === */
 .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--text-light);margin-bottom:16px}
 .report-card{background:var(--white);border-radius:10px;overflow:hidden;border:1px solid var(--border);margin-bottom:24px}
 .report-photo-main{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
@@ -69,7 +63,14 @@ nav a.active{color:var(--teal)}
 .surfline-link{display:inline-block;margin-top:16px;padding:10px 20px;background:var(--teal);color:var(--white);font-weight:700;font-size:14px;border-radius:6px;transition:background .2s}
 .surfline-link:hover{background:var(--teal-dark);text-decoration:none}
 
-/* === TIDE TABLE === */
+/* === ARCHIVE === */
+.archive-item{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:16px;background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;transition:transform .2s;cursor:pointer;text-decoration:none;color:inherit}
+.archive-item:hover{transform:translateY(-2px);text-decoration:none}
+.archive-thumb{width:120px;height:75px;object-fit:cover;border-radius:6px}
+.archive-date{font-family:var(--font-mono);font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px}
+.archive-headline{font-family:var(--font-display);font-size:14px;line-height:1.3;margin-top:4px;color:var(--text-primary)}
+@media(max-width:500px){.archive-item{grid-template-columns:80px 1fr}.archive-thumb{width:80px;height:50px}}
+
 .tide-section{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px}
 .tide-section h3{font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
 .tide-table{width:100%;border-collapse:collapse;font-size:13px}
@@ -77,7 +78,6 @@ nav a.active{color:var(--teal)}
 .tide-table td{padding:8px;border-bottom:1px solid #eee;font-family:var(--font-mono);font-size:13px}
 .tide-high{color:var(--teal-dark);font-weight:600}.tide-low{color:var(--text-light)}
 
-/* === SIDEBAR === */
 .ad-slot{background:var(--sand-dark);border:2px dashed var(--border);border-radius:8px;padding:30px 20px;text-align:center;margin-bottom:20px}
 .ad-slot-size{font-family:var(--font-mono);font-size:13px;color:var(--text-light);margin-bottom:4px}
 .ad-slot-cta{font-size:12px}
@@ -96,13 +96,25 @@ nav a.active{color:var(--teal)}
 .alert-btn{width:100%;padding:12px;background:var(--teal);color:var(--white);border:none;border-radius:6px;font-weight:700;font-size:14px;cursor:pointer;margin-top:8px;transition:background .2s}
 .alert-btn:hover{background:var(--teal-dark)}
 
+/* === TREAT BOX === */
+.treat-box{background:linear-gradient(135deg,#f8e8d0,#f5e0c0);border:1px solid #e0c89a;border-radius:10px;padding:20px;text-align:center;margin-bottom:20px}
+.treat-box .treat-emoji{font-size:36px;margin-bottom:8px}
+.treat-box h3{font-family:var(--font-display);font-size:16px;color:var(--text-primary);margin-bottom:6px}
+.treat-box p{font-size:13px;color:var(--text-secondary);margin-bottom:14px}
+.treat-btn{display:inline-block;padding:12px 28px;background:#00d632;color:var(--white);font-weight:700;font-size:15px;border-radius:8px;text-decoration:none;transition:background .2s;box-shadow:0 2px 8px rgba(0,214,50,.3)}
+.treat-btn:hover{background:#00b82a;text-decoration:none}
+
+/* === LAUNCH COUNTDOWN === */
 .launch-box{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:20px;margin-bottom:20px}
 .launch-box h3{font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-light);margin-bottom:10px}
 .launch-name{font-weight:700;font-size:15px}
 .launch-detail{font-size:13px;color:var(--text-secondary);margin-top:4px}
 #launch-content{min-height:40px}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.countdown-unit{background:var(--navy);border-radius:6px;padding:8px 4px;text-align:center}
+.countdown-num{font-family:var(--font-mono);font-size:20px;font-weight:700;color:var(--teal);line-height:1}
+.countdown-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#8a95a5;margin-top:4px}
 
-/* === QUICK LINKS === */
 .quick-links{background:var(--navy);padding:40px 20px;color:#8a95a5;margin-top:30px}
 .quick-links-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px}
 .quick-links h4{font-family:var(--font-display);font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--white);margin-bottom:12px}
@@ -116,14 +128,12 @@ footer a{color:var(--teal)}
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="top-bar">
   <a href="https://facebook.com" target="_blank" class="social-icon si-fb">f</a>
   <a href="https://instagram.com" target="_blank" class="social-icon si-ig">ig</a>
   <a href="https://x.com" target="_blank" class="social-icon si-x">X</a>
 </div>
 
-<!-- HEADER — SOLID NAVY -->
 <header>
   <div class="site-name">Dog Walker<span>Surf Report</span></div>
   <div class="site-tagline">Checked on foot, several times daily &middot; Real buoys, real eyes, real conditions</div>
@@ -138,12 +148,10 @@ footer a{color:var(--teal)}
 </header>
 <div class="header-border"></div>
 
-<!-- SUNRISE HERO PHOTO -->
 <div class="hero-photo">
   <img src="banner.webp" alt="Sunrise over Cocoa Beach from 31st Street">
 </div>
 
-<!-- BUOY DATA BAR -->
 <div class="buoy-bar" id="conditions">
   <div class="buoy-bar-inner">
     <h3>Cocoa Beach Live Weather, Winds, &amp; Offshore Buoys <em>[<a href="https://www.ndbc.noaa.gov/" target="_blank">Linked to Source</a>]</em></h3>
@@ -179,7 +187,6 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
-<!-- LEADERBOARD AD -->
 <div class="ad-leaderboard">
   <div class="ad-slot">
     <div class="ad-slot-size">728&times;90 &middot; Leaderboard</div>
@@ -187,28 +194,14 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="container">
   <div class="main-grid">
     <main>
+      <!-- TODAY'S REPORT — auto-populated from reports.json -->
       <div class="section-label" id="report">Today's Report</div>
-      <div class="report-card">
-        <img src="photos/2026-04-20/1.jpg" alt="Cocoa Beach surf conditions" class="report-photo-main" id="main-photo">
-        <div class="report-thumbnails">
-          <img src="photos/2026-04-20/1.jpg" alt="Surf shot 1" class="active" onclick="switchPhoto(this)">
-          <img src="photos/2026-04-20/2.jpg" alt="Surf shot 2" onclick="switchPhoto(this)">
-          <img src="photos/2026-04-20/3.jpg" alt="Surf shot 3" onclick="switchPhoto(this)">
-          <img src="photos/2026-04-20/4.jpg" alt="Surf shot 4" onclick="switchPhoto(this)">
-          <img src="photos/2026-04-20/5.jpg" alt="Surf shot 5" onclick="switchPhoto(this)">
-        </div>
-        <div class="report-body">
-          <div class="report-meta">Monday, April 20 &middot; 8:28 AM</div>
-          <h2 class="report-headline">2-3'+ wind driven victory at sea conditions.</h2>
-          <p class="report-text">A fast drift and maybe a surfable wave at high tide incoming at report time. Feels like a Monday, happy high holiday to those who celebrate.</p>
-          <a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="surfline-link">View Surfline Picnic Tables Forecast &rarr;</a>
-        </div>
-      </div>
+      <div id="today-report"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading report...</div></div>
 
+      <!-- TIDE TABLE -->
       <div class="tide-section">
         <h3>Cocoa Beach Tides</h3>
         <table class="tide-table">
@@ -225,10 +218,9 @@ footer a{color:var(--teal)}
         </table>
       </div>
 
+      <!-- ARCHIVE — auto-populated from reports.json -->
       <div class="section-label" id="archive">Recent Reports</div>
-      <div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">
-        <p>Archive coming soon &mdash; daily reports will stack here.</p>
-      </div>
+      <div id="archive-list"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading archive...</div></div>
     </main>
 
     <aside>
@@ -237,6 +229,15 @@ footer a{color:var(--teal)}
         <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Your Ad Here</a></div>
       </div>
 
+      <!-- BUY ATHENA A TREAT -->
+      <div class="treat-box">
+        <div class="treat-emoji">🐕</div>
+        <h3>Buy Athena a Treat!</h3>
+        <p>She walks the beach every morning so you don't have to. Show her some love.</p>
+        <a href="https://cash.app/$YOURUSERNAME" target="_blank" class="treat-btn">$ Send a Treat</a>
+      </div>
+
+      <!-- SURF ALERTS -->
       <div class="alerts-box" id="subscribe">
         <h3>Surf Alerts</h3>
         <p>Get notified when conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
@@ -247,6 +248,7 @@ footer a{color:var(--teal)}
         <p style="font-size:11px;text-align:center;margin-top:8px;color:#5a6577">No spam. Unsubscribe any time.</p>
       </div>
 
+      <!-- LAUNCH COUNTDOWN -->
       <div class="launch-box">
         <h3>Next Space Coast Launch</h3>
         <div id="launch-content"><div class="buoy-value loading">Loading...</div></div>
@@ -264,7 +266,6 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
-<!-- QUICK LINKS -->
 <div class="quick-links">
   <div class="quick-links-grid">
     <div><h4>Data Sources</h4><ul>
@@ -292,184 +293,238 @@ footer a{color:var(--teal)}
 <footer>&copy; 2026 Dog Walker Surf Report &middot; 31st St, Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
-// === PHOTO GALLERY ===
+// =============================================
+// REPORTS SYSTEM — reads from reports.json
+// =============================================
+async function loadReports(){
+  try{
+    const r=await fetch('reports.json?t='+Date.now());
+    const reports=await r.json();
+    if(!reports.length)return;
+
+    // --- TODAY'S REPORT (first entry) ---
+    const today=reports[0];
+    const photoCount=today.photos||5;
+    let thumbs='';
+    for(let i=1;i<=photoCount;i++){
+      thumbs+='<img src="photos/'+(today.folder||today.date)+'/'+i+'.jpg" alt="Surf shot '+i+'"'+(i===1?' class="active"':'')+' onclick="switchPhoto(this)">';
+    }
+    document.getElementById('today-report').innerHTML=
+      '<div class="report-card">'
+      +'<img src="photos/'+(today.folder||today.date)+'/1.jpg" alt="Cocoa Beach surf conditions" class="report-photo-main" id="main-photo">'
+      +'<div class="report-thumbnails">'+thumbs+'</div>'
+      +'<div class="report-body">'
+      +'<div class="report-meta">'+today.day+', '+ formatDate(today.date)+' &middot; '+today.time+'</div>'
+      +'<h2 class="report-headline">'+today.headline+'</h2>'
+      +'<p class="report-text">'+today.text+'</p>'
+      +'<a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="surfline-link">View Surfline Picnic Tables Forecast &rarr;</a>'
+      +'</div></div>';
+
+    // --- ARCHIVE (everything after the first entry) ---
+    if(reports.length>1){
+      let html='';
+      for(let i=1;i<reports.length;i++){
+        const rpt=reports[i];
+        html+='<div class="archive-item" onclick="showArchive('+i+')">'
+          +'<img src="photos/'+(rpt.folder||rpt.date)+'/1.jpg" alt="'+rpt.date+'" class="archive-thumb">'
+          +'<div><div class="archive-date">'+rpt.day+', '+formatDate(rpt.date)+' &middot; '+rpt.time+'</div>'
+          +'<div class="archive-headline">'+rpt.headline+'</div></div></div>';
+      }
+      document.getElementById('archive-list').innerHTML=html;
+    }else{
+      document.getElementById('archive-list').innerHTML='<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">More reports coming soon &mdash; check back tomorrow.</div>';
+    }
+
+    // Store reports globally for archive viewer
+    window._reports=reports;
+  }catch(e){
+    console.error('Error loading reports:',e);
+    document.getElementById('today-report').innerHTML='<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Could not load report.</div>';
+  }
+}
+
+function formatDate(dateStr){
+  const d=new Date(dateStr+'T12:00:00');
+  return d.toLocaleDateString('en-US',{month:'long',day:'numeric'});
+}
+
+function showArchive(idx){
+  const rpt=window._reports[idx];
+  if(!rpt)return;
+  const photoCount=rpt.photos||5;
+  let thumbs='';
+  for(let i=1;i<=photoCount;i++){
+    thumbs+='<img src="photos/'+(rpt.folder||rpt.date)+'/'+i+'.jpg" alt="Surf shot '+i+'"'+(i===1?' class="active"':'')+' onclick="switchPhoto(this)">';
+  }
+  document.getElementById('today-report').innerHTML=
+    '<div class="report-card">'
+    +'<img src="photos/'+(rpt.folder||rpt.date)+'/1.jpg" alt="Cocoa Beach surf" class="report-photo-main" id="main-photo">'
+    +'<div class="report-thumbnails">'+thumbs+'</div>'
+    +'<div class="report-body">'
+    +'<div class="report-meta">'+rpt.day+', '+formatDate(rpt.date)+' &middot; '+rpt.time+'</div>'
+    +'<h2 class="report-headline">'+rpt.headline+'</h2>'
+    +'<p class="report-text">'+rpt.text+'</p>'
+    +'<a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="surfline-link">View Surfline Picnic Tables Forecast &rarr;</a>'
+    +'</div></div>';
+  document.getElementById('report').scrollIntoView({behavior:'smooth'});
+}
+
 function switchPhoto(thumb){
   document.getElementById('main-photo').src=thumb.src;
   document.querySelectorAll('.report-thumbnails img').forEach(t=>t.classList.remove('active'));
   thumb.classList.add('active');
 }
 
-// === HELPERS ===
+// =============================================
+// BUOY DATA — 3 sources tried in order
+// =============================================
 const DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 function degToCompass(d){return DIRS[Math.round(d/22.5)%16]}
 function cToF(c){return Math.round(c*9/5+32)}
 function mpsToKts(m){return Math.round(m*1.944)}
 function mToFt(m){return(m*3.281).toFixed(1)}
+function setVal(id,html,err){const el=document.getElementById(id);el.innerHTML=html;el.classList.remove('loading');if(err)el.classList.add('error')}
 
-function setVal(id,html,err){
-  const el=document.getElementById(id);
-  el.innerHTML=html;el.classList.remove('loading');
-  if(err)el.classList.add('error');
-}
-
-// =============================================================
-// BUOY DATA — THREE SOURCES, TRIED IN ORDER
-// 1. Your own Vercel API route (/api/buoy) — best, no CORS
-// 2. NOAA ERDDAP server — public API with CORS support
-// 3. CORS proxy fallback
-// =============================================================
-
-// --- SOURCE 1: Vercel API route ---
 async function fetchFromVercelAPI(station){
-  try{
-    const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(5000)});
-    if(r.ok)return await r.json();
-  }catch(e){}
-  return null;
+  try{const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(5000)});if(r.ok)return await r.json()}catch(e){}return null;
 }
-
-// --- SOURCE 2: NOAA ERDDAP (has CORS) ---
 async function fetchFromERDDAP(station){
   try{
-    // ERDDAP only has standard buoys (numeric IDs), not coastal stations like TRDF1
     if(!/^\d+$/.test(station))return null;
-    const now=new Date();
-    const hours3=new Date(now.getTime()-3*60*60*1000).toISOString();
-    const url='https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json'
-      +'?station,time,wd,wspd,gst,wvht,dpd,apd,mwd,atmp,wtmp'
-      +'&station=%22'+station+'%22'
-      +'&time>='+encodeURIComponent(hours3)
-      +'&orderByMax(%22time%22)';
-    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
-    if(!r.ok)return null;
-    const json=await r.json();
-    const cols=json.table.columnNames;
-    const row=json.table.rows[json.table.rows.length-1];
+    const now=new Date();const h3=new Date(now.getTime()-3*3600000).toISOString();
+    const url='https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json?station,time,wd,wspd,gst,wvht,dpd,apd,mwd,atmp,wtmp&station=%22'+station+'%22&time>='+encodeURIComponent(h3)+'&orderByMax(%22time%22)';
+    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)return null;
+    const json=await r.json();const cols=json.table.columnNames;const row=json.table.rows[json.table.rows.length-1];
     const d={};cols.forEach((c,i)=>{d[c]=row[i]});
-    return{
-      air_temp_f:d.atmp!=null?cToF(d.atmp):null,
-      water_temp_f:d.wtmp!=null?cToF(d.wtmp):null,
-      wind_speed_kts:d.wspd!=null?mpsToKts(d.wspd):null,
-      wind_gust_kts:d.gst!=null?mpsToKts(d.gst):null,
-      wind_dir_compass:d.wd!=null?degToCompass(d.wd):null,
-      wave_height_ft:d.wvht!=null?mToFt(d.wvht):null,
-      dom_period_sec:d.dpd!=null?d.dpd:null,
-      wave_dir_compass:d.mwd!=null?degToCompass(d.mwd):null,
-    };
-  }catch(e){console.log('ERDDAP error for '+station,e)}
-  return null;
+    return{air_temp_f:d.atmp!=null?cToF(d.atmp):null,water_temp_f:d.wtmp!=null?cToF(d.wtmp):null,wind_speed_kts:d.wspd!=null?mpsToKts(d.wspd):null,wind_gust_kts:d.gst!=null?mpsToKts(d.gst):null,wind_dir_compass:d.wd!=null?degToCompass(d.wd):null,wave_height_ft:d.wvht!=null?mToFt(d.wvht):null,dom_period_sec:d.dpd!=null?d.dpd:null,wave_dir_compass:d.mwd!=null?degToCompass(d.mwd):null};
+  }catch(e){}return null;
 }
-
-// --- SOURCE 3: CORS proxy fallback ---
 async function fetchFromProxy(station){
-  const proxies=[
-    u=>'https://corsproxy.io/?'+encodeURIComponent(u),
-    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
-  ];
+  const proxies=[u=>'https://corsproxy.io/?'+encodeURIComponent(u),u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)];
   const ndbc='https://www.ndbc.noaa.gov/data/realtime2/'+station+'.txt';
-  for(const px of proxies){
-    try{
-      const r=await fetch(px(ndbc),{signal:AbortSignal.timeout(8000)});
-      if(!r.ok)continue;
-      const text=await r.text();
-      if(text.length<50)continue;
-      const lines=text.trim().split('\n');
-      if(lines.length<3)continue;
-      const hdr=lines[0].replace('#','').trim().split(/\s+/);
-      const vals=lines[2].trim().split(/\s+/);
-      const d={};hdr.forEach((h,i)=>{d[h]=vals[i]==='MM'?null:vals[i]});
-      return{
-        air_temp_f:d.ATMP?cToF(parseFloat(d.ATMP)):null,
-        water_temp_f:d.WTMP?cToF(parseFloat(d.WTMP)):null,
-        wind_speed_kts:d.WSPD?mpsToKts(parseFloat(d.WSPD)):null,
-        wind_gust_kts:d.GST?mpsToKts(parseFloat(d.GST)):null,
-        wind_dir_compass:d.WDIR?degToCompass(parseFloat(d.WDIR)):null,
-        wave_height_ft:d.WVHT?mToFt(parseFloat(d.WVHT)):null,
-        dom_period_sec:d.DPD?parseFloat(d.DPD):null,
-        wave_dir_compass:d.MWD?degToCompass(parseFloat(d.MWD)):null,
-      };
-    }catch(e){}
-  }
-  return null;
+  for(const px of proxies){try{
+    const r=await fetch(px(ndbc),{signal:AbortSignal.timeout(8000)});if(!r.ok)continue;
+    const text=await r.text();if(text.length<50)continue;
+    const lines=text.trim().split('\n');if(lines.length<3)continue;
+    const hdr=lines[0].replace('#','').trim().split(/\s+/);const vals=lines[2].trim().split(/\s+/);
+    const d={};hdr.forEach((h,i)=>{d[h]=vals[i]==='MM'?null:vals[i]});
+    return{air_temp_f:d.ATMP?cToF(parseFloat(d.ATMP)):null,water_temp_f:d.WTMP?cToF(parseFloat(d.WTMP)):null,wind_speed_kts:d.WSPD?mpsToKts(parseFloat(d.WSPD)):null,wind_gust_kts:d.GST?mpsToKts(parseFloat(d.GST)):null,wind_dir_compass:d.WDIR?degToCompass(parseFloat(d.WDIR)):null,wave_height_ft:d.WVHT?mToFt(parseFloat(d.WVHT)):null,dom_period_sec:d.DPD?parseFloat(d.DPD):null,wave_dir_compass:d.MWD?degToCompass(parseFloat(d.MWD)):null};
+  }catch(e){}}return null;
 }
-
-// --- MASTER FETCH: try all three sources ---
 async function fetchBuoy(station){
-  let data=await fetchFromVercelAPI(station);
-  if(data)return data;
-  data=await fetchFromERDDAP(station);
-  if(data)return data;
-  data=await fetchFromProxy(station);
-  return data;
+  let d=await fetchFromVercelAPI(station);if(d)return d;
+  d=await fetchFromERDDAP(station);if(d)return d;
+  return await fetchFromProxy(station);
 }
 
-// === LOAD ALL BUOY DATA ===
 async function loadAllBuoys(){
-  // Weather station TRDF1 (coastal station — ERDDAP won't have it, needs API route or proxy)
   const w=await fetchBuoy('TRDF1');
   if(w){
     setVal('air-temp',w.air_temp_f?w.air_temp_f+'&deg;F':'N/A');
     setVal('water-temp',w.water_temp_f?w.water_temp_f+'&deg;F':'N/A');
-    if(w.wind_speed_kts!=null){
-      let s=w.wind_speed_kts+' kts '+(w.wind_dir_compass||'');
-      if(w.wind_gust_kts)s+='<br>Gusts '+w.wind_gust_kts+' kts';
-      setVal('wind-data',s);
-    }else setVal('wind-data','N/A');
+    if(w.wind_speed_kts!=null){let s=w.wind_speed_kts+' kts '+(w.wind_dir_compass||'');if(w.wind_gust_kts)s+='<br>Gusts '+w.wind_gust_kts+' kts';setVal('wind-data',s)}
+    else setVal('wind-data','N/A');
   }else{
-    // Fallback: try 41009 for wind/temp data if TRDF1 fails
-    const fallback=await fetchBuoy('41009');
-    if(fallback){
-      setVal('air-temp',fallback.air_temp_f?fallback.air_temp_f+'&deg;F':'N/A');
-      setVal('water-temp',fallback.water_temp_f?fallback.water_temp_f+'&deg;F':'N/A');
-      if(fallback.wind_speed_kts!=null){
-        let s=fallback.wind_speed_kts+' kts '+(fallback.wind_dir_compass||'');
-        if(fallback.wind_gust_kts)s+='<br>Gusts '+fallback.wind_gust_kts+' kts';
-        setVal('wind-data',s);
-      }else setVal('wind-data','N/A');
-    }else{
-      setVal('air-temp','Unavailable',true);
-      setVal('water-temp','Unavailable',true);
-      setVal('wind-data','Unavailable',true);
-    }
+    const fb=await fetchBuoy('41009');
+    if(fb){
+      setVal('air-temp',fb.air_temp_f?fb.air_temp_f+'&deg;F':'N/A');
+      setVal('water-temp',fb.water_temp_f?fb.water_temp_f+'&deg;F':'N/A');
+      if(fb.wind_speed_kts!=null){let s=fb.wind_speed_kts+' kts '+(fb.wind_dir_compass||'');if(fb.wind_gust_kts)s+='<br>Gusts '+fb.wind_gust_kts+' kts';setVal('wind-data',s)}
+      else setVal('wind-data','N/A');
+    }else{setVal('air-temp','Unavailable',true);setVal('water-temp','Unavailable',true);setVal('wind-data','Unavailable',true)}
   }
 
-  // Buoy 41113 — ERDDAP should have this
   const b113=await fetchBuoy('41113');
-  if(b113&&b113.wave_height_ft){
-    const d=b113.wave_dir_compass||'',p=b113.dom_period_sec?b113.dom_period_sec+'s':'';
-    setVal('buoy-41113',b113.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
-  }else setVal('buoy-41113',b113?'Flat / No data':'Unavailable',!b113);
+  if(b113&&b113.wave_height_ft){const d=b113.wave_dir_compass||'',p=b113.dom_period_sec?b113.dom_period_sec+'s':'';
+    setVal('buoy-41113',b113.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>')}
+  else setVal('buoy-41113',b113?'Flat / No data':'Unavailable',!b113);
 
-  // Buoy 41009 — ERDDAP should have this
   const b009=await fetchBuoy('41009');
-  if(b009&&b009.wave_height_ft){
-    const d=b009.wave_dir_compass||'',p=b009.dom_period_sec?b009.dom_period_sec+'s':'';
+  if(b009&&b009.wave_height_ft){const d=b009.wave_dir_compass||'',p=b009.dom_period_sec?b009.dom_period_sec+'s':'';
     setVal('buoy-41009',b009.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
-    setVal('swell-data',b009.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>');
-  }else{
-    setVal('buoy-41009',b009?'Flat / No data':'Unavailable',!b009);
-    setVal('swell-data',b009?'N/A':'Unavailable',!b009);
-  }
+    setVal('swell-data',b009.wave_height_ft+' ft '+d+'<br><span style="font-size:11px;color:var(--text-light)">@ '+p+'</span>')}
+  else{setVal('buoy-41009',b009?'Flat / No data':'Unavailable',!b009);setVal('swell-data',b009?'N/A':'Unavailable',!b009)}
 }
 
-// === LAUNCH DATA ===
+// =============================================
+// LAUNCH COUNTDOWN
+// =============================================
+let launchTime=null;
+
+function updateCountdown(){
+  if(!launchTime)return;
+  const now=new Date();
+  const diff=launchTime-now;
+  if(diff<=0){
+    document.getElementById('launch-countdown').innerHTML='<div style="font-family:var(--font-mono);color:var(--teal);font-weight:700;text-align:center;padding:8px">LAUNCHING NOW!</div>';
+    return;
+  }
+  const days=Math.floor(diff/86400000);
+  const hrs=Math.floor((diff%86400000)/3600000);
+  const mins=Math.floor((diff%3600000)/60000);
+  const secs=Math.floor((diff%60000)/1000);
+  document.getElementById('launch-countdown').innerHTML=
+    '<div class="countdown">'
+    +'<div class="countdown-unit"><div class="countdown-num">'+days+'</div><div class="countdown-label">Days</div></div>'
+    +'<div class="countdown-unit"><div class="countdown-num">'+hrs+'</div><div class="countdown-label">Hrs</div></div>'
+    +'<div class="countdown-unit"><div class="countdown-num">'+mins+'</div><div class="countdown-label">Min</div></div>'
+    +'<div class="countdown-unit"><div class="countdown-num">'+secs+'</div><div class="countdown-label">Sec</div></div>'
+    +'</div>';
+}
+
 async function loadLaunches(){
+  // Try RocketLaunch.live first
   try{
     const r=await fetch('https://fdo.rocketlaunch.live/json/launches/next/1');
     const d=await r.json();
-    if(d.result&&d.result.length>0){const l=d.result[0];
-      document.getElementById('launch-content').innerHTML='<div class="launch-name">'+(l.name||'TBD')+'</div><div class="launch-detail">'+(l.provider?.name||'')+'</div><div class="launch-detail">'+(l.pad?.name||'')+'</div><div class="launch-detail" style="margin-top:6px;font-family:var(--font-mono);color:var(--teal-dark)">'+(l.date_str||l.t0||'TBD')+'</div>';return;}
+    if(d.result&&d.result.length>0){
+      const l=d.result[0];
+      const dateStr=l.t0||l.date_str||'';
+      let timeDisplay=l.date_str||'TBD';
+
+      // Parse launch time for countdown
+      if(l.t0){
+        launchTime=new Date(l.t0);
+        const opts={weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'};
+        timeDisplay=launchTime.toLocaleDateString('en-US',opts);
+      }
+
+      document.getElementById('launch-content').innerHTML=
+        '<div class="launch-name">'+(l.name||'TBD')+'</div>'
+        +'<div class="launch-detail">'+(l.provider?.name||'')+'</div>'
+        +'<div class="launch-detail">'+(l.pad?.name||'')+'</div>'
+        +'<div class="launch-detail" style="margin-top:6px;font-family:var(--font-mono);color:var(--teal-dark)">'+timeDisplay+'</div>'
+        +'<div id="launch-countdown"></div>';
+      updateCountdown();
+      setInterval(updateCountdown,1000);
+      return;
+    }
   }catch(e){}
+
+  // Fallback: Space Devs
   try{
     const r=await fetch('https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=1&location__ids=12,27');
     const d=await r.json();
-    if(d.results?.length>0){const l=d.results[0];
-      document.getElementById('launch-content').innerHTML='<div class="launch-name">'+l.name+'</div><div class="launch-detail">'+(l.net?new Date(l.net).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'TBD')+'</div>';return;}
+    if(d.results?.length>0){
+      const l=d.results[0];
+      if(l.net){
+        launchTime=new Date(l.net);
+        const opts={weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'};
+        document.getElementById('launch-content').innerHTML=
+          '<div class="launch-name">'+l.name+'</div>'
+          +'<div class="launch-detail">'+launchTime.toLocaleDateString('en-US',opts)+'</div>'
+          +'<div id="launch-countdown"></div>';
+        updateCountdown();
+        setInterval(updateCountdown,1000);
+        return;
+      }
+    }
   }catch(e){}
   document.getElementById('launch-content').innerHTML='<div style="font-size:13px">Check <a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal-dark)">KSC Schedule</a></div>';
 }
 
 // === INIT ===
+loadReports();
 loadAllBuoys();
 loadLaunches();
 setInterval(loadAllBuoys,600000);
