@@ -10,8 +10,10 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dog Walker Surf Report — South Cocoa Beach Surf Report</title>
-<meta name="description" content="South Cocoa Beach surf report. Live conditions at Picnic Tables checked on foot, several times daily. Real buoy data, real eyes, real report.">
+<title>Cocoa Beach Surf Report — Dog Walker Surf Report | South Cocoa Beach Conditions</title>
+<meta name="description" content="Cocoa Beach surf report updated several times daily from Picnic Tables at 31st Street. Live NOAA buoy data, real photos, tide charts, and wind conditions for South Cocoa Beach.">
+<meta name="keywords" content="Cocoa Beach surf report, South Cocoa Beach surf, Cocoa Beach waves, Cocoa Beach surf conditions, Cocoa Beach tide chart, Cocoa Beach wind, Brevard County surf report, Picnic Tables surf">
+<link rel="canonical" href="https://dogwalkersurfreport.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -26,7 +28,7 @@ a{color:var(--teal-dark);text-decoration:none}a:hover{text-decoration:underline}
 .si-fb{background:#1877f2}.si-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}.si-x{background:#333}
 
 header{background:var(--navy);padding:28px 20px 18px;text-align:center}
-.site-name{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);color:var(--white);letter-spacing:-1px;line-height:1.1}
+.site-name{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);color:var(--white);letter-spacing:-1px;line-height:1.1;margin:0;padding:0}
 .site-name span{color:var(--teal)}
 .site-tagline{font-size:13px;color:#8a95a5;margin-top:6px;letter-spacing:.5px}
 nav{margin-top:16px;display:flex;justify-content:center;flex-wrap:wrap;gap:4px}
@@ -132,6 +134,44 @@ footer{background:var(--navy-light);padding:20px;text-align:center;font-size:12p
 footer a{color:var(--teal)}
 ::-webkit-scrollbar{height:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Dog Walker Surf Report",
+  "alternateName": "Cocoa Beach Surf Report",
+  "url": "https://dogwalkersurfreport.com",
+  "description": "Cocoa Beach surf report updated several times daily from Picnic Tables at 31st Street, South Cocoa Beach. Live NOAA buoy data, real photos, and tide charts.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dog Walker Surf Report",
+    "url": "https://dogwalkersurfreport.com",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {"@type": "GeoCoordinates", "latitude": 28.3200, "longitude": -80.6076},
+      "geoRadius": "20000"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Dog Walker Surf Report — Cocoa Beach",
+  "description": "Daily Cocoa Beach surf report from Picnic Tables at 31st Street. Live conditions checked on foot, multiple times daily.",
+  "url": "https://dogwalkersurfreport.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "31st Street",
+    "addressLocality": "Cocoa Beach",
+    "addressRegion": "FL",
+    "postalCode": "32931",
+    "addressCountry": "US"
+  },
+  "geo": {"@type": "GeoCoordinates", "latitude": 28.3200, "longitude": -80.6076}
+}
+</script>
 </head>
 <body>
 
@@ -142,8 +182,8 @@ footer a{color:var(--teal)}
 </div>
 
 <header>
-  <div class="site-name">Dog Walker<span>Surf Report</span></div>
-  <div class="site-tagline">South Cocoa Beach Surf Report &middot; Checked on foot, several times daily &middot; Real buoys, real eyes, real conditions</div>
+  <h1 class="site-name">Dog Walker<span>Surf Report</span></h1>
+  <div class="site-tagline">Cocoa Beach Surf Report &middot; Checked on foot, several times daily &middot; Real buoys, real eyes, real conditions</div>
   <nav>
     <a href="#report" class="active">Today's Report</a>
     <a href="#conditions">Live Data</a>
@@ -156,12 +196,12 @@ footer a{color:var(--teal)}
 <div class="header-border"></div>
 
 <div class="hero-photo">
-  <img src="banner.webp" alt="Sunrise over Cocoa Beach from 31st Street">
+  <img src="banner.webp" alt="Cocoa Beach surf report — sunrise view from 31st Street Picnic Tables, South Cocoa Beach">
 </div>
 
 <div class="buoy-bar" id="conditions">
   <div class="buoy-bar-inner">
-    <h3>Cocoa Beach Live Weather, Winds, &amp; Offshore Buoys <em>[<a href="https://www.ndbc.noaa.gov/" target="_blank">Linked to Source</a>]</em></h3>
+    <h3>Cocoa Beach Live Weather, Winds, &amp; Offshore Buoys &mdash; South Cocoa Beach Conditions <em>[<a href="https://www.ndbc.noaa.gov/" target="_blank">Linked to Source</a>]</em></h3>
     <div class="buoy-grid">
       <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
         <div class="buoy-label">Air</div><div class="buoy-icon">🌡️</div>
@@ -208,21 +248,16 @@ footer a{color:var(--teal)}
       <div class="section-label" id="report">Today's Report</div>
       <div id="today-report"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading report...</div></div>
 
-      <!-- TIDE TABLE -->
+      <!-- TIDE TABLE — auto-populated from NOAA API -->
       <div class="tide-section">
-        <h3>Cocoa Beach Tides</h3>
+        <h3>Cocoa Beach Tides &mdash; Trident Pier, Port Canaveral</h3>
         <table class="tide-table">
           <thead><tr><th>Day</th><th>Tide</th><th>Time</th><th>Height</th></tr></thead>
-          <tbody>
-            <tr><td>20 Mon</td><td class="tide-low">Low</td><td>3:41 AM</td><td>0.0 ft</td></tr>
-            <tr><td>20 Mon</td><td class="tide-high">High</td><td>9:56 AM</td><td>3.6 ft</td></tr>
-            <tr><td>20 Mon</td><td class="tide-low">Low</td><td>3:54 PM</td><td>0.5 ft</td></tr>
-            <tr><td>20 Mon</td><td class="tide-high">High</td><td>10:18 PM</td><td>3.8 ft</td></tr>
-            <tr><td>21 Tue</td><td class="tide-low">Low</td><td>4:33 AM</td><td>0.1 ft</td></tr>
-            <tr><td>21 Tue</td><td class="tide-high">High</td><td>10:46 AM</td><td>3.5 ft</td></tr>
-            <tr><td>21 Tue</td><td class="tide-low">Low</td><td>4:47 PM</td><td>0.6 ft</td></tr>
+          <tbody id="tide-body">
+            <tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:16px">Loading tides...</td></tr>
           </tbody>
         </table>
+        <div style="font-size:11px;color:var(--text-light);margin-top:8px;text-align:right">Source: <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank" style="color:var(--text-light)">NOAA Station 8721604</a></div>
       </div>
 
       <!-- ARCHIVE — auto-populated from reports.json -->
@@ -247,7 +282,7 @@ footer a{color:var(--teal)}
       <!-- SURF ALERTS -->
       <div class="alerts-box" id="subscribe">
         <h3>Surf Alerts</h3>
-        <p>Get notified when conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
+        <p>Get notified when Cocoa Beach surf conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
         <div class="alert-tier"><div><div class="alert-tier-name">Daily Report</div><div class="alert-tier-desc">Morning email with conditions + photo</div></div><div class="alert-tier-price">Free</div></div>
         <div class="alert-tier"><div><div class="alert-tier-name">Surf Alerts</div><div class="alert-tier-desc">SMS + email when it fires</div></div><div class="alert-tier-price">$6/mo</div></div>
         <input type="email" class="alert-email" placeholder="your@email.com">
@@ -297,7 +332,7 @@ footer a{color:var(--teal)}
   </div>
 </div>
 
-<footer>&copy; 2026 Dog Walker Surf Report &middot; 31st St, Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
+<footer>&copy; 2026 Dog Walker Surf Report &middot; Cocoa Beach Surf Report from 31st St, South Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
 // =============================================
@@ -318,7 +353,7 @@ async function loadReports(){
     }
     document.getElementById('today-report').innerHTML=
       '<div class="report-card">'
-      +'<img src="photos/'+(today.folder||today.date)+'/1.jpg" alt="Cocoa Beach surf conditions" class="report-photo-main" id="main-photo">'
+      +'<img src="photos/'+(today.folder||today.date)+'/1.jpg" alt="Cocoa Beach surf report — current conditions at Picnic Tables" class="report-photo-main" id="main-photo">'
       +'<div class="report-thumbnails">'+thumbs+'</div>'
       +'<div class="report-body">'
       +'<div class="report-meta">'+today.day+', '+ formatDate(today.date)+' &middot; '+today.time+'</div>'
@@ -530,11 +565,54 @@ async function loadLaunches(){
   document.getElementById('launch-content').innerHTML='<div style="font-size:13px">Check <a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal-dark)">KSC Schedule</a></div>';
 }
 
+// =============================================
+// TIDES — live from NOAA API (Station 8721604)
+// =============================================
+async function loadTides(){
+  try{
+    const now=new Date();
+    const pad=n=>String(n).padStart(2,'0');
+    const beginDate=now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate());
+    const url='https://api.tidesandcurrents.noaa.gov/api/prod/datagetter'
+      +'?station=8721604&product=predictions&datum=MLLW'
+      +'&time_zone=lst_ldt&interval=hilo&units=english&format=json'
+      +'&begin_date='+beginDate+'&range=72';
+    const r=await fetch(url,{signal:AbortSignal.timeout(10000)});
+    if(!r.ok)throw new Error('NOAA API returned '+r.status);
+    const data=await r.json();
+    if(!data.predictions||!data.predictions.length)throw new Error('No predictions');
+
+    const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    let html='';
+    for(const p of data.predictions){
+      const dt=new Date(p.t.replace(' ','T'));
+      const dayLabel=pad(dt.getDate())+' '+days[dt.getDay()];
+      const isHigh=p.type==='H';
+      const hrs=dt.getHours();const mins=pad(dt.getMinutes());
+      const ampm=hrs>=12?'PM':'AM';
+      const h12=hrs%12||12;
+      const timeStr=h12+':'+mins+' '+ampm;
+      const height=parseFloat(p.v).toFixed(1)+' ft';
+      html+='<tr><td>'+dayLabel+'</td>'
+        +'<td class="'+(isHigh?'tide-high':'tide-low')+'">'+(isHigh?'High':'Low')+'</td>'
+        +'<td>'+timeStr+'</td><td>'+height+'</td></tr>';
+    }
+    document.getElementById('tide-body').innerHTML=html;
+  }catch(e){
+    console.error('Tide load error:',e);
+    document.getElementById('tide-body').innerHTML=
+      '<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:16px">'
+      +'Could not load tides. <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721604" target="_blank">View on NOAA</a></td></tr>';
+  }
+}
+
 // === INIT ===
 loadReports();
 loadAllBuoys();
+loadTides();
 loadLaunches();
 setInterval(loadAllBuoys,600000);
+setInterval(loadTides,3600000);
 </script>
 </body>
 </html>
