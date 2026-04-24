@@ -33,7 +33,7 @@
         "target": "https://www.dogwalkersurfreport.com"
       }
     },
- 
+
     {
       "@type": "Organization",
       "@id": "https://www.dogwalkersurfreport.com/#organization",
@@ -58,7 +58,7 @@
         "contactType": "advertising"
       }
     },
- 
+
     {
       "@type": "LocalBusiness",
       "@id": "https://www.dogwalkersurfreport.com/#localbusiness",
@@ -111,16 +111,16 @@
         "closes": "23:59"
       }
     },
- 
+
     {
       "@type": "Product",
       "@id": "https://www.dogwalkersurfreport.com/#surfalerts",
       "name": "Dog Walker Surf Alerts",
+      "image": "https://www.dogwalkersurfreport.com/banner.webp",
       "description": "SMS and email notifications when Cocoa Beach surf conditions hit your threshold at Picnic Tables. Set it and forget it.",
-"brand": {
-  "@type": "Brand",
-  "name": "Dog Walker Surf Report"
-}
+      "brand": {
+        "@type": "Brand",
+        "name": "Dog Walker Surf Report"
       },
       "offers": [
         {
@@ -143,7 +143,7 @@
         }
       ]
     },
- 
+
     {
       "@type": "BreadcrumbList",
       "@id": "https://www.dogwalkersurfreport.com/#breadcrumb",
@@ -168,7 +168,7 @@
         }
       ]
     },
- 
+
     {
       "@type": "FAQPage",
       "@id": "https://www.dogwalkersurfreport.com/#faq",
@@ -210,7 +210,7 @@
   ]
 }
 </script>
-  <link rel="canonical" href="https://dogwalkersurfreport.com">
+<link rel="canonical" href="https://dogwalkersurfreport.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -331,44 +331,6 @@ footer{background:var(--navy-light);padding:20px;text-align:center;font-size:12p
 footer a{color:var(--teal)}
 ::-webkit-scrollbar{height:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
 </style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Dog Walker Surf Report",
-  "alternateName": "Cocoa Beach Surf Report",
-  "url": "https://dogwalkersurfreport.com",
-  "description": "Cocoa Beach surf report updated several times daily from Picnic Tables at 31st Street, South Cocoa Beach. Live NOAA buoy data, real photos, and tide charts.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "Dog Walker Surf Report",
-    "url": "https://dogwalkersurfreport.com",
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {"@type": "GeoCoordinates", "latitude": 28.3200, "longitude": -80.6076},
-      "geoRadius": "20000"
-    }
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Dog Walker Surf Report — Cocoa Beach",
-  "description": "Daily Cocoa Beach surf report from Picnic Tables at 31st Street. Live conditions checked on foot, multiple times daily.",
-  "url": "https://dogwalkersurfreport.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "31st Street",
-    "addressLocality": "Cocoa Beach",
-    "addressRegion": "FL",
-    "postalCode": "32931",
-    "addressCountry": "US"
-  },
-  "geo": {"@type": "GeoCoordinates", "latitude": 28.3200, "longitude": -80.6076}
-}
-</script>
 </head>
 <body>
 
@@ -532,7 +494,7 @@ footer a{color:var(--teal)}
 <footer>&copy; 2026 Dog Walker Surf Report &middot; Cocoa Beach Surf Report from 31st St, South Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
-  function generateReportSchema(reports) {
+function generateReportSchema(reports) {
   const BASE_URL = 'https://www.dogwalkersurfreport.com';
   const PHOTO_BASE = 'https://www.dogwalkersurfreport.com/photos';
 
@@ -558,6 +520,7 @@ footer a{color:var(--teal)}
   script.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": articles });
   document.head.appendChild(script);
 }
+
 // =============================================
 // REPORTS SYSTEM — reads from reports.json
 // =============================================
@@ -602,7 +565,7 @@ async function loadReports(){
 
     // Store reports globally for archive viewer
     window._reports=reports;
-  generateReportSchema(reports);  
+    generateReportSchema(reports);
   }catch(e){
     console.error('Error loading reports:',e);
     document.getElementById('today-report').innerHTML='<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Could not load report.</div>';
