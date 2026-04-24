@@ -530,6 +530,32 @@ footer a{color:var(--teal)}
 <footer>&copy; 2026 Dog Walker Surf Report &middot; Cocoa Beach Surf Report from 31st St, South Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
+  function generateReportSchema(reports) {
+  const BASE_URL = 'https://www.dogwalkersurfreport.com';
+  const PHOTO_BASE = 'https://www.dogwalkersurfreport.com/photos';
+
+  const articles = reports.map((report) => {
+    const images = [];
+    for (let i = 1; i <= (report.photos || 1); i++) {
+      images.push(`${PHOTO_BASE}/${report.folder || report.date}/${i}.jpg`);
+    }
+    return {
+      "@type": "Article",
+      "headline": report.headline,
+      "datePublished": report.date,
+      "author": { "@type": "Organization", "name": "Dog Walker Surf Report" },
+      "publisher": { "@type": "Organization", "name": "Dog Walker Surf Report", "logo": { "@type": "ImageObject", "url": BASE_URL + "/logo.png" } },
+      "description": report.text,
+      "image": images,
+      "isAccessibleForFree": true
+    };
+  });
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify({ "@context": "https://schema.org", "@graph": articles });
+  document.head.appendChild(script);
+}
 // =============================================
 // REPORTS SYSTEM — reads from reports.json
 // =============================================
@@ -574,6 +600,7 @@ async function loadReports(){
 
     // Store reports globally for archive viewer
     window._reports=reports;
+  generateReportSchema(reports);  
   }catch(e){
     console.error('Error loading reports:',e);
     document.getElementById('today-report').innerHTML='<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Could not load report.</div>';
