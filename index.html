@@ -858,13 +858,14 @@ async function loadForecast(){
       const isToday=dates[i]===today;
       const dayLabel=isToday?'Today':dayNames[dt.getDay()];
 
-      // Use swell height if available, otherwise wave height — convert meters to feet
-      const hMeters=swellH[i]||waveH[i]||0;
+      // Use the larger of wave height or swell height — convert meters to feet
+      const hMeters=Math.max(swellH[i]||0,waveH[i]||0);
       const hFeet=hMeters*3.281;
-      // Nearshore surf ~70% of open ocean for East Coast beach break
-      const surfFt=Math.max(0,hFeet*0.7);
-      const surfMin=Math.max(0,Math.round(surfFt-0.3));
-      const surfMax=Math.round(surfFt+0.3);
+      // Cocoa Beach is a shallow-sloping beach break facing due east — nearshore surf
+      // runs close to open-ocean wave height, minimal reduction needed
+      const surfFt=hFeet*0.9;
+      const surfMin=Math.max(0,Math.round(surfFt-0.4));
+      const surfMax=Math.max(1,Math.round(surfFt+0.4));
       const surfRange=surfMin===surfMax?surfMax+"'":surfMin+"-"+surfMax+"'";
 
       // Period in seconds (use swell period if available)
