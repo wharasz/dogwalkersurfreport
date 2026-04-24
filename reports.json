@@ -6,7 +6,14 @@
     "folder": "2026-04-24",
     "headline": "1-2' clean with fun sets. Aloha Friday — grab your longboard!",
     "text": "8 am lowtide 1-2' breaking near shore, but some very fun sets coming through still. West wind keeping it very clean at Cocoa Beach's best surf spot. It's a beautiful Aloha Friday. Athena says get out there with your big boards.",
-    "photos": 7
+    "photos": 7,
+    "surfMin": 1,
+    "surfMax": 2,
+    "quality": "clean",
+    "tide": "low",
+    "wind": "W",
+    "board": "longboard",
+    "rating": 3
   },
   {
     "date": "2026-04-23",
@@ -15,7 +22,14 @@
     "folder": "2026-04-23-2",
     "headline": "Cocoa Beach 2' and breaking near shore, but looks fun on the longboard. Light onshores with rainstorms coming in from offshore.",
     "text": "2' and still breaking on the hightide, its a nice beach day but get it while it lasts.",
-    "photos": 6
+    "photos": 6,
+    "surfMin": 1,
+    "surfMax": 2,
+    "quality": "choppy",
+    "tide": "high",
+    "wind": "E",
+    "board": "longboard",
+    "rating": 2
   },
   {
     "date": "2026-04-21",
@@ -24,7 +38,14 @@
     "folder": "2026-04-21",
     "headline": "3-4'+ blown out. Surfable if you're desperate.",
     "text": "Extreme onshore ENE winds, totally blown out. 3-4'+ and surfable if you're desperate, but springtime conditions prevail at lowtide report time.",
-    "photos": 5
+    "photos": 5,
+    "surfMin": 3,
+    "surfMax": 4,
+    "quality": "blown-out",
+    "tide": "low",
+    "wind": "ENE",
+    "board": "any",
+    "rating": 1
   },
   {
     "date": "2026-04-20",
@@ -33,7 +54,14 @@
     "folder": "2026-04-20-2",
     "headline": "3-4'+ with 20 kt+ wind gusts. Stay home and walk the dog.",
     "text": "Extremely windy, low tide incoming and a chopped up mess. Surfable, but doesn't look like much fun. Stay home and walk the dog.",
-    "photos": 5
+    "photos": 5,
+    "surfMin": 3,
+    "surfMax": 4,
+    "quality": "messy",
+    "tide": "incoming",
+    "wind": "ENE",
+    "board": "stay-home",
+    "rating": 1
   },
   {
     "date": "2026-04-20",
@@ -42,6 +70,13 @@
     "folder": "2026-04-20",
     "headline": "2-3'+ wind driven victory at sea conditions.",
     "text": "A fast drift and maybe a surfable wave at high tide incoming at report time. Feels like a Monday, happy high holiday to those who celebrate.",
-    "photos": 5
+    "photos": 5,
+    "surfMin": 2,
+    "surfMax": 3,
+    "quality": "messy",
+    "tide": "incoming",
+    "wind": "ENE",
+    "board": "any",
+    "rating": 1
   }
 ]
