@@ -330,6 +330,26 @@ nav a.active{color:var(--teal)}
 footer{background:var(--navy-light);padding:20px;text-align:center;font-size:12px;color:#5a6577;border-top:1px solid rgba(255,255,255,.05)}
 footer a{color:var(--teal)}
 ::-webkit-scrollbar{height:6px}::-webkit-scrollbar-track{background:var(--navy)}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:3px}
+
+/* === SURF FORECAST === */
+.forecast-section{background:var(--white);border-radius:10px;border:1px solid var(--border);padding:20px 24px;margin-bottom:24px}
+.forecast-section h3{font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.forecast-source{font-size:11px;color:var(--text-light);margin-bottom:16px}
+.forecast-source a{color:var(--text-light)}.forecast-source a:hover{color:var(--teal-dark)}
+.forecast-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.forecast-card{background:var(--sand);border:1px solid var(--border);border-radius:8px;padding:14px 12px;text-align:center;transition:transform .2s}
+.forecast-card:hover{transform:translateY(-2px)}
+.forecast-card.today{border-color:var(--teal);border-width:2px}
+.forecast-day{font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.forecast-card.today .forecast-day{color:var(--teal-dark)}
+.forecast-icon{font-size:28px;margin:4px 0}
+.forecast-height{font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--text-primary);margin:4px 0}
+.forecast-quality{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 8px;border-radius:4px;display:inline-block;margin:4px 0}
+.fq-epic{background:#00c853;color:#fff}.fq-good{background:var(--teal);color:#fff}.fq-fair{background:#ffc107;color:#333}.fq-poor{background:#ff7043;color:#fff}.fq-flat{background:var(--border);color:var(--text-light)}
+.forecast-wind{font-size:11px;color:var(--text-secondary);margin-top:4px}
+.forecast-period{font-family:var(--font-mono);font-size:11px;color:var(--text-light);margin-top:2px}
+.forecast-board{font-size:18px;margin-top:4px}
+@media(max-width:500px){.forecast-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
 </style>
 </head>
 <body>
@@ -346,7 +366,7 @@ footer a{color:var(--teal)}
   <nav>
     <a href="#report" class="active">Today's Report</a>
     <a href="#conditions">Live Data</a>
-    <a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank">Surfline</a>
+    <a href="#forecast">Forecast</a>
     <a href="#archive">Archive</a>
     <a href="#subscribe">Alerts</a>
     <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a>
@@ -420,6 +440,16 @@ footer a{color:var(--teal)}
       </div>
 
       <!-- ARCHIVE — auto-populated from reports.json -->
+      <div class="section-label" id="forecast">7-Day Surf Forecast</div>
+      <div class="forecast-section">
+        <h3>Cocoa Beach Surf Forecast &mdash; Picnic Tables</h3>
+        <div class="forecast-source">Powered by <a href="https://www.weather.gov/mlb/" target="_blank">NWS Melbourne</a> marine zone AMZ552 &middot; Wave heights are estimated nearshore surf at Picnic Tables</div>
+        <div class="forecast-grid" id="forecast-grid">
+          <div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">Loading forecast...</div>
+        </div>
+      </div>
+
+      <!-- ARCHIVE — auto-populated from reports.json -->
       <div class="section-label" id="archive">Recent Reports</div>
       <div id="archive-list"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading archive...</div></div>
     </main>
@@ -477,7 +507,7 @@ footer a{color:var(--teal)}
       <li><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank">NOAA Tides &mdash; Trident Pier</a></li>
     </ul></div>
     <div><h4>Forecasts</h4><ul>
-      <li><a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank">Surfline &mdash; Picnic Tables</a></li>
+      <li><a href="https://forecast.weather.gov/shmrn.php?mz=amz552&syn=amz500" target="_blank">NWS Marine Forecast &mdash; AMZ552</a></li>
       <li><a href="https://magicseaweed.com/Cocoa-Beach-Surf-Report/350/" target="_blank">Magic Seaweed &mdash; Cocoa Beach</a></li>
       <li><a href="https://www.nhc.noaa.gov" target="_blank">Tropical Outlook &mdash; NHC</a></li>
       <li><a href="https://www.weather.gov/mlb/" target="_blank">NWS Melbourne</a></li>
@@ -485,6 +515,9 @@ footer a{color:var(--teal)}
     <div><h4>Community</h4><ul>
       <li><a href="https://911surfreport.com" target="_blank">911 Surf Report &mdash; Jax</a></li>
       <li><a href="https://www.surfguru.com" target="_blank">Surf Guru</a></li>
+      <li><a href="https://www.raw.surf/" target="_blank">Raw Surfing Adventures</a></li>
+      <li><a href="http://oceansportsworld.com/" target="_blank">Oceansports World &mdash; Cocoa Beach</a></li>
+      <li><a href="https://wtrbrand.com/" target="_blank">WTR Brand</a></li>
       <li><a href="https://www.ocearch.org" target="_blank">OCEARCH Shark Tracker</a></li>
       <li><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank">KSC Launch Schedule</a></li>
     </ul></div>
@@ -545,7 +578,6 @@ async function loadReports(){
       +'<div class="report-meta">'+today.day+', '+ formatDate(today.date)+' &middot; '+today.time+'</div>'
       +'<h2 class="report-headline">'+today.headline+'</h2>'
       +'<p class="report-text">'+today.text+'</p>'
-      +'<a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="surfline-link">View Surfline Picnic Tables Forecast &rarr;</a>'
       +'</div></div>';
 
     // --- ARCHIVE (everything after the first entry) ---
@@ -593,7 +625,6 @@ function showArchive(idx){
     +'<div class="report-meta">'+rpt.day+', '+formatDate(rpt.date)+' &middot; '+rpt.time+'</div>'
     +'<h2 class="report-headline">'+rpt.headline+'</h2>'
     +'<p class="report-text">'+rpt.text+'</p>'
-    +'<a href="https://www.surfline.com/surf-report/picnic-tables/5842041f4e65fad6a7708ab8" target="_blank" class="surfline-link">View Surfline Picnic Tables Forecast &rarr;</a>'
     +'</div></div>';
   document.getElementById('report').scrollIntoView({behavior:'smooth'});
 }
@@ -793,13 +824,158 @@ async function loadTides(){
   }
 }
 
+// =============================================
+// SURF FORECAST — NWS Marine Zone AMZ552
+// =============================================
+async function loadForecast(){
+  try{
+    // Fetch NWS marine zone forecast for Volusia-Brevard to Sebastian Inlet 0-20nm
+    const r=await fetch('https://api.weather.gov/zones/forecast/AMZ552/forecast',{
+      headers:{'User-Agent':'DogWalkerSurfReport/1.0 (ads@dogwalkersurfreport.com)'},
+      signal:AbortSignal.timeout(10000)
+    });
+    if(!r.ok)throw new Error('NWS API returned '+r.status);
+    const data=await r.json();
+    const periods=data.properties?.periods;
+    if(!periods||!periods.length)throw new Error('No forecast periods');
+
+    // Group periods into days (skip night periods for display, but use them for data)
+    const days=[];
+    const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const fullDayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const now=new Date();
+    const todayDay=now.getDay();
+
+    for(const p of periods){
+      const name=p.name.toUpperCase();
+      // Skip night periods
+      if(name.includes('NIGHT')||name.includes('OVERNIGHT'))continue;
+      // Skip "REST OF" prefix
+      const cleanName=name.replace('REST OF ','').replace('THIS ','');
+
+      // Parse the forecast text
+      const text=p.detailedForecast||'';
+      const parsed=parseMarine(text);
+      if(parsed){
+        parsed.periodName=cleanName;
+        // Determine which day
+        let dayIdx=-1;
+        if(cleanName==='TODAY'||cleanName==='THIS AFTERNOON'){
+          dayIdx=todayDay;
+          parsed.isToday=true;
+        }else{
+          for(let i=0;i<fullDayNames.length;i++){
+            if(cleanName.includes(fullDayNames[i].toUpperCase())){dayIdx=i;break}
+          }
+        }
+        if(dayIdx>=0){
+          parsed.dayLabel=parsed.isToday?'Today':dayNames[dayIdx];
+          days.push(parsed);
+        }
+      }
+    }
+
+    if(!days.length)throw new Error('Could not parse forecast');
+
+    // Render forecast cards
+    let html='';
+    for(const d of days){
+      const quality=getQuality(d);
+      html+='<div class="forecast-card'+(d.isToday?' today':'')+'">'
+        +'<div class="forecast-day">'+d.dayLabel+'</div>'
+        +'<div class="forecast-icon">'+quality.icon+'</div>'
+        +'<div class="forecast-height">'+d.surfRange+'</div>'
+        +'<div class="forecast-quality '+quality.cls+'">'+quality.label+'</div>'
+        +'<div class="forecast-wind">'+d.windStr+'</div>'
+        +'<div class="forecast-period">'+d.periodStr+'</div>'
+        +'<div class="forecast-board">'+quality.board+'</div>'
+        +'</div>';
+    }
+    document.getElementById('forecast-grid').innerHTML=html;
+
+  }catch(e){
+    console.error('Forecast error:',e);
+    document.getElementById('forecast-grid').innerHTML=
+      '<div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">'
+      +'Forecast unavailable. Check <a href="https://forecast.weather.gov/shmrn.php?mz=amz552&syn=amz500" target="_blank">NWS Marine Forecast</a></div>';
+  }
+}
+
+function parseMarine(text){
+  // Extract seas height: "Seas 2 to 3 feet" or "Seas around 2 feet" or "Seas 3 feet"
+  let seaMin=0,seaMax=0;
+  const seaMatch=text.match(/[Ss]eas?\s+(?:around\s+)?(\d+)(?:\s+to\s+(\d+))?\s+feet/i);
+  if(seaMatch){
+    seaMin=parseInt(seaMatch[1]);
+    seaMax=seaMatch[2]?parseInt(seaMatch[2]):seaMin;
+  }
+
+  // Nearshore surf estimate (~70% of offshore seas for East Coast beach break)
+  const surfMin=Math.max(1,Math.round(seaMin*0.7));
+  const surfMax=Math.max(1,Math.round(seaMax*0.7));
+  const surfRange=surfMin===surfMax?surfMin+"'":surfMin+"-"+surfMax+"'";
+
+  // Extract wind: "East winds 5 to 10 knots" or "Southeast winds around 10 knots"
+  let windDir='',windMin=0,windMax=0;
+  const windMatch=text.match(/(North|South|East|West|Northeast|Northwest|Southeast|Southwest)\s+winds?\s+(?:around\s+)?(\d+)(?:\s+to\s+(\d+))?\s+knots?/i);
+  if(windMatch){
+    windDir=windMatch[1];
+    windMin=parseInt(windMatch[2]);
+    windMax=windMatch[3]?parseInt(windMatch[3]):windMin;
+  }
+  const windAbbr={'North':'N','South':'S','East':'E','West':'W','Northeast':'NE','Northwest':'NW','Southeast':'SE','Southwest':'SW'};
+  const windDirShort=windAbbr[windDir]||windDir||'Calm';
+  const windStr=windMin?windDirShort+' '+windMin+(windMax>windMin?'-'+windMax:'')+' kt':'Light/Variable';
+
+  // Extract wave period: "8 seconds" or "at 9 seconds"
+  let period=0;
+  const periodMatch=text.match(/(?:at\s+)?(\d+)\s+seconds/i);
+  if(periodMatch)period=parseInt(periodMatch[1]);
+  const periodStr=period?period+'s period':'';
+
+  return{seaMin,seaMax,surfMin,surfMax,surfRange,windDir:windDirShort,windMin,windMax,windStr,period,periodStr};
+}
+
+function getQuality(d){
+  // Wind quality: offshore = clean, onshore = choppy
+  const offshore=['W','NW','SW','Calm'];
+  const side=['N','S'];
+  const onshore=['E','NE','SE','ENE','ESE'];
+  let windScore=1;
+  if(offshore.includes(d.windDir))windScore=3;
+  else if(side.includes(d.windDir))windScore=2;
+  // Light winds are always better
+  if(d.windMax<=5)windScore=Math.min(windScore+1,3);
+
+  // Period quality
+  let periodScore=1;
+  if(d.period>=12)periodScore=3;
+  else if(d.period>=8)periodScore=2;
+
+  // Size
+  let sizeScore=0;
+  if(d.seaMax>=5)sizeScore=3;
+  else if(d.seaMax>=3)sizeScore=2;
+  else if(d.seaMax>=2)sizeScore=1;
+
+  const total=windScore+periodScore+sizeScore;
+
+  if(d.seaMax<=1)return{label:'Flat',cls:'fq-flat',icon:'🏖️',board:'—'};
+  if(total>=8)return{label:'Epic',cls:'fq-epic',icon:'🤙',board:'🏄'};
+  if(total>=6)return{label:'Good',cls:'fq-good',icon:'🌊',board:'🏄'};
+  if(total>=4)return{label:'Fair',cls:'fq-fair',icon:'〰️',board:'🛹'};
+  return{label:'Poor',cls:'fq-poor',icon:'💨',board:'🐕'};
+}
+
 // === INIT ===
 loadReports();
 loadAllBuoys();
 loadTides();
 loadLaunches();
+loadForecast();
 setInterval(loadAllBuoys,600000);
 setInterval(loadTides,3600000);
+setInterval(loadForecast,3600000);
 </script>
 </body>
 </html>
