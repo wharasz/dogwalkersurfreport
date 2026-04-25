@@ -2,55 +2,25 @@
   {
     "date": "2026-04-25",
     "day": "Saturday",
-    "time": "7:00 AM",
+    "time": "12:00 PM",
     "folder": "2026-04-25",
-    "headline": "Cocoa Beach 1' and tiny. Great day to learn or enjoy the beach!",
-    "text": "Very small breaking against shore at 7 am. Maybe a bump for a very large board, but better day to teach the kids or enjoy the beautiful beach weather at Cocoa Beach's best surf spot!",
-    "photos": 0
+    "headline": "1' onshore mush — ESE winds killing it at Picnic Tables. Check back tomorrow morning.",
+    "text": "Afternoon check at Cocoa Beach's best surf spot and conditions aren't doing us any favors right now. 1 foot breaking nearshore with onshore ESE winds making it messy and blown out. Not worth paddling out. We'll be back at first light tomorrow when winds typically go offshore — morning glass is always the move. Stay tuned.",
+    "photos": 3,
+    "seoTitle": "Cocoa Beach Surf Report — Saturday April 25, 2026 | Onshore ESE, 1ft Nearshore",
+    "seoDescription": "Cocoa Beach surf report for Saturday April 25: 1 foot nearshore surf with onshore ESE winds at Picnic Tables, South Cocoa Beach. Conditions poor. Checking again Sunday morning for better winds.",
+    "keywords": ["Cocoa Beach surf report", "Picnic Tables surf", "Cocoa Beach waves today", "South Cocoa Beach conditions", "Cocoa Beach ESE wind surf"]
   },
   {
-    "date": "2026-04-23",
-    "day": "Thursday",
-    "time": "7:00 AM",
-    "folder": "2026-04-23",
-    "headline": "Cocoa Beach 2-3' and fun for a longboard. Winds finally down.",
-    "text": "Lowtide report time, wind has come down considerably but so has the surf. It's 2-3' and probably fun for a longboard. Beautiful sunrise this morning at Cocoa Beach's best surf spot!",
-    "photos": 7
-  },
-  {
-    "date": "2026-04-22",
-    "day": "Wednesday",
+    "date": "2026-04-24",
+    "day": "Friday",
     "time": "8:00 AM",
-    "folder": "2026-04-22",
-    "headline": "Cocoa Beach 2-3'+ with easing winds but still poor form at lowtide.",
-    "text": "Wind has finally eased up some, but is still onshore with gusts over 12 kts. Surf has come down some as well 2-3'+ with still poor form. Lowtide at report time wasn't too appealing. Cocoa Beach surf conditions remain below average.",
-    "photos": 5
-  },
-  {
-    "date": "2026-04-21",
-    "day": "Tuesday",
-    "time": "6:30 PM",
-    "folder": "2026-04-21-2",
-    "headline": "Cocoa Beach 3-5' washing machine continues. ENE winds keeping quality low.",
-    "text": "Choppy washing machine conditions continue with erosion visible on the beach. 3-5' at lowtide but persistent ENE winds have the quality low across Cocoa Beach.",
-    "photos": 6
-  },
-  {
-    "date": "2026-04-21",
-    "day": "Tuesday",
-    "time": "7:45 AM",
-    "folder": "2026-04-21",
-    "headline": "Cocoa Beach 3-5' but a choppy, wind-blown mess. Stay home and walk the dog.",
-    "text": "Extremely windy, low tide incoming and a chopped up mess at Cocoa Beach. Surfable, but doesn't look like much fun. Stay home and walk the dog.",
-    "photos": 5
-  },
-  {
-    "date": "2026-04-20",
-    "day": "Monday",
-    "time": "8:28 AM",
-    "folder": "2026-04-20",
-    "headline": "Cocoa Beach 2-3'+ wind driven victory at sea conditions.",
-    "text": "A fast drift and maybe a surfable wave at high tide incoming at report time. Cocoa Beach surf looking sloppy. Feels like a Monday, happy high holiday to those who celebrate.",
-    "photos": 4
+    "folder": "2026-04-24",
+    "headline": "1-2' clean with fun sets. Aloha Friday — grab your longboard!",
+    "text": "8 AM low tide check — 1-2' breaking nearshore but some very fun sets coming through. West wind keeping it glassy and clean at Cocoa Beach's best surf spot. Beautiful Aloha Friday out there. Athena says get out there with your big boards.",
+    "photos": 5,
+    "seoTitle": "Cocoa Beach Surf Report — Friday April 24, 2026 | 1-2ft Clean, West Wind Glass",
+    "seoDescription": "Cocoa Beach surf report for Friday April 24: 1-2 foot clean waves at Picnic Tables, South Cocoa Beach. Offshore west winds, fun sets, great longboard conditions.",
+    "keywords": ["Cocoa Beach surf report Friday", "Picnic Tables surf", "Cocoa Beach longboard waves", "South Cocoa Beach glassy surf", "Aloha Friday surf Cocoa Beach"]
   }
 ]
