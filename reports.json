@@ -2,14 +2,26 @@
   {
     "date": "2026-04-25",
     "day": "Saturday",
-    "time": "12:00 PM",
+    "time": "6:45 PM",
     "folder": "2026-04-25-2",
     "headline": "1' onshore mush — ESE winds killing it at Picnic Tables. Check back tomorrow morning.",
     "text": "Afternoon check at Cocoa Beach's best surf spot and conditions aren't doing us any favors right now. 1 foot breaking nearshore with onshore ESE winds making it messy and blown out. Not worth paddling out. We'll be back at first light tomorrow when winds typically go offshore — morning glass is always the move. Stay tuned.",
     "photos": 3,
-    "seoTitle": "Cocoa Beach Surf Report — Saturday April 25, 2026 | Onshore ESE, 1ft Nearshore",
-    "seoDescription": "Cocoa Beach surf report for Saturday April 25: 1 foot nearshore surf with onshore ESE winds at Picnic Tables, South Cocoa Beach. Conditions poor. Checking again Sunday morning for better winds.",
+    "seoTitle": "Cocoa Beach Surf Report — Saturday April 25, 2026 PM | Onshore ESE, 1ft Nearshore",
+    "seoDescription": "Cocoa Beach surf report Saturday April 25 afternoon: 1ft nearshore with onshore ESE winds at Picnic Tables, South Cocoa Beach. Conditions poor. Checking again Sunday morning.",
     "keywords": ["Cocoa Beach surf report", "Picnic Tables surf", "Cocoa Beach waves today", "South Cocoa Beach conditions", "Cocoa Beach ESE wind surf"]
+  },
+  {
+    "date": "2026-04-25",
+    "day": "Saturday",
+    "time": "7:00 AM",
+    "folder": "2026-04-25",
+    "headline": "1' and very small breaking against shore. Great day to teach the kids!",
+    "text": "Very small breaking against shore at 7 am. Maybe a bump for a very large board, but better day to teach the kids or enjoy the beautiful beach weather at Cocoa Beach's best surf spot!",
+    "photos": 5,
+    "seoTitle": "Cocoa Beach Surf Report — Saturday April 25, 2026 AM | 1ft, Great Beach Day",
+    "seoDescription": "Cocoa Beach surf report Saturday April 25 morning: 1ft very small surf at Picnic Tables, South Cocoa Beach. Great beach day, perfect for beginners and families.",
+    "keywords": ["Cocoa Beach surf report", "Picnic Tables surf", "Cocoa Beach beginner surf", "South Cocoa Beach beach", "Cocoa Beach morning surf"]
   },
   {
     "date": "2026-04-24",
@@ -20,7 +32,79 @@
     "text": "8 AM low tide check — 1-2' breaking nearshore but some very fun sets coming through. West wind keeping it glassy and clean at Cocoa Beach's best surf spot. Beautiful Aloha Friday out there. Athena says get out there with your big boards.",
     "photos": 5,
     "seoTitle": "Cocoa Beach Surf Report — Friday April 24, 2026 | 1-2ft Clean, West Wind Glass",
-    "seoDescription": "Cocoa Beach surf report for Friday April 24: 1-2 foot clean waves at Picnic Tables, South Cocoa Beach. Offshore west winds, fun sets, great longboard conditions.",
+    "seoDescription": "Cocoa Beach surf report Friday April 24: 1-2ft clean glassy waves at Picnic Tables, South Cocoa Beach. Offshore west winds, fun sets, great longboard conditions.",
     "keywords": ["Cocoa Beach surf report Friday", "Picnic Tables surf", "Cocoa Beach longboard waves", "South Cocoa Beach glassy surf", "Aloha Friday surf Cocoa Beach"]
+  },
+  {
+    "date": "2026-04-23",
+    "day": "Thursday",
+    "time": "7:00 AM",
+    "folder": "2026-04-23",
+    "headline": "2-3' and fun for a longboard. Winds finally down!",
+    "text": "Lowtide report time, wind has come down considerably but so has the surf. It's 2-3' and probably fun for a longboard. Beautiful sunrise this morning at Cocoa Beach's best surf spot!",
+    "photos": 7,
+    "seoTitle": "Cocoa Beach Surf Report — Thursday April 23, 2026 | 2-3ft, Longboard Fun",
+    "seoDescription": "Cocoa Beach surf report Thursday April 23: 2-3ft waves at Picnic Tables, South Cocoa Beach. Winds down, fun longboard conditions, beautiful sunrise.",
+    "keywords": ["Cocoa Beach surf report Thursday", "Picnic Tables surf", "Cocoa Beach 2-3ft waves", "South Cocoa Beach longboard", "Cocoa Beach sunrise surf"]
+  },
+  {
+    "date": "2026-04-22",
+    "day": "Wednesday",
+    "time": "8:00 AM",
+    "folder": "2026-04-22",
+    "headline": "2-3'+ with easing winds but still poor form at lowtide.",
+    "text": "Wind has finally eased up some, but is still onshore with gusts over 12 kts. Surf has come down some as well 2-3'+ with still poor form. Lowtide at report time wasn't too appealing. Cocoa Beach surf conditions remain below average.",
+    "photos": 5,
+    "seoTitle": "Cocoa Beach Surf Report — Wednesday April 22, 2026 | 2-3ft+ Onshore, Poor Form",
+    "seoDescription": "Cocoa Beach surf report Wednesday April 22: 2-3ft+ waves at Picnic Tables with onshore winds over 12 knots. Poor form at low tide, below average conditions.",
+    "keywords": ["Cocoa Beach surf report Wednesday", "Picnic Tables surf", "Cocoa Beach onshore wind surf", "South Cocoa Beach conditions", "Cocoa Beach lowtide report"]
+  },
+  {
+    "date": "2026-04-21",
+    "day": "Tuesday",
+    "time": "6:30 PM",
+    "folder": "2026-04-21-2",
+    "headline": "3-5' washing machine continues. ENE winds keeping quality low.",
+    "text": "Choppy washing machine conditions continue with erosion visible on the beach. 3-5' at lowtide but persistent ENE winds have the quality low across Cocoa Beach's best surf spot.",
+    "photos": 6,
+    "seoTitle": "Cocoa Beach Surf Report — Tuesday April 21, 2026 PM | 3-5ft Choppy, ENE Wind",
+    "seoDescription": "Cocoa Beach surf report Tuesday April 21 afternoon: 3-5ft choppy washing machine conditions at Picnic Tables. ENE winds keeping quality low, beach erosion visible.",
+    "keywords": ["Cocoa Beach surf report Tuesday", "Picnic Tables surf", "Cocoa Beach choppy surf", "South Cocoa Beach ENE wind", "Cocoa Beach afternoon report"]
+  },
+  {
+    "date": "2026-04-21",
+    "day": "Tuesday",
+    "time": "7:45 AM",
+    "folder": "2026-04-21",
+    "headline": "3-5' but a choppy, wind-blown mess. Stay home and walk the dog.",
+    "text": "Extremely windy, low tide incoming and a chopped up mess at Cocoa Beach's best surf spot. Surfable, but doesn't look like much fun. Stay home and walk the dog.",
+    "photos": 5,
+    "seoTitle": "Cocoa Beach Surf Report — Tuesday April 21, 2026 AM | 3-5ft Blown Out",
+    "seoDescription": "Cocoa Beach surf report Tuesday April 21 morning: 3-5ft blown out surf at Picnic Tables, South Cocoa Beach. Extremely windy, choppy mess at low tide.",
+    "keywords": ["Cocoa Beach surf report", "Picnic Tables surf", "Cocoa Beach blown out surf", "South Cocoa Beach wind surf", "Cocoa Beach morning surf report"]
+  },
+  {
+    "date": "2026-04-20",
+    "day": "Monday",
+    "time": "2:15 PM",
+    "folder": "2026-04-20-2",
+    "headline": "3-4'+ with 20kt+ wind gusts. Stay home and walk the dog.",
+    "text": "Extremely windy, low tide incoming and a chopped up mess at Cocoa Beach's best surf spot. Surfable, but doesn't look like much fun. Stay home and walk the dog.",
+    "photos": 5,
+    "seoTitle": "Cocoa Beach Surf Report — Monday April 20, 2026 PM | 3-4ft+, 20kt Gusts",
+    "seoDescription": "Cocoa Beach surf report Monday April 20 afternoon: 3-4ft+ waves at Picnic Tables with 20+ knot wind gusts. Poor conditions, blown out surf.",
+    "keywords": ["Cocoa Beach surf report Monday", "Picnic Tables surf", "Cocoa Beach wind gusts surf", "South Cocoa Beach afternoon", "Cocoa Beach poor conditions"]
+  },
+  {
+    "date": "2026-04-20",
+    "day": "Monday",
+    "time": "8:28 AM",
+    "folder": "2026-04-20",
+    "headline": "2-3'+ wind driven victory at sea conditions.",
+    "text": "A fast drift and maybe a surfable wave at high tide incoming at report time. Feels like a Monday, happy high holiday to those who celebrate. Cocoa Beach's best surf spot doing its thing.",
+    "photos": 5,
+    "seoTitle": "Cocoa Beach Surf Report — Monday April 20, 2026 AM | 2-3ft+ Wind Swell",
+    "seoDescription": "Cocoa Beach surf report Monday April 20 morning: 2-3ft+ wind driven surf at Picnic Tables, South Cocoa Beach. High tide incoming, fast drift conditions.",
+    "keywords": ["Cocoa Beach surf report Monday", "Picnic Tables surf", "Cocoa Beach wind swell", "South Cocoa Beach morning surf", "Cocoa Beach 420 surf report"]
   }
 ]
