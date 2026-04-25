@@ -527,26 +527,132 @@ footer a{color:var(--teal)}
 <footer>&copy; 2026 Dog Walker Surf Report &middot; Cocoa Beach Surf Report from 31st St, South Cocoa Beach, FL &middot; <a href="mailto:ads@dogwalkersurfreport.com">Advertise With Us</a></footer>
 
 <script>
-function generateReportSchema(reports) {
-  const BASE_URL = 'https://www.dogwalkersurfreport.com';
-  const PHOTO_BASE = 'https://www.dogwalkersurfreport.com/photos';
+// ============================================================
+//  generateReportSchema.js
+//  Drop-in replacement for your existing generateReportSchema()
+//  Outputs BlogPosting JSON-LD for each report entry.
+//  Call after your reports array is loaded, e.g.:
+//    fetch('/reports.json').then(r=>r.json()).then(generateReportSchema);
+// ============================================================
 
-  const articles = reports.map((report) => {
+function generateReportSchema(reports) {
+
+  const BASE_URL  = 'https://www.dogwalkersurfreport.com';
+  const PHOTO_BASE = `${BASE_URL}/photos`;
+  const LOGO_URL  = `${BASE_URL}/logo.png`;
+
+  const blogPosts = reports.map((report) => {
+
+    // Build image array from photo count
     const images = [];
     for (let i = 1; i <= (report.photos || 1); i++) {
-      images.push(`${PHOTO_BASE}/${report.folder || report.date}/${i}.jpg`);
+      images.push({
+        "@type": "ImageObject",
+        "url": `${PHOTO_BASE}/${report.folder}/${i}.jpg`,
+        "contentLocation": "Picnic Tables, 31st Street, South Cocoa Beach, FL"
+      });
     }
+
+    // Use SEO-optimized fields if present, fall back to report fields
+    const headline    = report.seoTitle       || report.headline;
+    const description = report.seoDescription || report.text;
+    const keywords    = report.keywords
+      ? report.keywords.join(', ')
+      : 'Cocoa Beach surf report, Picnic Tables surf, South Cocoa Beach conditions';
+
+    const isoDate = `${report.date}T${convertTo24h(report.time)}:00-04:00`;
+
     return {
-      "@type": "Article",
-      "headline": report.headline,
-      "datePublished": report.date,
-      "author": { "@type": "Organization", "name": "Dog Walker Surf Report" },
-      "publisher": { "@type": "Organization", "name": "Dog Walker Surf Report", "logo": { "@type": "ImageObject", "url": BASE_URL + "/logo.png" } },
-      "description": report.text,
+      "@type": "BlogPosting",
+      "@id": `${BASE_URL}/#report-${report.folder}`,
+      "headline": headline,
+      "name": headline,
+      "description": description,
+      "articleBody": report.text,
+      "datePublished": isoDate,
+      "dateModified": isoDate,
+      "keywords": keywords,
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
       "image": images,
-      "isAccessibleForFree": true
+      "author": {
+        "@type": "Person",
+        "name": "Dog Walker — Picnic Tables, South Cocoa Beach",
+        "url": BASE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": `${BASE_URL}/#organization`,
+        "name": "Dog Walker Surf Report",
+        "url": BASE_URL,
+        "logo": {
+          "@type": "ImageObject",
+          "url": LOGO_URL
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": BASE_URL
+      },
+      "locationCreated": {
+        "@type": "Place",
+        "name": "Picnic Tables — 31st Street, South Cocoa Beach",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "31st Street",
+          "addressLocality": "Cocoa Beach",
+          "addressRegion": "FL",
+          "postalCode": "32931",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 28.3200,
+          "longitude": -80.6076
+        }
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Surf Conditions",
+          "description": "Real-time surf conditions at Picnic Tables, South Cocoa Beach, FL"
+        },
+        {
+          "@type": "Place",
+          "name": "Cocoa Beach, Florida"
+        }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".report-headline", ".report-text"]
+      }
     };
   });
+
+  // Remove any previously injected schema to avoid duplicates on re-render
+  const existing = document.getElementById('dwsr-report-schema');
+  if (existing) existing.remove();
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.id   = 'dwsr-report-schema';
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": blogPosts
+  }, null, 2);
+
+  document.head.appendChild(script);
+}
+
+// Helper: "6:45 PM" → "18:45", "7:00 AM" → "07:00"
+function convertTo24h(timeStr) {
+  if (!timeStr) return '08:00';
+  const [time, period] = timeStr.split(' ');
+  let [hours, minutes] = time.split(':').map(Number);
+  if (period === 'PM' && hours !== 12) hours += 12;
+  if (period === 'AM' && hours === 12) hours = 0;
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
 
   const script = document.createElement('script');
   script.type = 'application/ld+json';
