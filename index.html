@@ -582,72 +582,125 @@ function closeModal(e) {
 }
 
 // ============================================================
-//  BUOY DATA
+//  BUOY DATA — 3-source fallback chain
+//  1. /api/buoy  (Vercel serverless, no CORS issues)
+//  2. NOAA ERDDAP  (public CORS-enabled JSON API)
+//  3. CORS proxy  (corsproxy.io → allorigins fallback)
 // ============================================================
-async function loadAllBuoys() {
-  await Promise.all([
-    fetchBuoy('https://www.ndbc.noaa.gov/data/realtime2/41009.txt', parseMainBuoy),
-    fetchBuoy('https://www.ndbc.noaa.gov/data/realtime2/TRDF1.txt', parseWindBuoy),
-    fetchBuoy('https://www.ndbc.noaa.gov/data/realtime2/41113.txt', parseSwellBuoy),
-  ]);
+const DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+function degToCompass(d){return DIRS[Math.round(d/22.5)%16];}
+function cToF(c){return Math.round(c*9/5+32);}
+function mpsToKts(m){return Math.round(m*1.944);}
+function mToFt(m){return(m*3.281).toFixed(1);}
+function setVal(id,html,isErr){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML=html;
+  el.classList.remove('loading');
+  if(isErr)el.style.color='var(--text-light)';
 }
 
-async function fetchBuoy(url, parser) {
-  try {
-    const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
-    const res = await fetch(proxy);
-    const txt = await res.text();
-    parser(txt);
-  } catch(e) { console.warn('Buoy fetch error:', e); }
+async function fetchFromVercelAPI(station){
+  try{
+    const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(5000)});
+    if(r.ok)return await r.json();
+  }catch(e){}
+  return null;
 }
 
-function parseMainBuoy(txt) {
-  const lines = txt.trim().split('\n').filter(l => !l.startsWith('#'));
-  if (!lines[0]) return;
-  const cols = lines[0].trim().split(/\s+/);
-  const wvht = parseFloat(cols[8]);
-  const dpd  = parseFloat(cols[9]);
-  if (!isNaN(wvht)) {
-    const ft = (wvht * 3.28084).toFixed(1);
-    document.getElementById('wave-data').textContent = ft + ' ft';
-    document.getElementById('wave-data').classList.remove('loading');
+async function fetchFromERDDAP(station){
+  try{
+    if(!/^\d+$/.test(station))return null; // ERDDAP only handles numeric IDs
+    const h3=new Date(Date.now()-3*3600000).toISOString();
+    const url='https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json'
+      +'?station,time,wd,wspd,gst,wvht,dpd,mwd,atmp,wtmp'
+      +'&station=%22'+station+'%22'
+      +'&time>='+encodeURIComponent(h3)
+      +'&orderByMax(%22time%22)';
+    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
+    if(!r.ok)return null;
+    const json=await r.json();
+    const cols=json.table.columnNames;
+    const row=json.table.rows[json.table.rows.length-1];
+    const d={};cols.forEach((c,i)=>{d[c]=row[i];});
+    return{
+      wave_height_ft: d.wvht!=null ? mToFt(d.wvht) : null,
+      dom_period_sec: d.dpd!=null  ? d.dpd : null,
+      wave_dir_compass: d.mwd!=null ? degToCompass(d.mwd) : null,
+      wind_speed_kts: d.wspd!=null  ? mpsToKts(d.wspd) : null,
+      wind_dir_compass: d.wd!=null  ? degToCompass(d.wd) : null,
+    };
+  }catch(e){console.warn('ERDDAP error',station,e);}
+  return null;
+}
+
+async function fetchFromProxy(station){
+  const ndbc='https://www.ndbc.noaa.gov/data/realtime2/'+station+'.txt';
+  const proxies=[
+    u=>'https://corsproxy.io/?'+encodeURIComponent(u),
+    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
+  ];
+  for(const px of proxies){
+    try{
+      const r=await fetch(px(ndbc),{signal:AbortSignal.timeout(8000)});
+      if(!r.ok)continue;
+      const text=await r.text();
+      if(text.length<100)continue;
+      const lines=text.trim().split('\n');
+      // lines[0] = header names, lines[1] = units, lines[2] = most recent data
+      if(lines.length<3)continue;
+      const hdr=lines[0].replace(/^#\s*/,'').trim().split(/\s+/);
+      const vals=lines[2].trim().split(/\s+/);
+      const d={};hdr.forEach((h,i)=>{d[h]=vals[i]==='MM'?null:vals[i];});
+      return{
+        wave_height_ft: d.WVHT  ? mToFt(parseFloat(d.WVHT))      : null,
+        dom_period_sec: d.DPD   ? parseFloat(d.DPD)               : null,
+        wave_dir_compass: d.MWD ? degToCompass(parseFloat(d.MWD)) : null,
+        wind_speed_kts: d.WSPD  ? mpsToKts(parseFloat(d.WSPD))    : null,
+        wind_dir_compass: d.WDIR? degToCompass(parseFloat(d.WDIR)): null,
+      };
+    }catch(e){console.warn('Proxy error',px.toString().slice(0,30),e);}
   }
-  if (!isNaN(dpd)) {
-    document.getElementById('period-data').textContent = dpd.toFixed(0) + 's';
-    document.getElementById('period-data').classList.remove('loading');
-  }
+  return null;
 }
 
-function parseWindBuoy(txt) {
-  const lines = txt.trim().split('\n').filter(l => !l.startsWith('#'));
-  if (!lines[0]) return;
-  const cols = lines[0].trim().split(/\s+/);
-  const wspd = parseFloat(cols[6]);
-  const wdir = parseFloat(cols[5]);
-  if (!isNaN(wspd)) {
-    const kts = (wspd * 1.94384).toFixed(0);
-    const dir = degToCompass(wdir);
-    document.getElementById('wind-data').textContent = kts + ' kt ' + dir;
-    document.getElementById('wind-data').classList.remove('loading');
-  }
+async function fetchBuoyData(station){
+  return (await fetchFromVercelAPI(station))
+      || (await fetchFromERDDAP(station))
+      || (await fetchFromProxy(station));
 }
 
-function parseSwellBuoy(txt) {
-  const lines = txt.trim().split('\n').filter(l => !l.startsWith('#'));
-  if (!lines[0]) return;
-  const cols = lines[0].trim().split(/\s+/);
-  const dpd  = parseFloat(cols[9]);
-  const mwd  = parseFloat(cols[11]);
-  if (!isNaN(dpd)) {
-    const dir = isNaN(mwd) ? '' : ' ' + degToCompass(mwd);
-    document.getElementById('swell-data').textContent = dpd.toFixed(0) + 's' + dir;
-    document.getElementById('swell-data').classList.remove('loading');
+async function loadAllBuoys(){
+  // Wave height + period from 41009
+  const b009 = await fetchBuoyData('41009');
+  if(b009 && b009.wave_height_ft){
+    const period = b009.dom_period_sec ? b009.dom_period_sec.toFixed(0)+'s' : '';
+    setVal('wave-data', b009.wave_height_ft+' ft');
+    setVal('period-data', period || '—');
+  } else {
+    setVal('wave-data','<a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank" style="color:var(--text-light);font-size:12px">Visit NDBC</a>', true);
+    setVal('period-data','—', true);
   }
-}
 
-function degToCompass(deg) {
-  const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-  return dirs[Math.round(deg/22.5) % 16];
+  // Wind from TRDF1 (Trident Pier) — proxy only since ERDDAP doesn't have it
+  const bWind = await fetchFromVercelAPI('TRDF1') || await fetchFromProxy('TRDF1');
+  if(bWind && bWind.wind_speed_kts!=null){
+    const dir = bWind.wind_dir_compass || '';
+    setVal('wind-data', bWind.wind_speed_kts+' kt '+dir);
+  } else {
+    setVal('wind-data','<a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank" style="color:var(--text-light);font-size:12px">Visit NDBC</a>', true);
+  }
+
+  // Swell from 41113
+  const b113 = await fetchBuoyData('41113');
+  if(b113 && b113.dom_period_sec){
+    const dir = b113.wave_dir_compass || '';
+    setVal('swell-data', b113.dom_period_sec.toFixed(0)+'s '+dir);
+  } else if(b009 && b009.dom_period_sec){
+    setVal('swell-data', b009.dom_period_sec.toFixed(0)+'s (41009)');
+  } else {
+    setVal('swell-data','—', true);
+  }
 }
 
 // ============================================================
@@ -685,66 +738,60 @@ function formatNoaaDate(d) {
 }
 
 // ============================================================
-//  7-DAY FORECAST  (NWS Marine AMZ552)
+//  7-DAY FORECAST  (NWS JSON API — supports CORS natively)
 // ============================================================
 async function loadForecast() {
   try {
-    const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://forecast.weather.gov/shmrn.php?mz=amz552');
-    const res   = await fetch(proxy);
-    const html  = await res.text();
-    const parser= new DOMParser();
-    const doc   = parser.parseFromString(html, 'text/html');
-    const rows  = doc.querySelectorAll('table tr');
-    const days  = [];
-    rows.forEach(row => {
-      const cells = row.querySelectorAll('td');
-      if (cells.length >= 2) {
-        const label = cells[0].textContent.trim();
-        const text  = cells[1].textContent.trim();
-        if (label && text && label.length < 25) days.push({label, text});
-      }
-    });
-    if (!days.length) { loadForecastFallback(); return; }
+    // NWS zones/forecast endpoint — no proxy needed, full CORS support
+    const r = await fetch('https://api.weather.gov/zones/forecast/AMZ552/forecast',
+      {headers:{'User-Agent':'dogwalkersurfreport.com'},signal:AbortSignal.timeout(10000)});
+    if(!r.ok) throw new Error('NWS '+r.status);
+    const json = await r.json();
+    const periods = json.properties?.periods;
+    if(!periods||!periods.length) throw new Error('No periods');
     const grid = document.getElementById('forecast-grid');
-    grid.innerHTML = days.slice(0, 7).map(d => {
-      const parsed = parseForecastDay(d.text);
+    grid.innerHTML = periods.slice(0,7).map(p => {
+      const parsed = parseForecastPeriod(p);
       return `<div class="forecast-day">
-        <div class="fc-dow">${d.label.replace(/\./g,'').trim().split(' ')[0]}</div>
+        <div class="fc-dow">${p.name.split(' ')[0]}</div>
         <div class="fc-icon">${parsed.icon}</div>
         <div class="fc-height">${parsed.height}</div>
         <div class="fc-cond cond-${parsed.condClass}">${parsed.cond}</div>
         <div class="fc-wind">${parsed.wind}</div>
       </div>`;
     }).join('');
-  } catch(e) { loadForecastFallback(); }
+  } catch(e) {
+    console.warn('NWS forecast error:', e);
+    loadForecastFallback();
+  }
 }
 
-function parseForecastDay(text) {
-  const t = text.toLowerCase();
+function parseForecastPeriod(p) {
+  const text = (p.detailedForecast || p.shortForecast || '').toLowerCase();
   // Wave height
   let height = '?';
-  const hmatch = t.match(/seas?\s+(\d+)\s+to\s+(\d+)|seas?\s+(\d+)\s+ft|(\d+)\s+to\s+(\d+)\s+ft/);
-  if (hmatch) {
-    const lo = parseInt(hmatch[1]||hmatch[4]||hmatch[3]);
-    const hi = parseInt(hmatch[2]||hmatch[5]||hmatch[3]);
-    const nearLo = Math.round(lo * 0.7);
-    const nearHi = Math.round(hi * 0.7);
-    height = nearLo === nearHi ? nearLo + "'" : nearLo + "-" + nearHi + "'";
+  const hmatch = text.match(/seas?\s+(\d+)\s+to\s+(\d+)|seas?\s+(\d+)\s*ft|(\d+)\s+to\s+(\d+)\s*ft/);
+  if(hmatch){
+    const lo = parseInt(hmatch[1]||hmatch[4]||hmatch[3]||'0');
+    const hi = parseInt(hmatch[2]||hmatch[5]||hmatch[3]||'0');
+    const nLo = Math.max(1,Math.round(lo*0.7));
+    const nHi = Math.max(1,Math.round(hi*0.7));
+    height = nLo===nHi ? nLo+"'" : nLo+"-"+nHi+"'";
   }
-  // Wind direction for offshore check
-  const offshore = /w |west|nw |northwest/i.test(text);
-  const strong   = /\b(2[0-9]|[3-9]\d)\s*kt/i.test(text);
-  const wmatch   = t.match(/winds?\s+([nsew]+(?:\s+to\s+[nsew]+)?)\s+(\d+)\s+(?:to\s+(\d+)\s+)?kt/);
-  const wind     = wmatch ? wmatch[0].replace(/winds?\s+/i,'').toUpperCase() : '';
-  // Condition rating
-  let cond = 'POOR', condClass = 'poor', icon = '🐕';
-  if (offshore && !strong && height !== '?' && parseInt(height) >= 2) {
-    cond = 'GOOD'; condClass = 'good'; icon = '🏄';
-  } else if (offshore && !strong) {
-    cond = 'FAIR'; condClass = 'fair'; icon = '🤙';
-  } else if (height === "0'" || height === "0-0'") {
-    cond = 'FLAT'; condClass = 'flat'; icon = '🌊';
-  }
+  // Wind
+  const windDir  = (p.windDirection||'').toUpperCase();
+  const windSpd  = p.windSpeed||'';
+  const wind     = windDir && windSpd ? windDir+' '+windSpd : '';
+  const offshore = /^(W|NW|WNW|NNW)$/.test(windDir);
+  const spdNums  = (windSpd.match(/\d+/g)||[]).map(Number);
+  const maxSpd   = spdNums.length ? Math.max(...spdNums) : 0;
+  const strong   = maxSpd >= 20;
+  // Rating
+  let cond='POOR', condClass='poor', icon='🐕';
+  const hNum = parseInt(height)||0;
+  if(height==='?'||hNum===0){cond='FLAT';condClass='flat';icon='🌊';}
+  else if(offshore&&!strong&&hNum>=2){cond='GOOD';condClass='good';icon='🏄';}
+  else if(offshore&&!strong){cond='FAIR';condClass='fair';icon='🤙';}
   return {height, cond, condClass, icon, wind};
 }
 
@@ -761,35 +808,59 @@ function loadForecastFallback() {
 let _launchTimer;
 async function loadLaunches() {
   try {
-    const res  = await fetch('https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=5&location__ids=12,143&format=json');
-    const data = await res.json();
-    const launches = (data.results || []).filter(l => {
-      const loc = (l.pad?.location?.name || '').toLowerCase();
-      return loc.includes('kennedy') || loc.includes('canaveral') || loc.includes('cape');
+    // Primary: rocketlaunch.live (reliable, low rate limit)
+    const r = await fetch('https://fdo.rocketlaunch.live/json/launches/next/5',
+      {signal:AbortSignal.timeout(6000)});
+    const data = await r.json();
+    const launches = (data.result||[]).filter(l => {
+      const site = ((l.pad?.location?.name||'')+(l.pad?.name||'')).toLowerCase();
+      return site.includes('kennedy')||site.includes('canaveral')||site.includes('cape');
     });
-    if (!launches.length) {
-      document.getElementById('launch-content').innerHTML = '<div style="font-size:13px;color:var(--text-light)">No launches scheduled nearby.</div>';
+    if(launches.length){
+      renderLaunch(launches[0]);
       return;
     }
-    const next = launches[0];
-    const name = next.name || 'Unknown Mission';
-    const vehicle = next.rocket?.configuration?.name || '';
-    const netDate = new Date(next.net);
-    document.getElementById('launch-content').innerHTML =
-      `<div class="launch-name">${name}</div>
-       <div class="launch-vehicle">${vehicle}</div>
-       <div class="countdown-grid" id="countdown-grid">
-         <div class="countdown-unit"><div class="countdown-num" id="cd-d">--</div><div class="countdown-label">Days</div></div>
-         <div class="countdown-unit"><div class="countdown-num" id="cd-h">--</div><div class="countdown-label">Hrs</div></div>
-         <div class="countdown-unit"><div class="countdown-num" id="cd-m">--</div><div class="countdown-label">Min</div></div>
-         <div class="countdown-unit"><div class="countdown-num" id="cd-s">--</div><div class="countdown-label">Sec</div></div>
-       </div>`;
+  } catch(e) { console.warn('rocketlaunch.live error:', e); }
+
+  try {
+    // Fallback: The Space Devs dev endpoint
+    const r = await fetch('https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=5&location__ids=12,27',
+      {signal:AbortSignal.timeout(8000)});
+    const data = await r.json();
+    if(data.results?.length){
+      const l = data.results[0];
+      renderLaunchRaw(l.name, l.net ? new Date(l.net) : null);
+      return;
+    }
+  } catch(e) { console.warn('Space Devs error:', e); }
+
+  document.getElementById('launch-content').innerHTML =
+    '<div style="font-size:13px;color:var(--text-light)"><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal)">View KSC Launch Schedule &rarr;</a></div>';
+}
+
+function renderLaunch(l) {
+  const name    = l.name || 'TBD';
+  const vehicle = l.vehicle?.name || l.provider?.name || '';
+  const netDate = l.t0 ? new Date(l.t0) : (l.win_open ? new Date(l.win_open) : null);
+  renderLaunchRaw(name + (vehicle ? ' · ' + vehicle : ''), netDate);
+}
+
+function renderLaunchRaw(name, netDate) {
+  document.getElementById('launch-content').innerHTML =
+    `<div class="launch-name">${name}</div>
+     <div class="countdown-grid" id="countdown-grid">
+       <div class="countdown-unit"><div class="countdown-num" id="cd-d">--</div><div class="countdown-label">Days</div></div>
+       <div class="countdown-unit"><div class="countdown-num" id="cd-h">--</div><div class="countdown-label">Hrs</div></div>
+       <div class="countdown-unit"><div class="countdown-num" id="cd-m">--</div><div class="countdown-label">Min</div></div>
+       <div class="countdown-unit"><div class="countdown-num" id="cd-s">--</div><div class="countdown-label">Sec</div></div>
+     </div>`;
+  if(netDate){
     clearInterval(_launchTimer);
-    _launchTimer = setInterval(() => tickCountdown(netDate), 1000);
+    _launchTimer = setInterval(()=>tickCountdown(netDate), 1000);
     tickCountdown(netDate);
-  } catch(e) {
-    document.getElementById('launch-content').innerHTML =
-      '<div style="font-size:13px;color:var(--text-light)"><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal)">View KSC Launch Schedule &rarr;</a></div>';
+  } else {
+    document.getElementById('countdown-grid').innerHTML =
+      '<div style="grid-column:1/-1;font-size:12px;color:var(--text-light)">Date TBD</div>';
   }
 }
 
