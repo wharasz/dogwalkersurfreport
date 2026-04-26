@@ -266,7 +266,7 @@ footer a:hover{color:var(--teal)}
       <a href="#forecast">Forecast</a>
       <a href="#archive">Archive</a>
       <a href="#subscribe">Alerts</a>
-      <a href="mailto:ads@dogwalkersurfreport.com">Advertise</a>
+      <a href="mailto:dogwalkersurfreport@gmail.com">Advertise</a>
     </nav>
   </div>
 </header>
@@ -318,7 +318,7 @@ footer a:hover{color:var(--teal)}
 <div class="ad-leaderboard">
   <div class="ad-slot" style="max-width:728px;margin:0 auto;padding:14px">
     <div class="ad-slot-size">728&times;90 &middot; Leaderboard</div>
-    <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">ads@dogwalkersurfreport.com</a></div>
+    <div class="ad-slot-cta"><a href="mailto:dogwalkersurfreport@gmail.com">dogwalkersurfreport@gmail.com</a></div>
   </div>
 </div>
 
@@ -348,19 +348,40 @@ footer a:hover{color:var(--teal)}
     </main>
 
     <aside>
-      <div class="ad-slot"><div class="ad-slot-size">300&times;250</div><div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div></div>
+      <div class="ad-slot"><div class="ad-slot-size">300&times;250</div><div class="ad-slot-cta"><a href="mailto:dogwalkersurfreport@gmail.com">Advertise Here</a></div></div>
       <div class="treat-box">
         <div class="treat-emoji">🐕</div>
         <h3>Buy Athena a Treat!</h3>
         <p>She walks the beach every morning so you don't have to. Show her some love.</p>
-        <a href="https://cash.app/$strangedab" target="_blank" class="treat-btn">$ Send a Treat</a>
+        <a href="https://venmo.com/code?user_id=2814289693900800904&created=1777238778" target="_blank" class="treat-btn">Venmo Athena a Treat</a>
       </div>
       <div class="alerts-box" id="subscribe">
-        <h3>Surf Alerts</h3>
-        <p>Get notified when Cocoa Beach surf conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
-        <div class="alert-tier"><div><div class="alert-tier-name">Daily Report</div><div class="alert-tier-desc">Morning email with conditions + photo</div></div><div class="alert-tier-price">Free</div></div>
-        <div class="alert-tier"><div><div class="alert-tier-name">Surf Alerts</div><div class="alert-tier-desc">SMS + email when it fires</div></div><div class="alert-tier-price">$6/mo</div></div>
+        <h3>🔔 Surf Alerts</h3>
+        <p>Get notified when Cocoa Beach conditions fire at Picnic Tables. Pick your plan:</p>
+        <div class="alert-tier" onclick="selectTier('daily')" id="tier-daily" style="cursor:pointer;border-radius:6px;padding:8px 10px;margin-bottom:4px;border:2px solid transparent;transition:all .2s">
+          <div><div class="alert-tier-name">📧 Daily Report</div><div class="alert-tier-desc">Morning email with conditions + photo</div></div>
+          <div class="alert-tier-price">Free</div>
+        </div>
+        <div class="alert-tier" onclick="selectTier('alerts')" id="tier-alerts" style="cursor:pointer;border-radius:6px;padding:8px 10px;margin-bottom:12px;border:2px solid transparent;transition:all .2s">
+          <div><div class="alert-tier-name">📱 Surf Alerts</div><div class="alert-tier-desc">Email when it's firing — you set the threshold</div></div>
+          <div class="alert-tier-price">$6/mo</div>
+        </div>
         <input type="email" class="alert-email" id="alert-email-input" placeholder="your@email.com">
+        <input type="text" class="alert-email" id="alert-name-input" placeholder="Your name (optional)" style="margin-bottom:8px">
+        <div id="alert-threshold" style="display:none;margin-bottom:8px">
+          <select id="alert-size" style="width:100%;background:var(--navy);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:9px 12px;color:var(--white);font-size:13px;margin-bottom:6px">
+            <option value="">Alert me when surf is at least...</option>
+            <option value="1ft+">1ft+ (any rideable wave)</option>
+            <option value="2ft+">2ft+ (fun small wave)</option>
+            <option value="3ft+">3ft+ (solid session)</option>
+            <option value="4ft+">4ft+ (pumping)</option>
+          </select>
+          <select id="alert-wind" style="width:100%;background:var(--navy);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:9px 12px;color:var(--white);font-size:13px">
+            <option value="">Wind preference...</option>
+            <option value="offshore only">Offshore winds only (W/NW)</option>
+            <option value="any winds">Any wind conditions</option>
+          </select>
+        </div>
         <button class="alert-btn" onclick="handleAlertSignup()">GET ALERTS</button>
         <p style="font-size:11px;text-align:center;margin-top:8px;color:var(--text-light)">No spam. Unsubscribe any time.</p>
       </div>
@@ -368,8 +389,8 @@ footer a:hover{color:var(--teal)}
         <h3>Next Space Coast Launch</h3>
         <div id="launch-content"><div class="buoy-value loading">Loading...</div></div>
       </div>
-      <div class="ad-slot"><div class="ad-slot-size">300&times;250</div><div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div></div>
-      <div class="ad-slot"><div class="ad-slot-size">300&times;100</div><div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div></div>
+      <div class="ad-slot"><div class="ad-slot-size">300&times;250</div><div class="ad-slot-cta"><a href="mailto:dogwalkersurfreport@gmail.com">Advertise Here</a></div></div>
+      <div class="ad-slot"><div class="ad-slot-size">300&times;100</div><div class="ad-slot-cta"><a href="mailto:dogwalkersurfreport@gmail.com">Advertise Here</a></div></div>
     </aside>
   </div>
 </div>
@@ -403,7 +424,7 @@ footer a:hover{color:var(--teal)}
 
 <footer>
   &copy; 2026 Dog Walker Surf Report &middot; Cocoa Beach Surf Report from 31st St, South Cocoa Beach, FL
-  &middot; <a href="mailto:ads@dogwalkersurfreport.com">ads@dogwalkersurfreport.com</a>
+  &middot; <a href="mailto:dogwalkersurfreport@gmail.com">dogwalkersurfreport@gmail.com</a>
 </footer>
 
 <div class="modal-overlay" id="archive-modal" onclick="closeModal(event)">
@@ -771,10 +792,46 @@ function tickCountdown(target){
 // ============================================================
 //  ALERTS
 // ============================================================
+let _selectedTier = 'daily';
+
+function selectTier(tier){
+  _selectedTier = tier;
+  const daily  = document.getElementById('tier-daily');
+  const alerts = document.getElementById('tier-alerts');
+  const thresh = document.getElementById('alert-threshold');
+  if(tier === 'daily'){
+    daily.style.borderColor  = 'var(--teal)';
+    daily.style.background   = 'var(--teal-dim)';
+    alerts.style.borderColor = 'transparent';
+    alerts.style.background  = 'transparent';
+    thresh.style.display     = 'none';
+  } else {
+    alerts.style.borderColor = 'var(--teal)';
+    alerts.style.background  = 'var(--teal-dim)';
+    daily.style.borderColor  = 'transparent';
+    daily.style.background   = 'transparent';
+    thresh.style.display     = 'block';
+  }
+}
+
 function handleAlertSignup(){
-  const email=document.getElementById('alert-email-input').value.trim();
-  if(!email||!email.includes('@')){alert('Please enter a valid email address.');return;}
-  window.location.href=`mailto:alerts@dogwalkersurfreport.com?subject=Surf Alert Signup&body=Please sign me up: ${email}`;
+  const email = document.getElementById('alert-email-input').value.trim();
+  const name  = document.getElementById('alert-name-input')?.value.trim() || '';
+  if(!email || !email.includes('@')){
+    alert('Please enter a valid email address.');
+    return;
+  }
+  let subject, body;
+  if(_selectedTier === 'alerts'){
+    const size = document.getElementById('alert-size')?.value || 'not specified';
+    const wind = document.getElementById('alert-wind')?.value || 'not specified';
+    subject = 'Surf Alert Signup — $6/mo';
+    body = `Hi! I'd like to sign up for Surf Alerts at Picnic Tables.\n\nName: ${name||'Not provided'}\nEmail: ${email}\nAlert threshold: ${size}\nWind preference: ${wind}\n\nPlease send payment info to get started. Thanks!`;
+  } else {
+    subject = 'Daily Surf Report Signup — Free';
+    body = `Hi! I'd like to sign up for the free daily Cocoa Beach surf report.\n\nName: ${name||'Not provided'}\nEmail: ${email}\n\nThanks!`;
+  }
+  window.location.href = `mailto:dogwalkersurfreport@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 // ============================================================
