@@ -588,21 +588,28 @@ async function fetchTides(){
   // Source 1: Vercel serverless /api/tides
   try{
     const r=await fetch('/api/tides',{signal:AbortSignal.timeout(6000)});
-    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
-  }catch(e){}
+    if(r.ok){const d=await r.json();if(d.predictions?.length){console.log('Tides: Vercel API');return d.predictions;}}
+  }catch(e){console.warn('Tides source 1 fail:',e.message);}
 
-  // Source 2: NOAA direct (works if CORS allows)
+  // Source 2: NOAA direct
   try{
     const r=await fetch(noaaUrl,{signal:AbortSignal.timeout(8000)});
-    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
-  }catch(e){}
+    if(r.ok){const d=await r.json();if(d.predictions?.length){console.log('Tides: NOAA direct');return d.predictions;}}
+  }catch(e){console.warn('Tides source 2 fail:',e.message);}
 
-  // Source 3: allorigins proxy
+  // Source 3: corsproxy.io
+  try{
+    const r=await fetch('https://corsproxy.io/?'+encodeURIComponent(noaaUrl),{signal:AbortSignal.timeout(10000)});
+    if(r.ok){const d=await r.json();if(d.predictions?.length){console.log('Tides: corsproxy');return d.predictions;}}
+  }catch(e){console.warn('Tides source 3 fail:',e.message);}
+
+  // Source 4: allorigins raw
   try{
     const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(noaaUrl),{signal:AbortSignal.timeout(10000)});
-    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
-  }catch(e){}
+    if(r.ok){const d=await r.json();if(d.predictions?.length){console.log('Tides: allorigins');return d.predictions;}}
+  }catch(e){console.warn('Tides source 4 fail:',e.message);}
 
+  console.error('All tide sources failed');
   return null;
 }
 function fmtDate(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}
