@@ -555,57 +555,94 @@ async function loadAllBuoys(){
 }
 
 // ============================================================
-//  TIDES — 3-source fallback
-//  1. /api/tides  (Vercel serverless — no CORS)
-//  2. NOAA direct  (works in some browsers)
-//  3. allorigins proxy fallback
+//  TIDES — Harmonic prediction, no API needed
+//  NOAA Station 8721604 — Trident Pier, Port Canaveral, FL
+//  Constants from NOAA CO-OPS harmonic constituent database
+//  Phases pre-computed for J1970 epoch at lon=-80.60°W
 // ============================================================
-async function loadTides(){
-  const predictions = await fetchTides();
-  if(!predictions){
-    document.getElementById('tide-body').innerHTML=`<tr><td colspan="4" style="text-align:center;padding:12px;color:var(--text-light)">Tides unavailable &mdash; <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721604" target="_blank">View on NOAA</a></td></tr>`;
-    return;
+function loadTides(){
+  try{
+    const tides = predictTides(new Date(), 4);
+    if(!tides.length) throw new Error('No tides computed');
+    document.getElementById('tide-body').innerHTML = tides.map(p => {
+      const day  = p.time.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      const time = p.time.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      const hi   = p.type === 'H';
+      return `<tr>
+        <td>${day}</td>
+        <td class="${hi?'tide-high':'tide-low'}">${hi?'High':'Low'}</td>
+        <td>${time}</td>
+        <td>${p.height.toFixed(1)} ft</td>
+      </tr>`;
+    }).join('');
+  }catch(e){
+    console.error('Tide prediction error:',e);
+    document.getElementById('tide-body').innerHTML =
+      `<tr><td colspan="4" style="text-align:center;padding:12px;color:var(--text-light)">
+        Tides unavailable &mdash; <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721604" target="_blank">View on NOAA</a>
+      </td></tr>`;
   }
-  document.getElementById('tide-body').innerHTML=predictions.map(p=>{
-    // NOAA returns "2026-04-25 06:13" — parse carefully to avoid TZ shift
-    const parts=p.t.split(' ');
-    const [y,mo,d]=parts[0].split('-').map(Number);
-    const [h,m]=parts[1].split(':').map(Number);
-    const dt=new Date(y,mo-1,d,h,m);
-    const day=dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-    const time=dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-    const hi=p.type==='H';
-    return `<tr><td>${day}</td><td class="${hi?'tide-high':'tide-low'}">${hi?'High':'Low'}</td><td>${time}</td><td>${parseFloat(p.v).toFixed(1)} ft</td></tr>`;
-  }).join('');
 }
 
-async function fetchTides(){
-  const today=new Date();
-  const begin=fmtDate(today);
-  const end=fmtDate(new Date(today.getTime()+4*86400000));
-  const noaaUrl=`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${begin}&end_date=${end}&station=8721604&product=predictions&datum=MLLW&time_zone=lst_lct&interval=hilo&units=english&application=dogwalkersurfreport&format=json`;
+function predictTides(startDate, days){
+  // NOAA 8721604 harmonic constants (amplitudes in meters, converted to feet)
+  // Initial phases (°) = V0(Port Canaveral, J1970) + u(J1970) - kappa
+  const M2FT = 3.28084;
+  const DEG  = Math.PI / 180;
+  const MLLW = 2.287; // ft — Mean Sea Level above MLLW for this station
 
-  // Source 1: Vercel serverless /api/tides
-  try{
-    const r=await fetch('/api/tides',{signal:AbortSignal.timeout(6000)});
-    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
-  }catch(e){}
+  const C = [
+  //  speed(°/hr)   amp(m)  f_node  phase° at J1970
+    [28.9841042,    0.597,  0.964,  113.35],  // M2  — principal lunar semidiurnal
+    [30.0000000,    0.085,  1.000,    3.60],  // S2  — principal solar semidiurnal
+    [28.4397295,    0.125,  0.964,  193.95],  // N2  — larger lunar elliptic
+    [15.0410686,    0.151,  1.109,  288.29],  // K1  — lunisolar declinational diurnal
+    [13.9430356,    0.133,  1.177,  352.20],  // O1  — principal lunar diurnal
+    [30.0821373,    0.023,  1.243,  206.10],  // K2  — lunisolar semidiurnal
+    [14.9589314,    0.049,  1.000,  249.60],  // P1  — principal solar diurnal
+    [57.9682084,    0.023,  0.929,   87.71],  // M4  — shallow water overtide
+    [57.4238336,    0.016,  0.929,  163.71],  // MN4 — shallow water
+  ];
 
-  // Source 2: NOAA direct (works if CORS allows)
-  try{
-    const r=await fetch(noaaUrl,{signal:AbortSignal.timeout(8000)});
-    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
-  }catch(e){}
+  function height(ms){
+    const t = ms / 3600000; // hours since J1970 00:00 UTC
+    let h = MLLW;
+    for(const [spd, amp, f, phase] of C)
+      h += f * amp * M2FT * Math.cos((spd * t + phase) * DEG);
+    return h;
+  }
 
-  // Source 3: allorigins proxy
-  try{
-    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(noaaUrl),{signal:AbortSignal.timeout(10000)});
-    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
-  }catch(e){}
+  const results = [];
+  const start = startDate.getTime();
+  const end   = start + days * 86400000;
+  const step  = 6 * 60000; // sample every 6 minutes
 
-  return null;
+  let prevH     = height(start);
+  let prevSlope = 0;
+
+  for(let t = start + step; t <= end; t += step){
+    const curH  = height(t);
+    const slope = curH - prevH;
+    if(prevSlope !== 0 && prevSlope * slope < 0){
+      // Refine extremum with binary search
+      let lo = t - step, hi = t;
+      for(let i = 0; i < 8; i++){
+        const mid = (lo + hi) / 2;
+        const slopeMid = height(mid + 60000) - height(mid);
+        (slopeMid * slope < 0) ? lo = mid : hi = mid;
+      }
+      const extremumT = (lo + hi) / 2;
+      results.push({
+        time:   new Date(extremumT),
+        height: height(extremumT),
+        type:   slope < 0 ? 'H' : 'L'
+      });
+    }
+    prevSlope = slope;
+    prevH     = curH;
+  }
+  return results;
 }
-function fmtDate(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}
 
 // ============================================================
 //  SURF FORECAST — Open-Meteo Marine API (free, CORS-enabled)
