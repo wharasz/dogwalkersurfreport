@@ -555,28 +555,55 @@ async function loadAllBuoys(){
 }
 
 // ============================================================
-//  TIDES — NOAA Station 8721604 (native CORS)
+//  TIDES — 3-source fallback
+//  1. /api/tides  (Vercel serverless — no CORS)
+//  2. NOAA direct  (works in some browsers)
+//  3. allorigins proxy fallback
 // ============================================================
 async function loadTides(){
-  try{
-    const today=new Date();
-    const begin=fmtDate(today);
-    const end=fmtDate(new Date(today.getTime()+3*86400000));
-    const url=`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${begin}&end_date=${end}&station=8721604&product=predictions&datum=MLLW&time_zone=lst_lct&interval=hilo&units=english&application=dogwalkersurfreport&format=json`;
-    const res=await fetch(url,{signal:AbortSignal.timeout(10000)});
-    const data=await res.json();
-    if(!data.predictions||!data.predictions.length)throw new Error('No predictions');
-    document.getElementById('tide-body').innerHTML=data.predictions.map(p=>{
-      const dt=new Date(p.t.replace(' ','T'));
-      const day=dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-      const time=dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      const hi=p.type==='H';
-      return `<tr><td>${day}</td><td class="${hi?'tide-high':'tide-low'}">${hi?'High':'Low'}</td><td>${time}</td><td>${parseFloat(p.v).toFixed(1)} ft</td></tr>`;
-    }).join('');
-  }catch(e){
-    console.warn('Tide error:',e);
+  const predictions = await fetchTides();
+  if(!predictions){
     document.getElementById('tide-body').innerHTML=`<tr><td colspan="4" style="text-align:center;padding:12px;color:var(--text-light)">Tides unavailable &mdash; <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721604" target="_blank">View on NOAA</a></td></tr>`;
+    return;
   }
+  document.getElementById('tide-body').innerHTML=predictions.map(p=>{
+    // NOAA returns "2026-04-25 06:13" — parse carefully to avoid TZ shift
+    const parts=p.t.split(' ');
+    const [y,mo,d]=parts[0].split('-').map(Number);
+    const [h,m]=parts[1].split(':').map(Number);
+    const dt=new Date(y,mo-1,d,h,m);
+    const day=dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+    const time=dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+    const hi=p.type==='H';
+    return `<tr><td>${day}</td><td class="${hi?'tide-high':'tide-low'}">${hi?'High':'Low'}</td><td>${time}</td><td>${parseFloat(p.v).toFixed(1)} ft</td></tr>`;
+  }).join('');
+}
+
+async function fetchTides(){
+  const today=new Date();
+  const begin=fmtDate(today);
+  const end=fmtDate(new Date(today.getTime()+4*86400000));
+  const noaaUrl=`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${begin}&end_date=${end}&station=8721604&product=predictions&datum=MLLW&time_zone=lst_lct&interval=hilo&units=english&application=dogwalkersurfreport&format=json`;
+
+  // Source 1: Vercel serverless /api/tides
+  try{
+    const r=await fetch('/api/tides',{signal:AbortSignal.timeout(6000)});
+    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
+  }catch(e){}
+
+  // Source 2: NOAA direct (works if CORS allows)
+  try{
+    const r=await fetch(noaaUrl,{signal:AbortSignal.timeout(8000)});
+    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
+  }catch(e){}
+
+  // Source 3: allorigins proxy
+  try{
+    const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(noaaUrl),{signal:AbortSignal.timeout(10000)});
+    if(r.ok){const d=await r.json();if(d.predictions?.length)return d.predictions;}
+  }catch(e){}
+
+  return null;
 }
 function fmtDate(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}
 
