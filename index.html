@@ -31,7 +31,7 @@
       "url": "https://www.dogwalkersurfreport.com",
       "description": "Cocoa Beach surf report checked on foot several times daily from 31st Street Picnic Tables in South Cocoa Beach.",
       "inLanguage": "en-US",
-      "publisher": {"@id": "https://www.dogwalkersurfreport.com/#organization"}
+      "publisher": {"@id":"https://www.dogwalkersurfreport.com/#organization"}
     },
     {
       "@type": "Organization",
@@ -64,6 +64,7 @@
   --navy-light:  #1a2535;
   --navy-card:   #1e2d42;
   --teal:        #00c4b4;
+  --teal-dark:   #009e91;
   --teal-dim:    rgba(0,196,180,0.12);
   --teal-border: rgba(0,196,180,0.3);
   --white:       #f0f4f8;
@@ -109,16 +110,16 @@ nav a:hover,nav a.active{color:var(--teal);background:var(--teal-dim);text-decor
 .hero-text h2{font-family:var(--font-display);font-size:22px;font-weight:700;letter-spacing:1px;text-shadow:0 2px 8px rgba(0,0,0,.8)}
 .hero-text p{font-size:13px;color:rgba(255,255,255,.75)}
 
-/* BUOY BAR — 6 cards with icons */
+/* BUOY BAR */
 .buoy-bar{background:var(--navy-mid);border-bottom:1px solid rgba(255,255,255,.06)}
-.buoy-bar-inner{max-width:1100px;margin:0 auto;padding:10px 16px}
-.buoy-bar-title{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px}
+.buoy-bar-inner{max-width:1100px;margin:0 auto;padding:12px 16px}
+.buoy-bar-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:10px}
 .buoy-bar-title a{color:var(--text-light)}
 .buoy-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
 @media(max-width:768px){.buoy-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:480px){.buoy-grid{grid-template-columns:repeat(2,1fr)}}
-.buoy-card{background:var(--navy-card);border-radius:var(--radius);overflow:hidden}
-.buoy-card a{display:block;padding:12px 10px;text-align:center;text-decoration:none;transition:background .2s}
+.buoy-card{background:var(--navy-card);border-radius:var(--radius)}
+.buoy-card a{display:block;padding:12px 8px;text-align:center;text-decoration:none;transition:background .2s;border-radius:var(--radius)}
 .buoy-card a:hover{background:var(--teal-dim)}
 .buoy-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--text-light);margin-bottom:4px}
 .buoy-icon{font-size:20px;margin-bottom:4px;line-height:1}
@@ -133,7 +134,7 @@ nav a:hover,nav a.active{color:var(--teal);background:var(--teal-dim);text-decor
 .ad-slot-cta{font-size:12px;color:var(--text-mid);margin-top:4px}
 .ad-slot-cta a{color:var(--teal)}
 
-/* MAIN LAYOUT */
+/* LAYOUT */
 .container{max-width:1100px;margin:0 auto;padding:24px 16px}
 .main-grid{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
 @media(max-width:768px){.main-grid{grid-template-columns:1fr}}
@@ -155,7 +156,7 @@ nav a:hover,nav a.active{color:var(--teal);background:var(--teal-dim);text-decor
 
 /* TIDE TABLE */
 .tide-section{background:var(--navy-card);border-radius:var(--radius);padding:18px;margin-top:20px}
-.tide-section h3{font-family:var(--font-display);font-size:15px;font-weight:700;letter-spacing:.5px;color:var(--white);margin-bottom:14px}
+.tide-section h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:14px}
 .tide-table{width:100%;border-collapse:collapse;font-size:13px}
 .tide-table th{font-family:var(--font-display);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);padding:6px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}
 .tide-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text-mid)}
@@ -167,18 +168,22 @@ nav a:hover,nav a.active{color:var(--teal);background:var(--teal-dim);text-decor
 .forecast-section{background:var(--navy-card);border-radius:var(--radius);padding:18px;margin-top:20px}
 .forecast-section h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:4px}
 .forecast-note{font-size:11px;color:var(--text-light);margin-bottom:14px}
-.forecast-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
-.forecast-day{background:var(--navy-light);border-radius:6px;padding:12px 8px;text-align:center;border:1px solid rgba(255,255,255,.06)}
-.fc-dow{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);margin-bottom:4px}
-.fc-icon{font-size:22px;margin:4px 0}
-.fc-height{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--teal)}
-.fc-cond{font-size:10px;font-weight:700;letter-spacing:.5px;margin-top:4px;padding:2px 6px;border-radius:3px;display:inline-block}
-.cond-epic{background:#00c4b422;color:#00c4b4}
-.cond-good{background:#22c55e22;color:#22c55e}
-.cond-fair{background:#f4c84222;color:#f4c842}
-.cond-poor{background:#ff4d6d22;color:#ff4d6d}
-.cond-flat{background:#ffffff11;color:#7a8ea8}
-.fc-wind{font-size:10px;color:var(--text-light);margin-top:4px}
+.forecast-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+@media(max-width:600px){.forecast-grid{grid-template-columns:repeat(4,1fr)}}
+.forecast-card{background:var(--navy-light);border-radius:6px;padding:10px 6px;text-align:center;border:1px solid rgba(255,255,255,.06);transition:border-color .2s}
+.forecast-card.today{border-color:var(--teal-border);background:rgba(0,196,180,0.06)}
+.forecast-day{font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);margin-bottom:4px}
+.forecast-icon{font-size:20px;margin:4px 0;line-height:1}
+.forecast-height{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--teal)}
+.forecast-quality{font-size:9px;font-weight:700;letter-spacing:.5px;margin-top:4px;padding:2px 5px;border-radius:3px;display:inline-block}
+.fq-epic{background:rgba(0,196,180,.2);color:var(--teal)}
+.fq-good{background:rgba(34,197,94,.2);color:#22c55e}
+.fq-fair{background:rgba(244,200,66,.2);color:var(--gold)}
+.fq-poor{background:rgba(255,77,109,.2);color:#ff4d6d}
+.fq-flat{background:rgba(255,255,255,.08);color:var(--text-light)}
+.forecast-wind{font-size:9px;color:var(--text-light);margin-top:3px}
+.forecast-period{font-size:9px;color:var(--text-mid)}
+.forecast-board{font-size:14px;margin-top:3px}
 
 /* ARCHIVE */
 .archive-item{background:var(--navy-card);border-radius:var(--radius);display:flex;gap:14px;padding:14px;cursor:pointer;transition:background .2s;margin-bottom:10px;border:1px solid rgba(255,255,255,.04)}
@@ -187,7 +192,7 @@ nav a:hover,nav a.active{color:var(--teal);background:var(--teal-dim);text-decor
 .archive-date{font-size:11px;color:var(--text-light);font-family:var(--font-mono);margin-bottom:4px}
 .archive-headline{font-family:var(--font-display);font-size:16px;font-weight:600;color:var(--white);line-height:1.3}
 
-/* ARCHIVE MODAL */
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;overflow-y:auto;padding:20px}
 .modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
 .modal-inner{background:var(--navy-card);border-radius:var(--radius);max-width:700px;width:100%;margin:auto;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.7)}
@@ -243,14 +248,12 @@ footer a:hover{color:var(--teal)}
 </head>
 <body>
 
-<!-- TOP SOCIAL BAR -->
 <div class="top-bar">
   <a href="https://facebook.com" target="_blank" class="social-icon si-fb">f</a>
   <a href="https://instagram.com" target="_blank" class="social-icon si-ig">ig</a>
   <a href="https://x.com" target="_blank" class="social-icon si-x">X</a>
 </div>
 
-<!-- HEADER -->
 <header>
   <div class="header-inner">
     <div class="brand">
@@ -268,7 +271,6 @@ footer a:hover{color:var(--teal)}
   </div>
 </header>
 
-<!-- HERO BANNER -->
 <div class="hero">
   <img src="banner.webp" alt="Cocoa Beach surf report — Picnic Tables at 31st Street, South Cocoa Beach">
   <div class="hero-overlay"></div>
@@ -278,61 +280,41 @@ footer a:hover{color:var(--teal)}
   </div>
 </div>
 
-<!-- BUOY DATA BAR -->
 <div class="buoy-bar" id="conditions">
   <div class="buoy-bar-inner">
     <div class="buoy-bar-title">Cocoa Beach Live Weather, Winds &amp; Offshore Buoys &mdash; South Cocoa Beach Conditions &mdash; <a href="https://www.ndbc.noaa.gov/" target="_blank">Linked to Source</a></div>
     <div class="buoy-grid">
-      <div class="buoy-card">
-        <a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
-          <div class="buoy-label">Air Temp</div>
-          <div class="buoy-icon">🌡️</div>
-          <div class="buoy-value loading" id="air-temp">Loading...</div>
-        </a>
-      </div>
-      <div class="buoy-card">
-        <a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
-          <div class="buoy-label">Water Temp</div>
-          <div class="buoy-icon">🌊</div>
-          <div class="buoy-value loading" id="water-temp">Loading...</div>
-        </a>
-      </div>
-      <div class="buoy-card">
-        <a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
-          <div class="buoy-label">Winds</div>
-          <div class="buoy-icon">💨</div>
-          <div class="buoy-value loading" id="wind-data">Loading...</div>
-        </a>
-      </div>
-      <div class="buoy-card">
-        <a href="https://www.ndbc.noaa.gov/station_page.php?station=41113" target="_blank">
-          <div class="buoy-label">41113 Wave Ht</div>
-          <div class="buoy-icon">⚓</div>
-          <div class="buoy-value loading" id="buoy-41113">Loading...</div>
-          <div class="buoy-sub">Cape Canaveral Nearshore</div>
-        </a>
-      </div>
-      <div class="buoy-card">
-        <a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">
-          <div class="buoy-label">41009 Swell Ht</div>
-          <div class="buoy-icon">⚓</div>
-          <div class="buoy-value loading" id="buoy-41009">Loading...</div>
-          <div class="buoy-sub">Canaveral 20nm Offshore</div>
-        </a>
-      </div>
-      <div class="buoy-card">
-        <a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">
-          <div class="buoy-label">Swell Period</div>
-          <div class="buoy-icon">〰️</div>
-          <div class="buoy-value loading" id="swell-data">Loading...</div>
-          <div class="buoy-sub">Period &amp; Direction</div>
-        </a>
-      </div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
+        <div class="buoy-label">Air Temp</div><div class="buoy-icon">🌡️</div>
+        <div class="buoy-value loading" id="air-temp">Loading...</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
+        <div class="buoy-label">Water Temp</div><div class="buoy-icon">🌊</div>
+        <div class="buoy-value loading" id="water-temp">Loading...</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">
+        <div class="buoy-label">Winds</div><div class="buoy-icon">💨</div>
+        <div class="buoy-value loading" id="wind-data">Loading...</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41113" target="_blank">
+        <div class="buoy-label">41113 Wave Ht</div><div class="buoy-icon">⚓</div>
+        <div class="buoy-value loading" id="buoy-41113">Loading...</div>
+        <div class="buoy-sub">Cape Canaveral Nearshore</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">
+        <div class="buoy-label">41009 Swell Ht</div><div class="buoy-icon">⚓</div>
+        <div class="buoy-value loading" id="buoy-41009">Loading...</div>
+        <div class="buoy-sub">Canaveral 20nm Offshore</div>
+      </a></div>
+      <div class="buoy-card"><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">
+        <div class="buoy-label">Swell Period</div><div class="buoy-icon">〰️</div>
+        <div class="buoy-value loading" id="swell-data">Loading...</div>
+        <div class="buoy-sub">Period &amp; Direction</div>
+      </a></div>
     </div>
   </div>
 </div>
 
-<!-- LEADERBOARD AD -->
 <div class="ad-leaderboard">
   <div class="ad-slot" style="max-width:728px;margin:0 auto;padding:14px">
     <div class="ad-slot-size">728&times;90 &middot; Leaderboard</div>
@@ -340,50 +322,33 @@ footer a:hover{color:var(--teal)}
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
 <div class="container">
   <div class="main-grid">
     <main>
       <div class="section-label" id="report">Today's Report</div>
-      <div id="today-report">
-        <div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading report...</div>
-      </div>
+      <div id="today-report"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading report...</div></div>
 
-      <!-- TIDE TABLE -->
       <div class="tide-section">
         <h3>Cocoa Beach Tides &mdash; Trident Pier, Port Canaveral</h3>
         <table class="tide-table">
           <thead><tr><th>Day</th><th>Tide</th><th>Time</th><th>Height</th></tr></thead>
-          <tbody id="tide-body">
-            <tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:16px">Loading tides...</td></tr>
-          </tbody>
+          <tbody id="tide-body"><tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:16px">Loading tides...</td></tr></tbody>
         </table>
-        <div style="font-size:11px;color:var(--text-light);margin-top:8px;text-align:right">
-          Source: <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank" style="color:var(--text-light)">NOAA Station 8721604 &mdash; Trident Pier</a>
-        </div>
+        <div style="font-size:11px;color:var(--text-light);margin-top:8px;text-align:right">Source: <a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank" style="color:var(--text-light)">NOAA Station 8721604 &mdash; Trident Pier</a></div>
       </div>
 
-      <!-- 7-DAY FORECAST -->
       <div class="forecast-section" id="forecast">
         <h3>7-Day Surf Forecast</h3>
-        <div class="forecast-note">NWS Marine Zone AMZ552 &middot; Wave heights adjusted ~70% for nearshore at Picnic Tables</div>
-        <div class="forecast-grid" id="forecast-grid">
-          <div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">Loading forecast...</div>
-        </div>
+        <div class="forecast-note">Open-Meteo Marine API &middot; Wave heights at 0.9x nearshore factor for Picnic Tables</div>
+        <div class="forecast-grid" id="forecast-grid"><div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">Loading forecast...</div></div>
       </div>
 
-      <!-- ARCHIVE -->
       <div class="section-label" id="archive">Recent Reports</div>
-      <div id="archive-list">
-        <div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading archive...</div>
-      </div>
+      <div id="archive-list"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading archive...</div></div>
     </main>
 
     <aside>
-      <div class="ad-slot">
-        <div class="ad-slot-size">300&times;250</div>
-        <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div>
-      </div>
+      <div class="ad-slot"><div class="ad-slot-size">300&times;250</div><div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div></div>
       <div class="treat-box">
         <div class="treat-emoji">🐕</div>
         <h3>Buy Athena a Treat!</h3>
@@ -393,14 +358,8 @@ footer a:hover{color:var(--teal)}
       <div class="alerts-box" id="subscribe">
         <h3>Surf Alerts</h3>
         <p>Get notified when Cocoa Beach surf conditions hit your threshold at Picnic Tables. Set it and forget it.</p>
-        <div class="alert-tier">
-          <div><div class="alert-tier-name">Daily Report</div><div class="alert-tier-desc">Morning email with conditions + photo</div></div>
-          <div class="alert-tier-price">Free</div>
-        </div>
-        <div class="alert-tier">
-          <div><div class="alert-tier-name">Surf Alerts</div><div class="alert-tier-desc">SMS + email when it fires</div></div>
-          <div class="alert-tier-price">$6/mo</div>
-        </div>
+        <div class="alert-tier"><div><div class="alert-tier-name">Daily Report</div><div class="alert-tier-desc">Morning email with conditions + photo</div></div><div class="alert-tier-price">Free</div></div>
+        <div class="alert-tier"><div><div class="alert-tier-name">Surf Alerts</div><div class="alert-tier-desc">SMS + email when it fires</div></div><div class="alert-tier-price">$6/mo</div></div>
         <input type="email" class="alert-email" id="alert-email-input" placeholder="your@email.com">
         <button class="alert-btn" onclick="handleAlertSignup()">GET ALERTS</button>
         <p style="font-size:11px;text-align:center;margin-top:8px;color:var(--text-light)">No spam. Unsubscribe any time.</p>
@@ -409,52 +368,36 @@ footer a:hover{color:var(--teal)}
         <h3>Next Space Coast Launch</h3>
         <div id="launch-content"><div class="buoy-value loading">Loading...</div></div>
       </div>
-      <div class="ad-slot">
-        <div class="ad-slot-size">300&times;250</div>
-        <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div>
-      </div>
-      <div class="ad-slot">
-        <div class="ad-slot-size">300&times;100</div>
-        <div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div>
-      </div>
+      <div class="ad-slot"><div class="ad-slot-size">300&times;250</div><div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div></div>
+      <div class="ad-slot"><div class="ad-slot-size">300&times;100</div><div class="ad-slot-cta"><a href="mailto:ads@dogwalkersurfreport.com">Advertise Here</a></div></div>
     </aside>
   </div>
 </div>
 
-<!-- QUICK LINKS -->
 <div class="quick-links">
   <div class="quick-links-inner">
-    <div>
-      <h4>Data Sources</h4>
-      <ul>
-        <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">Buoy 41009 &mdash; Canaveral 20nm</a></li>
-        <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=41113" target="_blank">Buoy 41113 &mdash; Cape Canaveral Nearshore</a></li>
-        <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">Trident Pier, Port Canaveral</a></li>
-        <li><a href="https://www.ndbc.noaa.gov/" target="_blank">All NDBC Buoys</a></li>
-        <li><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank">NOAA Tides &mdash; Trident Pier</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Forecasts</h4>
-      <ul>
-        <li><a href="https://forecast.weather.gov/shmrn.php?mz=amz552&syn=amz500" target="_blank">NWS Marine Forecast &mdash; AMZ552</a></li>
-        <li><a href="https://magicseaweed.com/Cocoa-Beach-Surf-Report/350/" target="_blank">Magic Seaweed &mdash; Cocoa Beach</a></li>
-        <li><a href="https://www.nhc.noaa.gov" target="_blank">Tropical Outlook &mdash; NHC</a></li>
-        <li><a href="https://www.weather.gov/mlb/" target="_blank">NWS Melbourne</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Community</h4>
-      <ul>
-        <li><a href="https://911surfreport.com" target="_blank">911 Surf Report &mdash; Jax</a></li>
-        <li><a href="https://www.surfguru.com" target="_blank">Surf Guru</a></li>
-        <li><a href="https://www.raw.surf/" target="_blank">Raw Surfing Adventures</a></li>
-        <li><a href="http://oceansportsworld.com/" target="_blank">Oceansports World &mdash; Cocoa Beach</a></li>
-        <li><a href="https://wtrbrand.com/" target="_blank">WTR Brand</a></li>
-        <li><a href="https://www.ocearch.org" target="_blank">OCEARCH Shark Tracker</a></li>
-        <li><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank">KSC Launch Schedule</a></li>
-      </ul>
-    </div>
+    <div><h4>Data Sources</h4><ul>
+      <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=41009" target="_blank">Buoy 41009 &mdash; Canaveral 20nm</a></li>
+      <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=41113" target="_blank">Buoy 41113 &mdash; Cape Canaveral Nearshore</a></li>
+      <li><a href="https://www.ndbc.noaa.gov/station_page.php?station=TRDF1" target="_blank">Trident Pier, Port Canaveral</a></li>
+      <li><a href="https://www.ndbc.noaa.gov/" target="_blank">All NDBC Buoys</a></li>
+      <li><a href="https://tidesandcurrents.noaa.gov/stationhome.html?id=8721604" target="_blank">NOAA Tides &mdash; Trident Pier</a></li>
+    </ul></div>
+    <div><h4>Forecasts</h4><ul>
+      <li><a href="https://forecast.weather.gov/shmrn.php?mz=amz552&syn=amz500" target="_blank">NWS Marine Forecast &mdash; AMZ552</a></li>
+      <li><a href="https://magicseaweed.com/Cocoa-Beach-Surf-Report/350/" target="_blank">Magic Seaweed &mdash; Cocoa Beach</a></li>
+      <li><a href="https://www.nhc.noaa.gov" target="_blank">Tropical Outlook &mdash; NHC</a></li>
+      <li><a href="https://www.weather.gov/mlb/" target="_blank">NWS Melbourne</a></li>
+    </ul></div>
+    <div><h4>Community</h4><ul>
+      <li><a href="https://911surfreport.com" target="_blank">911 Surf Report &mdash; Jax</a></li>
+      <li><a href="https://www.surfguru.com" target="_blank">Surf Guru</a></li>
+      <li><a href="https://www.raw.surf/" target="_blank">Raw Surfing Adventures</a></li>
+      <li><a href="http://oceansportsworld.com/" target="_blank">Oceansports World &mdash; Cocoa Beach</a></li>
+      <li><a href="https://wtrbrand.com/" target="_blank">WTR Brand</a></li>
+      <li><a href="https://www.ocearch.org" target="_blank">OCEARCH Shark Tracker</a></li>
+      <li><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank">KSC Launch Schedule</a></li>
+    </ul></div>
   </div>
 </div>
 
@@ -463,7 +406,6 @@ footer a:hover{color:var(--teal)}
   &middot; <a href="mailto:ads@dogwalkersurfreport.com">ads@dogwalkersurfreport.com</a>
 </footer>
 
-<!-- ARCHIVE MODAL -->
 <div class="modal-overlay" id="archive-modal" onclick="closeModal(event)">
   <div class="modal-inner">
     <div class="modal-header">
@@ -481,18 +423,17 @@ footer a:hover{color:var(--teal)}
 // ============================================================
 //  REPORTS
 // ============================================================
-async function loadReports() {
-  try {
-    const res = await fetch('reports.json?v='+Date.now());
-    const reports = await res.json();
-    if (!reports.length) return;
-    const today = reports[0];
-    const pc = today.photos || 1;
-    let thumbs = '';
-    for (let i = 1; i <= pc; i++) {
-      thumbs += `<img src="photos/${today.folder||today.date}/${i}.jpg" alt="Cocoa Beach surf photo ${i}" ${i===1?'class="active"':''} onclick="switchPhoto(this)">`;
-    }
-    document.getElementById('today-report').innerHTML =
+async function loadReports(){
+  try{
+    const res=await fetch('reports.json?v='+Date.now());
+    const reports=await res.json();
+    if(!reports.length)return;
+    const today=reports[0];
+    const pc=today.photos||1;
+    let thumbs='';
+    for(let i=1;i<=pc;i++)
+      thumbs+=`<img src="photos/${today.folder||today.date}/${i}.jpg" alt="Cocoa Beach surf photo ${i}" ${i===1?'class="active"':''} onclick="switchPhoto(this)">`;
+    document.getElementById('today-report').innerHTML=
       `<div class="report-card">
         <img src="photos/${today.folder||today.date}/1.jpg" alt="Cocoa Beach surf conditions at Picnic Tables — ${today.date}" class="report-photo-main" id="main-photo">
         <div class="report-thumbnails">${thumbs}</div>
@@ -502,245 +443,217 @@ async function loadReports() {
           <p class="report-text">${today.text}</p>
         </div>
       </div>`;
-    if (reports.length > 1) {
-      let html = '';
-      for (let i = 1; i < reports.length; i++) {
-        const r = reports[i];
-        html += `<div class="archive-item" onclick="showArchive(${i})">
+    if(reports.length>1){
+      let html='';
+      for(let i=1;i<reports.length;i++){
+        const r=reports[i];
+        html+=`<div class="archive-item" onclick="showArchive(${i})">
           <img src="photos/${r.folder||r.date}/1.jpg" alt="${r.day} ${r.date}" class="archive-thumb" onerror="this.style.display='none'">
-          <div>
-            <div class="archive-date">${r.day}, ${formatDate(r.date)} &middot; ${r.time}</div>
-            <div class="archive-headline">${r.headline}</div>
-          </div>
+          <div><div class="archive-date">${r.day}, ${formatDate(r.date)} &middot; ${r.time}</div>
+          <div class="archive-headline">${r.headline}</div></div>
         </div>`;
       }
-      document.getElementById('archive-list').innerHTML = html;
-    } else {
-      document.getElementById('archive-list').innerHTML = '<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">More reports coming soon.</div>';
+      document.getElementById('archive-list').innerHTML=html;
+    }else{
+      document.getElementById('archive-list').innerHTML='<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">More reports coming soon.</div>';
     }
-    window._reports = reports;
+    window._reports=reports;
     generateReportSchema(reports);
-  } catch(e) {
-    document.getElementById('today-report').innerHTML = '<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Could not load report.</div>';
+  }catch(e){
+    document.getElementById('today-report').innerHTML='<div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Could not load report.</div>';
   }
 }
-function switchPhoto(el) {
+function switchPhoto(el){
   document.querySelectorAll('.report-thumbnails img').forEach(i=>i.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('main-photo').src = el.src;
+  document.getElementById('main-photo').src=el.src;
 }
-function showArchive(idx) {
-  const r = window._reports[idx];
-  if (!r) return;
-  document.getElementById('modal-meta').textContent = `${r.day}, ${formatDate(r.date)} · ${r.time}`;
-  document.getElementById('modal-headline').textContent = r.headline;
-  document.getElementById('modal-text').textContent = r.text;
-  document.getElementById('modal-main-photo').src = `photos/${r.folder||r.date}/1.jpg`;
-  let thumbs = '';
-  for (let i = 1; i <= (r.photos||1); i++) {
-    thumbs += `<img src="photos/${r.folder||r.date}/${i}.jpg" alt="Surf photo ${i}" ${i===1?'class="active"':''} onclick="switchModalPhoto(this)">`;
-  }
-  document.getElementById('modal-thumbs').innerHTML = thumbs;
+function showArchive(idx){
+  const r=window._reports[idx];if(!r)return;
+  document.getElementById('modal-meta').textContent=`${r.day}, ${formatDate(r.date)} · ${r.time}`;
+  document.getElementById('modal-headline').textContent=r.headline;
+  document.getElementById('modal-text').textContent=r.text;
+  document.getElementById('modal-main-photo').src=`photos/${r.folder||r.date}/1.jpg`;
+  let thumbs='';
+  for(let i=1;i<=(r.photos||1);i++)
+    thumbs+=`<img src="photos/${r.folder||r.date}/${i}.jpg" alt="Surf photo ${i}" ${i===1?'class="active"':''} onclick="switchModalPhoto(this)">`;
+  document.getElementById('modal-thumbs').innerHTML=thumbs;
   document.getElementById('archive-modal').classList.add('open');
 }
-function switchModalPhoto(el) {
+function switchModalPhoto(el){
   document.querySelectorAll('#modal-thumbs img').forEach(i=>i.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('modal-main-photo').src = el.src;
+  document.getElementById('modal-main-photo').src=el.src;
 }
-function closeModal(e) {
-  if (e.target===document.getElementById('archive-modal'))
-    document.getElementById('archive-modal').classList.remove('open');
-}
+function closeModal(e){if(e.target===document.getElementById('archive-modal'))document.getElementById('archive-modal').classList.remove('open');}
 
 // ============================================================
-//  BUOY DATA — 3-source fallback chain
-//  1. /api/buoy (Vercel serverless — no CORS)
-//  2. NOAA ERDDAP (public JSON API with CORS)
-//  3. corsproxy.io → allorigins (proxy fallback)
+//  BUOYS — 3-source fallback: Vercel /api/buoy → ERDDAP → proxy
 // ============================================================
 const DIRS=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 function degToCompass(d){return DIRS[Math.round(d/22.5)%16];}
 function cToF(c){return Math.round(c*9/5+32);}
 function mpsToKts(m){return Math.round(m*1.944);}
 function mToFt(m){return(m*3.281).toFixed(1);}
-function setVal(id,html){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.innerHTML=html;
-  el.classList.remove('loading');
-}
+function setVal(id,html){const el=document.getElementById(id);if(!el)return;el.innerHTML=html;el.classList.remove('loading');}
 
 async function fetchFromVercelAPI(station){
-  try{
-    const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(5000)});
-    if(r.ok)return await r.json();
-  }catch(e){}
-  return null;
+  try{const r=await fetch('/api/buoy?station='+station,{signal:AbortSignal.timeout(5000)});if(r.ok)return await r.json();}catch(e){}return null;
 }
 async function fetchFromERDDAP(station){
   try{
     if(!/^\d+$/.test(station))return null;
     const h3=new Date(Date.now()-3*3600000).toISOString();
-    const url='https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json'
-      +'?station,time,wd,wspd,wvht,dpd,mwd,atmp,wtmp'
-      +'&station=%22'+station+'%22&time>='+encodeURIComponent(h3)+'&orderByMax(%22time%22)';
-    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});
-    if(!r.ok)return null;
+    const url='https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.json?station,time,wd,wspd,wvht,dpd,mwd,atmp,wtmp&station=%22'+station+'%22&time>='+encodeURIComponent(h3)+'&orderByMax(%22time%22)';
+    const r=await fetch(url,{signal:AbortSignal.timeout(8000)});if(!r.ok)return null;
     const json=await r.json();
-    const cols=json.table.columnNames;
-    const row=json.table.rows[json.table.rows.length-1];
+    const cols=json.table.columnNames,row=json.table.rows[json.table.rows.length-1];
     const d={};cols.forEach((c,i)=>{d[c]=row[i];});
-    return{
-      wave_height_ft:  d.wvht!=null ? mToFt(d.wvht)        : null,
-      dom_period_sec:  d.dpd!=null  ? d.dpd                 : null,
-      wave_dir_compass:d.mwd!=null  ? degToCompass(d.mwd)   : null,
-      wind_speed_kts:  d.wspd!=null ? mpsToKts(d.wspd)      : null,
-      wind_dir_compass:d.wd!=null   ? degToCompass(d.wd)    : null,
-      air_temp_f:      d.atmp!=null ? cToF(d.atmp)          : null,
-      water_temp_f:    d.wtmp!=null ? cToF(d.wtmp)          : null,
-    };
-  }catch(e){console.warn('ERDDAP',station,e);}
-  return null;
+    return{wave_height_ft:d.wvht!=null?mToFt(d.wvht):null,dom_period_sec:d.dpd!=null?d.dpd:null,wave_dir_compass:d.mwd!=null?degToCompass(d.mwd):null,wind_speed_kts:d.wspd!=null?mpsToKts(d.wspd):null,wind_dir_compass:d.wd!=null?degToCompass(d.wd):null,air_temp_f:d.atmp!=null?cToF(d.atmp):null,water_temp_f:d.wtmp!=null?cToF(d.wtmp):null};
+  }catch(e){}return null;
 }
 async function fetchFromProxy(station){
   const ndbc='https://www.ndbc.noaa.gov/data/realtime2/'+station+'.txt';
-  const proxies=[
-    u=>'https://corsproxy.io/?'+encodeURIComponent(u),
-    u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
-  ];
+  const proxies=[u=>'https://corsproxy.io/?'+encodeURIComponent(u),u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u)];
   for(const px of proxies){
     try{
-      const r=await fetch(px(ndbc),{signal:AbortSignal.timeout(8000)});
-      if(!r.ok)continue;
-      const text=await r.text();
-      if(text.length<100)continue;
-      const lines=text.trim().split('\n');
-      if(lines.length<3)continue;
+      const r=await fetch(px(ndbc),{signal:AbortSignal.timeout(8000)});if(!r.ok)continue;
+      const text=await r.text();if(text.length<100)continue;
+      const lines=text.trim().split('\n');if(lines.length<3)continue;
       const hdr=lines[0].replace(/^#\s*/,'').trim().split(/\s+/);
       const vals=lines[2].trim().split(/\s+/);
       const d={};hdr.forEach((h,i)=>{d[h]=vals[i]==='MM'?null:vals[i];});
-      return{
-        wave_height_ft:  d.WVHT ? mToFt(parseFloat(d.WVHT))        : null,
-        dom_period_sec:  d.DPD  ? parseFloat(d.DPD)                : null,
-        wave_dir_compass:d.MWD  ? degToCompass(parseFloat(d.MWD))  : null,
-        wind_speed_kts:  d.WSPD ? mpsToKts(parseFloat(d.WSPD))     : null,
-        wind_dir_compass:d.WDIR ? degToCompass(parseFloat(d.WDIR)) : null,
-        air_temp_f:      d.ATMP ? cToF(parseFloat(d.ATMP))         : null,
-        water_temp_f:    d.WTMP ? cToF(parseFloat(d.WTMP))         : null,
-      };
-    }catch(e){console.warn('Proxy err',e);}
+      return{wave_height_ft:d.WVHT?mToFt(parseFloat(d.WVHT)):null,dom_period_sec:d.DPD?parseFloat(d.DPD):null,wave_dir_compass:d.MWD?degToCompass(parseFloat(d.MWD)):null,wind_speed_kts:d.WSPD?mpsToKts(parseFloat(d.WSPD)):null,wind_dir_compass:d.WDIR?degToCompass(parseFloat(d.WDIR)):null,air_temp_f:d.ATMP?cToF(parseFloat(d.ATMP)):null,water_temp_f:d.WTMP?cToF(parseFloat(d.WTMP)):null};
+    }catch(e){}
   }
   return null;
 }
-async function fetchBuoy(station){
-  return (await fetchFromVercelAPI(station))
-      || (await fetchFromERDDAP(station))
-      || (await fetchFromProxy(station));
-}
+async function fetchBuoy(station){return(await fetchFromVercelAPI(station))||(await fetchFromERDDAP(station))||(await fetchFromProxy(station));}
 
 async function loadAllBuoys(){
-  // TRDF1 — air temp, water temp, wind
-  const trdf = await fetchFromVercelAPI('TRDF1') || await fetchFromProxy('TRDF1');
+  // TRDF1 — air, water, wind
+  const trdf=await fetchFromVercelAPI('TRDF1')||await fetchFromProxy('TRDF1');
   if(trdf){
-    setVal('air-temp',   trdf.air_temp_f   != null ? trdf.air_temp_f+'°F'                         : '—');
-    setVal('water-temp', trdf.water_temp_f != null ? trdf.water_temp_f+'°F'                       : '—');
-    setVal('wind-data',  trdf.wind_speed_kts!=null ? trdf.wind_speed_kts+' kt '+(trdf.wind_dir_compass||'') : '—');
-  } else {
-    setVal('air-temp','—'); setVal('water-temp','—'); setVal('wind-data','—');
-  }
-  // 41113 — nearshore wave height
-  const b113 = await fetchBuoy('41113');
-  if(b113 && b113.wave_height_ft){
-    const p = b113.dom_period_sec ? '<br><span style="font-size:11px;color:var(--text-light)">@ '+b113.dom_period_sec.toFixed(0)+'s</span>' : '';
-    setVal('buoy-41113', b113.wave_height_ft+' ft'+p);
-  } else { setVal('buoy-41113','—'); }
-  // 41009 — offshore swell height + period/direction
-  const b009 = await fetchBuoy('41009');
-  if(b009 && b009.wave_height_ft){
-    const dir = b009.wave_dir_compass || '';
-    const p   = b009.dom_period_sec ? '<br><span style="font-size:11px;color:var(--text-light)">@ '+b009.dom_period_sec.toFixed(0)+'s</span>' : '';
-    setVal('buoy-41009', b009.wave_height_ft+' ft '+dir+p);
-    setVal('swell-data', (b009.dom_period_sec ? b009.dom_period_sec.toFixed(0)+'s' : '—')+' '+dir);
-  } else { setVal('buoy-41009','—'); setVal('swell-data','—'); }
+    setVal('air-temp',   trdf.air_temp_f   !=null?trdf.air_temp_f+'°F'  :'—');
+    setVal('water-temp', trdf.water_temp_f !=null?trdf.water_temp_f+'°F':'—');
+    setVal('wind-data',  trdf.wind_speed_kts!=null?trdf.wind_speed_kts+' kt '+(trdf.wind_dir_compass||''):'—');
+  }else{setVal('air-temp','—');setVal('water-temp','—');setVal('wind-data','—');}
+  // 41113 nearshore wave height
+  const b113=await fetchBuoy('41113');
+  if(b113&&b113.wave_height_ft){
+    const p=b113.dom_period_sec?'<br><span style="font-size:11px;color:var(--text-light)">@ '+b113.dom_period_sec.toFixed(0)+'s</span>':'';
+    setVal('buoy-41113',b113.wave_height_ft+' ft'+p);
+  }else setVal('buoy-41113','—');
+  // 41009 offshore swell
+  const b009=await fetchBuoy('41009');
+  if(b009&&b009.wave_height_ft){
+    const dir=b009.wave_dir_compass||'';
+    const p=b009.dom_period_sec?'<br><span style="font-size:11px;color:var(--text-light)">@ '+b009.dom_period_sec.toFixed(0)+'s</span>':'';
+    setVal('buoy-41009',b009.wave_height_ft+' ft '+dir+p);
+    setVal('swell-data',(b009.dom_period_sec?b009.dom_period_sec.toFixed(0)+'s':'—')+' '+dir);
+  }else{setVal('buoy-41009','—');setVal('swell-data','—');}
 }
 
 // ============================================================
-//  TIDES — NOAA Station 8721604 (supports CORS natively)
+//  TIDES — NOAA Station 8721604 (native CORS)
 // ============================================================
 async function loadTides(){
   try{
-    const today = new Date();
-    const begin = fmtDate(today);
-    const end   = fmtDate(new Date(today.getTime()+3*86400000));
-    const url   = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${begin}&end_date=${end}&station=8721604&product=predictions&datum=MLLW&time_zone=lst_lct&interval=hilo&units=english&application=dogwalkersurfreport&format=json`;
-    const res   = await fetch(url,{signal:AbortSignal.timeout(10000)});
-    const data  = await res.json();
-    if(!data.predictions || !data.predictions.length) throw new Error('No predictions');
-    document.getElementById('tide-body').innerHTML = data.predictions.map(p=>{
-      const dt   = new Date(p.t.replace(' ','T'));
-      const day  = dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-      const time = dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-      const hi   = p.type==='H';
+    const today=new Date();
+    const begin=fmtDate(today);
+    const end=fmtDate(new Date(today.getTime()+3*86400000));
+    const url=`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${begin}&end_date=${end}&station=8721604&product=predictions&datum=MLLW&time_zone=lst_lct&interval=hilo&units=english&application=dogwalkersurfreport&format=json`;
+    const res=await fetch(url,{signal:AbortSignal.timeout(10000)});
+    const data=await res.json();
+    if(!data.predictions||!data.predictions.length)throw new Error('No predictions');
+    document.getElementById('tide-body').innerHTML=data.predictions.map(p=>{
+      const dt=new Date(p.t.replace(' ','T'));
+      const day=dt.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      const time=dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+      const hi=p.type==='H';
       return `<tr><td>${day}</td><td class="${hi?'tide-high':'tide-low'}">${hi?'High':'Low'}</td><td>${time}</td><td>${parseFloat(p.v).toFixed(1)} ft</td></tr>`;
     }).join('');
   }catch(e){
     console.warn('Tide error:',e);
-    document.getElementById('tide-body').innerHTML = `<tr><td colspan="4" style="text-align:center;padding:12px;color:var(--text-light)">Could not load tides &mdash; <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721604" target="_blank">view on NOAA</a></td></tr>`;
+    document.getElementById('tide-body').innerHTML=`<tr><td colspan="4" style="text-align:center;padding:12px;color:var(--text-light)">Tides unavailable &mdash; <a href="https://tidesandcurrents.noaa.gov/noaatidepredictions.html?id=8721604" target="_blank">View on NOAA</a></td></tr>`;
   }
 }
-function fmtDate(d){
-  return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
-}
+function fmtDate(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}
 
 // ============================================================
-//  FORECAST — NWS JSON API (native CORS, no proxy needed)
+//  SURF FORECAST — Open-Meteo Marine API (free, CORS-enabled)
+//  0.9 nearshore factor confirmed for Cocoa Beach / Picnic Tables
 // ============================================================
 async function loadForecast(){
   try{
-    const r=await fetch('https://api.weather.gov/zones/forecast/AMZ552/forecast',
-      {headers:{'User-Agent':'dogwalkersurfreport.com'},signal:AbortSignal.timeout(10000)});
-    if(!r.ok) throw new Error('NWS '+r.status);
-    const json=await r.json();
-    const periods=json.properties?.periods;
-    if(!periods||!periods.length) throw new Error('No periods');
-    document.getElementById('forecast-grid').innerHTML=periods.slice(0,7).map(p=>{
-      const parsed=parseForecastPeriod(p);
-      return `<div class="forecast-day">
-        <div class="fc-dow">${p.name.split(' ')[0]}</div>
-        <div class="fc-icon">${parsed.icon}</div>
-        <div class="fc-height">${parsed.height}</div>
-        <div class="fc-cond cond-${parsed.condClass}">${parsed.cond}</div>
-        <div class="fc-wind">${parsed.wind}</div>
+    const lat=28.32,lon=-80.61;
+    const [marineRes,windRes]=await Promise.all([
+      fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&daily=wave_height_max,wave_period_max,wave_direction_dominant,swell_wave_height_max,swell_wave_period_max,swell_wave_direction_dominant&forecast_days=7&timezone=America%2FNew_York`,{signal:AbortSignal.timeout(10000)}),
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=wind_speed_10m_max,wind_direction_10m_dominant&forecast_days=7&timezone=America%2FNew_York`,{signal:AbortSignal.timeout(10000)})
+    ]);
+    if(!marineRes.ok)throw new Error('Marine API '+marineRes.status);
+    if(!windRes.ok)throw new Error('Wind API '+windRes.status);
+    const marine=await marineRes.json();
+    const wind=await windRes.json();
+    const dates=marine.daily.time;
+    const waveH=marine.daily.wave_height_max;
+    const waveP=marine.daily.wave_period_max;
+    const swellH=marine.daily.swell_wave_height_max;
+    const swellP=marine.daily.swell_wave_period_max;
+    const windS=wind.daily.wind_speed_10m_max;
+    const windD=wind.daily.wind_direction_10m_dominant;
+    const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const todayStr=new Date().toISOString().slice(0,10);
+    let html='';
+    for(let i=0;i<dates.length;i++){
+      const dt=new Date(dates[i]+'T12:00:00');
+      const isToday=dates[i]===todayStr;
+      const dayLabel=isToday?'Today':dayNames[dt.getDay()];
+      // Use the larger of wave height or swell height, 0.9 nearshore factor
+      const hMeters=Math.max(swellH[i]||0,waveH[i]||0);
+      const hFeet=hMeters*3.281;
+      const surfFt=hFeet*0.9;
+      const surfMin=Math.max(0,Math.round(surfFt-0.4));
+      const surfMax=Math.max(1,Math.round(surfFt+0.4));
+      const surfRange=surfMin===surfMax?surfMax+"'":surfMin+"-"+surfMax+"'";
+      const period=Math.round(swellP[i]||waveP[i]||0);
+      const periodStr=period?period+'s':'';
+      const windKts=Math.round((windS[i]||0)*0.5399);
+      const windDir=degToCompass(windD[i]||0);
+      const windStr=windKts?windDir+' '+windKts+' kt':'Calm';
+      const quality=getForecastQuality(surfMax,period,windDir,windKts);
+      html+=`<div class="forecast-card${isToday?' today':''}">
+        <div class="forecast-day">${dayLabel}</div>
+        <div class="forecast-icon">${quality.icon}</div>
+        <div class="forecast-height">${surfRange}</div>
+        <div class="forecast-quality ${quality.cls}">${quality.label}</div>
+        <div class="forecast-wind">${windStr}</div>
+        <div class="forecast-period">${periodStr}</div>
+        <div class="forecast-board">${quality.board}</div>
       </div>`;
-    }).join('');
+    }
+    document.getElementById('forecast-grid').innerHTML=html;
   }catch(e){
     console.warn('Forecast error:',e);
-    document.getElementById('forecast-grid').innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:12px;font-size:13px">Forecast unavailable &mdash; <a href="https://forecast.weather.gov/shmrn.php?mz=amz552" target="_blank">View NWS Marine Forecast</a></div>`;
+    document.getElementById('forecast-grid').innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">Forecast unavailable &mdash; <a href="https://forecast.weather.gov/shmrn.php?mz=amz552" target="_blank">View NWS Marine Forecast</a></div>`;
   }
 }
-function parseForecastPeriod(p){
-  const text=(p.detailedForecast||p.shortForecast||'').toLowerCase();
-  let height='?';
-  const hm=text.match(/seas?\s+(\d+)\s+to\s+(\d+)|seas?\s+(\d+)\s*ft|(\d+)\s+to\s+(\d+)\s*ft/);
-  if(hm){
-    const lo=parseInt(hm[1]||hm[4]||hm[3]||'0');
-    const hi=parseInt(hm[2]||hm[5]||hm[3]||'0');
-    const nLo=Math.max(1,Math.round(lo*.7)), nHi=Math.max(1,Math.round(hi*.7));
-    height=nLo===nHi?nLo+"'":nLo+'-'+nHi+"'";
-  }
-  const windDir=(p.windDirection||'').toUpperCase();
-  const windSpd=p.windSpeed||'';
-  const wind=windDir&&windSpd?windDir+' '+windSpd:'';
-  const offshore=/^(W|NW|WNW|NNW)$/.test(windDir);
-  const maxSpd=Math.max(...((windSpd.match(/\d+/g)||['0']).map(Number)));
-  const strong=maxSpd>=20;
-  const hNum=parseInt(height)||0;
-  let cond='POOR',condClass='poor',icon='🐕';
-  if(!hNum||height==='?'){cond='FLAT';condClass='flat';icon='🌊';}
-  else if(offshore&&!strong&&hNum>=2){cond='GOOD';condClass='good';icon='🏄';}
-  else if(offshore&&!strong){cond='FAIR';condClass='fair';icon='🤙';}
-  return{height,cond,condClass,icon,wind};
+function getForecastQuality(surfFt,period,windDir,windKts){
+  const offshore=['W','NW','SW','WNW','WSW','NNW'];
+  const side=['N','S','NNE','SSW','SSE'];
+  let windScore=1;
+  if(offshore.includes(windDir))windScore=3;
+  else if(side.includes(windDir))windScore=2;
+  if(windKts<=5)windScore=Math.min(windScore+1,3);
+  if(windKts>=20)windScore=Math.max(windScore-1,0);
+  let periodScore=period>=12?3:period>=8?2:1;
+  let sizeScore=surfFt>=5?3:surfFt>=3?2:surfFt>=1?1:0;
+  const total=windScore+periodScore+sizeScore;
+  if(surfFt<1)return{label:'Flat',cls:'fq-flat',icon:'🏖️',board:'—'};
+  if(total>=8)return{label:'Epic',cls:'fq-epic',icon:'🤙',board:'🏄'};
+  if(total>=6)return{label:'Good',cls:'fq-good',icon:'🌊',board:'🏄'};
+  if(total>=4)return{label:'Fair',cls:'fq-fair',icon:'🤙',board:'🤙'};
+  return{label:'Poor',cls:'fq-poor',icon:'🐕',board:'🐕'};
 }
 
 // ============================================================
@@ -756,22 +669,17 @@ async function loadLaunches(){
       return s.includes('kennedy')||s.includes('canaveral')||s.includes('cape');
     });
     if(launches.length){renderLaunch(launches[0]);return;}
-  }catch(e){console.warn('rocketlaunch.live:',e);}
+  }catch(e){}
   try{
     const r=await fetch('https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?limit=5&location__ids=12,27',{signal:AbortSignal.timeout(8000)});
     const data=await r.json();
-    if(data.results?.length){
-      const l=data.results[0];
-      renderLaunchRaw(l.name,l.net?new Date(l.net):null);
-      return;
-    }
-  }catch(e){console.warn('Space Devs:',e);}
+    if(data.results?.length){renderLaunchRaw(data.results[0].name,data.results[0].net?new Date(data.results[0].net):null);return;}
+  }catch(e){}
   document.getElementById('launch-content').innerHTML='<div style="font-size:13px;color:var(--text-light)"><a href="https://www.kennedyspacecenter.com/launches-and-events" target="_blank" style="color:var(--teal)">View KSC Launch Schedule &rarr;</a></div>';
 }
 function renderLaunch(l){
-  const name=(l.name||'TBD')+((l.vehicle?.name||l.provider?.name)?(' · '+(l.vehicle?.name||l.provider?.name)):'');
-  const net=l.t0?new Date(l.t0):(l.win_open?new Date(l.win_open):null);
-  renderLaunchRaw(name,net);
+  const name=(l.name||'TBD')+((l.vehicle?.name||l.provider?.name)?' · '+(l.vehicle?.name||l.provider?.name):'');
+  renderLaunchRaw(name,l.t0?new Date(l.t0):l.win_open?new Date(l.win_open):null);
 }
 function renderLaunchRaw(name,netDate){
   document.getElementById('launch-content').innerHTML=
@@ -786,10 +694,9 @@ function renderLaunchRaw(name,netDate){
   else document.getElementById('countdown-grid').innerHTML='<div style="grid-column:1/-1;font-size:12px;color:var(--text-light)">Date TBD</div>';
 }
 function tickCountdown(target){
-  const diff=target-Date.now();
-  if(diff<=0){loadLaunches();return;}
-  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000);
-  const m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  const diff=target-Date.now();if(diff<=0){loadLaunches();return;}
+  const d=Math.floor(diff/86400000),h=Math.floor(diff%86400000/3600000);
+  const m=Math.floor(diff%3600000/60000),s=Math.floor(diff%60000/1000);
   const el=id=>document.getElementById(id);
   if(el('cd-d'))el('cd-d').textContent=String(d).padStart(2,'0');
   if(el('cd-h'))el('cd-h').textContent=String(h).padStart(2,'0');
@@ -807,28 +714,30 @@ function handleAlertSignup(){
 }
 
 // ============================================================
-//  SEO — BlogPosting Schema
+//  SEO — BlogPosting JSON-LD (injected after reports load)
 // ============================================================
 function generateReportSchema(reports){
   const BASE='https://www.dogwalkersurfreport.com';
   const posts=reports.map(r=>{
     const imgs=[];
-    for(let i=1;i<=(r.photos||1);i++) imgs.push({"@type":"ImageObject","url":`${BASE}/photos/${r.folder||r.date}/${i}.jpg`});
+    for(let i=1;i<=(r.photos||1);i++)
+      imgs.push({"@type":"ImageObject","url":`${BASE}/photos/${r.folder||r.date}/${i}.jpg`,"contentLocation":"Picnic Tables, 31st Street, South Cocoa Beach, FL"});
     const iso=`${r.date}T${convertTo24h(r.time)}:00-04:00`;
     return{
       "@type":"BlogPosting",
       "@id":`${BASE}/#report-${r.folder||r.date}`,
       "headline":r.seoTitle||r.headline,
+      "name":r.seoTitle||r.headline,
       "description":r.seoDescription||r.text,
       "articleBody":r.text,
       "datePublished":iso,"dateModified":iso,
-      "keywords":r.keywords?r.keywords.join(', '):'Cocoa Beach surf report, Picnic Tables surf',
+      "keywords":r.keywords?r.keywords.join(', '):'Cocoa Beach surf report, Picnic Tables surf, South Cocoa Beach conditions',
       "inLanguage":"en-US","isAccessibleForFree":true,
       "image":imgs,
       "author":{"@type":"Person","name":"Dog Walker — Picnic Tables, South Cocoa Beach","url":BASE},
       "publisher":{"@type":"Organization","@id":`${BASE}/#organization`,"name":"Dog Walker Surf Report","logo":{"@type":"ImageObject","url":`${BASE}/logo.png`}},
       "mainEntityOfPage":{"@type":"WebPage","@id":BASE},
-      "locationCreated":{"@type":"Place","name":"Picnic Tables — 31st Street, South Cocoa Beach","geo":{"@type":"GeoCoordinates","latitude":28.3200,"longitude":-80.6076}},
+      "locationCreated":{"@type":"Place","name":"Picnic Tables — 31st Street, South Cocoa Beach","address":{"@type":"PostalAddress","streetAddress":"31st Street","addressLocality":"Cocoa Beach","addressRegion":"FL","postalCode":"32931","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":28.3200,"longitude":-80.6076}},
       "speakable":{"@type":"SpeakableSpecification","cssSelector":[".report-headline",".report-text"]}
     };
   });
@@ -839,14 +748,11 @@ function generateReportSchema(reports){
 }
 function convertTo24h(t){
   if(!t)return'08:00';
-  const[time,period]=t.split(' ');
-  let[h,m]=time.split(':').map(Number);
+  const[time,period]=t.split(' ');let[h,m]=time.split(':').map(Number);
   if(period==='PM'&&h!==12)h+=12;if(period==='AM'&&h===12)h=0;
   return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
 }
-function formatDate(s){
-  return new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric'});
-}
+function formatDate(s){return new Date(s+'T12:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric'});}
 
 // ============================================================
 //  INIT
