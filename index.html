@@ -184,6 +184,12 @@ nav a:hover,nav a.active{color:var(--teal);background:var(--teal-dim);text-decor
 .forecast-wind{font-size:9px;color:var(--text-light);margin-top:3px}
 .forecast-period{font-size:9px;color:var(--text-mid)}
 .forecast-board{font-size:14px;margin-top:3px}
+.marine-text-section{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06)}
+.marine-heading{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px}
+.marine-text-body{font-size:12px;line-height:1.7;color:var(--text-mid)}
+.marine-period{margin-bottom:10px}
+.marine-period strong{display:block;color:var(--white);font-size:12px;font-weight:600;margin-bottom:2px}
+.marine-period span{display:block;color:var(--text-mid)}
 
 /* ARCHIVE */
 .archive-item{background:var(--navy-card);border-radius:var(--radius);display:flex;gap:14px;padding:14px;cursor:pointer;transition:background .2s;margin-bottom:10px;border:1px solid rgba(255,255,255,.04)}
@@ -340,8 +346,12 @@ footer a:hover{color:var(--teal)}
 
       <div class="forecast-section" id="forecast">
         <h3>7-Day Surf Forecast</h3>
-        <div class="forecast-note">Open-Meteo Marine API &middot; Wave heights at 0.9x nearshore factor for Picnic Tables</div>
+        <div class="forecast-note">NOAA WaveWatch III &amp; ECMWF WAM via Open-Meteo &middot; Offshore swell → surf conversion tuned for Picnic Tables</div>
         <div class="forecast-grid" id="forecast-grid"><div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">Loading forecast...</div></div>
+        <div class="marine-text-section" id="marine-section" style="display:none">
+          <h4 class="marine-heading">NWS Marine Forecast — Brevard Coast (AMZ552)</h4>
+          <div id="marine-text" class="marine-text-body"></div>
+        </div>
       </div>
 
       <div class="section-label" id="archive">Recent Reports</div>
@@ -667,25 +677,59 @@ function predictTides(startDate, days){
 }
 
 // ============================================================
-//  SURF FORECAST — Open-Meteo Marine API (free, CORS-enabled)
-//  0.9 nearshore factor confirmed for Cocoa Beach / Picnic Tables
+//  SURF FORECAST — Open-Meteo Marine API (WW3 + ECMWF WAM)
+//  Offshore query point + swell-to-surf conversion tuned for
+//  Picnic Tables, Cocoa Beach (east-facing, ~110°)
 // ============================================================
+const BEACH_FACING = 110; // degrees — Cocoa Beach faces ESE
+
+function swellDirectionFactor(swellDir){
+  // How well does swell direction align with the beach?
+  // Direct onshore (E/ESE for Cocoa Beach) = best energy transfer
+  const diff = Math.abs(((swellDir - BEACH_FACING + 180) % 360) - 180);
+  if(diff <= 30)  return 1.0;   // E, ENE, ESE — direct onshore
+  if(diff <= 60)  return 0.8;   // NE, SE — good angle
+  if(diff <= 90)  return 0.5;   // NNE, SSE — moderate
+  if(diff <= 120) return 0.25;  // N, S — weak
+  return 0.1;                   // W, NW, SW — blocked
+}
+
+function estimateSurfHeight(swellHtFt, swellPeriod, swellDir, windWaveHtFt){
+  // Convert offshore swell to estimated surf at beach
+  // Base ratio: FL east coast typically sees 40-60% of offshore Hs
+  let ratio = 0.50;
+  // Period bonus: longer period = more energy reaching shore
+  if(swellPeriod >= 12)      ratio += 0.20;
+  else if(swellPeriod >= 10) ratio += 0.15;
+  else if(swellPeriod >= 8)  ratio += 0.10;
+  else if(swellPeriod < 6)   ratio -= 0.10;
+  // Direction factor
+  const dirFactor = swellDirectionFactor(swellDir);
+  let surfHt = swellHtFt * ratio * dirFactor;
+  // Wind wave contribution (local chop adds some rideable height)
+  if(windWaveHtFt > 0) surfHt += windWaveHtFt * 0.30;
+  return Math.max(0, surfHt);
+}
+
 async function loadForecast(){
   try{
-    const lat=28.32,lon=-80.61;
+    // Offshore point ~15nm east of Cocoa Beach for better swell model data
+    const mLat=28.33, mLon=-80.20;
+    // Nearshore point for wind
+    const wLat=28.32, wLon=-80.61;
     const [marineRes,windRes]=await Promise.all([
-      fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&daily=wave_height_max,wave_period_max,wave_direction_dominant,swell_wave_height_max,swell_wave_period_max,swell_wave_direction_dominant&forecast_days=7&timezone=America%2FNew_York`,{signal:AbortSignal.timeout(10000)}),
-      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=wind_speed_10m_max,wind_direction_10m_dominant&forecast_days=7&timezone=America%2FNew_York`,{signal:AbortSignal.timeout(10000)})
+      fetch(`https://marine-api.open-meteo.com/v1/marine?latitude=${mLat}&longitude=${mLon}&daily=wave_height_max,wave_period_max,wave_direction_dominant,swell_wave_height_max,swell_wave_period_max,swell_wave_direction_dominant,wind_wave_height_max&hourly=swell_wave_height,swell_wave_direction&forecast_days=7&timezone=America%2FNew_York&length_unit=imperial`,{signal:AbortSignal.timeout(10000)}),
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${wLat}&longitude=${wLon}&daily=wind_speed_10m_max,wind_direction_10m_dominant&forecast_days=7&timezone=America%2FNew_York&wind_speed_unit=kn`,{signal:AbortSignal.timeout(10000)})
     ]);
     if(!marineRes.ok)throw new Error('Marine API '+marineRes.status);
     if(!windRes.ok)throw new Error('Wind API '+windRes.status);
     const marine=await marineRes.json();
     const wind=await windRes.json();
     const dates=marine.daily.time;
-    const waveH=marine.daily.wave_height_max;
-    const waveP=marine.daily.wave_period_max;
     const swellH=marine.daily.swell_wave_height_max;
     const swellP=marine.daily.swell_wave_period_max;
+    const swellD=marine.daily.swell_wave_direction_dominant;
+    const windWaveH=marine.daily.wind_wave_height_max;
     const windS=wind.daily.wind_speed_10m_max;
     const windD=wind.daily.wind_direction_10m_dominant;
     const dayNames=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -695,26 +739,32 @@ async function loadForecast(){
       const dt=new Date(dates[i]+'T12:00:00');
       const isToday=dates[i]===todayStr;
       const dayLabel=isToday?'Today':dayNames[dt.getDay()];
-      // Use the larger of wave height or swell height, 0.9 nearshore factor
-      const hMeters=Math.max(swellH[i]||0,waveH[i]||0);
-      const hFeet=hMeters*3.281;
-      const surfFt=hFeet*0.9;
-      const surfMin=Math.max(0,Math.round(surfFt-0.4));
-      const surfMax=Math.max(1,Math.round(surfFt+0.4));
+      // Swell data (already in feet via length_unit=imperial)
+      const swHt=swellH[i]||0;
+      const swPer=swellP[i]||0;
+      const swDir=swellD[i]||0;
+      const wwHt=windWaveH[i]||0;
+      // Estimate surf height at beach
+      const surfFt=estimateSurfHeight(swHt,swPer,swDir,wwHt);
+      const surfMin=Math.max(0,Math.round(surfFt-0.5));
+      const surfMax=Math.max(surfMin,Math.round(surfFt+0.5));
       const surfRange=surfMin===surfMax?surfMax+"'":surfMin+"-"+surfMax+"'";
-      const period=Math.round(swellP[i]||waveP[i]||0);
-      const periodStr=period?period+'s':'';
-      const windKts=Math.round((windS[i]||0)*0.5399);
-      const windDir=degToCompass(windD[i]||0);
+      // Swell detail string
+      const periodStr=swPer?Math.round(swPer)+'s':'';
+      const swDirStr=swDir?degToCompass(swDir):'';
+      // Wind
+      const windKts=Math.round(windS[i]||0);
+      const windDirDeg=windD[i]||0;
+      const windDir=degToCompass(windDirDeg);
       const windStr=windKts?windDir+' '+windKts+' kt':'Calm';
-      const quality=getForecastQuality(surfMax,period,windDir,windKts);
+      const quality=getForecastQuality(surfMax,swPer,windDir,windKts);
       html+=`<div class="forecast-card${isToday?' today':''}">
         <div class="forecast-day">${dayLabel}</div>
         <div class="forecast-icon">${quality.icon}</div>
         <div class="forecast-height">${surfRange}</div>
         <div class="forecast-quality ${quality.cls}">${quality.label}</div>
         <div class="forecast-wind">${windStr}</div>
-        <div class="forecast-period">${periodStr}</div>
+        <div class="forecast-period">${swHt.toFixed(1)}ft@${periodStr} ${swDirStr}</div>
         <div class="forecast-board">${quality.board}</div>
       </div>`;
     }
@@ -723,6 +773,8 @@ async function loadForecast(){
     console.warn('Forecast error:',e);
     document.getElementById('forecast-grid').innerHTML=`<div style="grid-column:1/-1;text-align:center;color:var(--text-light);padding:16px">Forecast unavailable &mdash; <a href="https://forecast.weather.gov/shmrn.php?mz=amz552" target="_blank">View NWS Marine Forecast</a></div>`;
   }
+  // Load NWS marine text (non-blocking)
+  loadMarineForecast();
 }
 function getForecastQuality(surfFt,period,windDir,windKts){
   const offshore=['W','NW','SW','WNW','WSW','NNW'];
@@ -740,6 +792,31 @@ function getForecastQuality(surfFt,period,windDir,windKts){
   if(total>=6)return{label:'Good',cls:'fq-good',icon:'🌊',board:'🏄'};
   if(total>=4)return{label:'Fair',cls:'fq-fair',icon:'🤙',board:'🤙'};
   return{label:'Poor',cls:'fq-poor',icon:'🐕',board:'🐕'};
+}
+
+// ============================================================
+//  NWS MARINE TEXT FORECAST — AMZ552 (Brevard Coast)
+// ============================================================
+async function loadMarineForecast(){
+  try{
+    const res=await fetch('https://api.weather.gov/zones/forecast/AMZ552/forecast',{
+      headers:{'Accept':'application/geo+json','User-Agent':'DogWalkerSurfReport'},
+      signal:AbortSignal.timeout(10000)
+    });
+    if(!res.ok)throw new Error('NWS '+res.status);
+    const data=await res.json();
+    if(!data.properties||!data.properties.periods)throw new Error('No periods');
+    const periods=data.properties.periods.slice(0,6);
+    let html='';
+    for(const p of periods){
+      html+=`<div class="marine-period"><strong>${p.name}</strong><span>${p.detailedForecast}</span></div>`;
+    }
+    document.getElementById('marine-text').innerHTML=html;
+    document.getElementById('marine-section').style.display='block';
+  }catch(e){
+    console.warn('NWS marine error:',e);
+    // Silently fail — the strip forecast still works
+  }
 }
 
 // ============================================================
