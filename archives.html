@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archives — Dog Walker Surf Report | Cocoa Beach, FL</title>
+<meta name="description" content="Browse the Dog Walker Surf Report archives. Daily surf reports with photos from Picnic Tables, South Cocoa Beach since April 2026.">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5F0E8;
+    --ocean-dark: #1A3A4A;
+    --ocean-mid: #2D6A7A;
+    --foam: #E8F1F0;
+    --sun: #E8A838;
+    --sun-glow: #F2C46D;
+    --text: #2A2A2A;
+    --text-muted: #6B7280;
+    --white: #FFFFFF;
+    --border: #D4CFC4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .page-header {
+    background: var(--ocean-dark);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--sun), var(--sun-glow), var(--sun));
+  }
+
+  .page-header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .page-header p {
+    color: var(--foam);
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    opacity: 0.8;
+  }
+
+  .container {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .search-bar {
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    background: var(--white);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-bar input:focus { border-color: var(--ocean-mid); }
+
+  .search-bar svg {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+  }
+
+  .year-block {
+    margin-bottom: 0.75rem;
+  }
+
+  .year-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--ocean-dark);
+    background: var(--foam);
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 4px solid var(--ocean-mid);
+    transition: background 0.15s;
+  }
+
+  .year-header:hover { background: #DCE9E7; }
+
+  .year-header .toggle {
+    font-size: 1.1rem;
+    color: var(--ocean-mid);
+    transition: transform 0.25s;
+  }
+
+  .year-header.open .toggle { transform: rotate(90deg); }
+
+  .year-content {
+    display: none;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+  }
+
+  .year-content.open { display: block; }
+
+  .month-block {
+    margin-bottom: 0.25rem;
+  }
+
+  .month-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.15s;
+  }
+
+  .month-header:hover { color: var(--ocean-mid); }
+
+  .month-header .indicator {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+
+  .month-header.open .indicator { transform: rotate(90deg); }
+
+  .month-header .count {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+
+  .month-content {
+    display: none;
+    padding: 0 0 0.5rem 1.5rem;
+  }
+
+  .month-content.open { display: block; }
+
+  .report-link {
+    display: block;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.92rem;
+    color: var(--ocean-dark);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.12s, color 0.12s;
+    line-height: 1.4;
+  }
+
+  .report-link:hover {
+    background: var(--foam);
+    color: var(--ocean-mid);
+  }
+
+  .report-link .time-badge {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--white);
+    background: var(--ocean-mid);
+    padding: 0.1rem 0.45rem;
+    border-radius: 3px;
+    margin-right: 0.35rem;
+    vertical-align: middle;
+  }
+
+  .report-link .photo-count {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    margin-left: 0.3rem;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    display: none;
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--ocean-dark);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 520px) {
+    .page-header h1 { font-size: 1.6rem; }
+    .year-header { font-size: 1.3rem; }
+    .stats-bar { gap: 1rem; }
+    .stat-num { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Surf Report Archives</h1>
+  <p>Cocoa Beach's Best Surf Spot — Picnic Tables, South Cocoa Beach</p>
+</div>
+
+<div class="container">
+  <div class="stats-bar" id="statsBar"></div>
+
+  <div class="search-bar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="searchInput" placeholder="Search reports — try 'offshore', 'Bean Reef', 'flat'...">
+  </div>
+
+  <div id="archiveRoot"></div>
+  <div class="no-results" id="noResults">No reports match your search.</div>
+</div>
+
+<script>
+// This fetches from your reports.json — update the path to match your site
+const REPORTS_URL = 'reports.json';
+
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+async function loadReports() {
+  try {
+    const res = await fetch(REPORTS_URL);
+    const reports = await res.json();
+    return reports;
+  } catch(e) {
+    console.error('Could not load reports.json', e);
+    return [];
+  }
+}
+
+function groupReports(reports) {
+  const years = {};
+  reports.forEach(r => {
+    const [y, m] = r.date.split('-');
+    const year = parseInt(y);
+    const month = parseInt(m) - 1;
+    if (!years[year]) years[year] = {};
+    if (!years[year][month]) years[year][month] = [];
+    years[year][month].push(r);
+  });
+  return years;
+}
+
+function buildArchive(reports) {
+  const root = document.getElementById('archiveRoot');
+  const statsBar = document.getElementById('statsBar');
+  root.innerHTML = '';
+
+  // Stats
+  const totalReports = reports.length;
+  const totalPhotos = reports.reduce((sum, r) => sum + (r.photos || 0), 0);
+  const months = new Set(reports.map(r => r.date.substring(0, 7)));
+  statsBar.innerHTML = `
+    <div class="stat"><div class="stat-num">${totalReports}</div><div class="stat-label">Reports</div></div>
+    <div class="stat"><div class="stat-num">${totalPhotos}</div><div class="stat-label">Photos</div></div>
+    <div class="stat"><div class="stat-num">${months.size}</div><div class="stat-label">Months</div></div>
+  `;
+
+  const grouped = groupReports(reports);
+  const sortedYears = Object.keys(grouped).sort((a, b) => b - a);
+
+  sortedYears.forEach((year, yi) => {
+    const yearBlock = document.createElement('div');
+    yearBlock.className = 'year-block';
+
+    const yearHeader = document.createElement('div');
+    yearHeader.className = 'year-header' + (yi === 0 ? ' open' : '');
+    yearHeader.innerHTML = `<span>${year}</span><span class="toggle">&#9654;</span>`;
+
+    const yearContent = document.createElement('div');
+    yearContent.className = 'year-content' + (yi === 0 ? ' open' : '');
+
+    const sortedMonths = Object.keys(grouped[year]).sort((a, b) => b - a);
+
+    sortedMonths.forEach((month, mi) => {
+      const monthReports = grouped[year][month];
+      const monthBlock = document.createElement('div');
+      monthBlock.className = 'month-block';
+
+      const monthHeader = document.createElement('div');
+      monthHeader.className = 'month-header' + (yi === 0 && mi === 0 ? ' open' : '');
+      monthHeader.innerHTML = `<span class="indicator">&#9654;</span> ${MONTHS[month]} <span class="count">(${monthReports.length})</span>`;
+
+      const monthContent = document.createElement('div');
+      monthContent.className = 'month-content' + (yi === 0 && mi === 0 ? ' open' : '');
+
+      // Sort reports newest first within month
+      monthReports.sort((a, b) => {
+        if (a.date !== b.date) return b.date.localeCompare(a.date);
+        // If same date, PM before AM
+        const timeA = a.time || '';
+        const timeB = b.time || '';
+        const isPMA = timeA.includes('PM');
+        const isPMB = timeB.includes('PM');
+        if (isPMA !== isPMB) return isPMA ? -1 : 1;
+        return timeB.localeCompare(timeA);
+      });
+
+      monthReports.forEach(r => {
+        const link = document.createElement('a');
+        link.className = 'report-link';
+        link.href = `#${r.folder}`;
+        // Build display text
+        const dayName = r.day || '';
+        const timeStr = r.time || '';
+        const isAM = timeStr.includes('AM');
+        const reportNum = isAM ? '#1' : '#2';
+        const photoStr = r.photos > 0 ? `📷 ${r.photos}` : '';
+
+        link.innerHTML = `<span class="time-badge">${timeStr}</span> Cocoa Beach Surf Report ${reportNum} ${dayName} <span class="photo-count">${photoStr}</span>`;
+        link.dataset.searchText = `${r.headline} ${r.text} ${dayName} ${r.date} ${timeStr}`.toLowerCase();
+
+        monthContent.appendChild(link);
+      });
+
+      monthHeader.addEventListener('click', () => {
+        monthHeader.classList.toggle('open');
+        monthContent.classList.toggle('open');
+      });
+
+      monthBlock.appendChild(monthHeader);
+      monthBlock.appendChild(monthContent);
+      yearContent.appendChild(monthBlock);
+    });
+
+    yearHeader.addEventListener('click', () => {
+      yearHeader.classList.toggle('open');
+      yearContent.classList.toggle('open');
+    });
+
+    yearBlock.appendChild(yearHeader);
+    yearBlock.appendChild(yearContent);
+    root.appendChild(yearBlock);
+  });
+}
+
+// Search
+function setupSearch() {
+  const input = document.getElementById('searchInput');
+  const noResults = document.getElementById('noResults');
+
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    const links = document.querySelectorAll('.report-link');
+    let visible = 0;
+
+    links.forEach(link => {
+      if (!q || link.dataset.searchText.includes(q)) {
+        link.style.display = '';
+        visible++;
+      } else {
+        link.style.display = 'none';
+      }
+    });
+
+    // Show all containers when searching
+    if (q) {
+      document.querySelectorAll('.year-content, .month-content').forEach(el => el.classList.add('open'));
+      document.querySelectorAll('.year-header, .month-header').forEach(el => el.classList.add('open'));
+    }
+
+    noResults.style.display = (q && visible === 0) ? 'block' : 'none';
+  });
+}
+
+loadReports().then(reports => {
+  buildArchive(reports);
+  setupSearch();
+});
+</script>
+
+</body>
+</html>
