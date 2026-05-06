@@ -182,7 +182,7 @@ function build() {
   fs.writeFileSync(path.join(OUT, 'index.html'), html);
 
   // Copy everything else to public/
-  const skip = new Set(['node_modules', OUT, '.git', '.gitignore', 'build.js', 'package.json', 'package-lock.json', 'vercel.json', '.vercel','index.html']);
+  const skip = new Set(['node_modules', OUT, '.git', '.gitignore', 'build.js', 'package.json', 'package-lock.json', 'vercel.json', '.vercel','index.html','api']);
   copyDir('.', OUT, skip);
 
   console.log(`🏄 Build complete → ${OUT}/`);
