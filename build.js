@@ -1,12 +1,9 @@
 /**
  * build.js — Pre-renders reports into index.html for SEO
  * 
- * Vercel runs this on every deploy. It reads reports.json and bakes
- * the latest report + archive into the HTML so Google crawls real
- * surf conditions instead of "Loading report..."
- * 
- * Your client-side JS still runs on top for interactivity
- * (photo switching, modals, buoy data, etc.)
+ * Outputs to public/ which Vercel serves by default.
+ * Reads reports.json, bakes the latest report into index.html
+ * so Google sees real content instead of "Loading report..."
  */
 
 const fs = require('fs');
@@ -14,6 +11,7 @@ const path = require('path');
 
 const SITE = 'https://www.dogwalkersurfreport.com';
 const MAX_DAYS = 7;
+const OUT = 'public';
 
 // ── Helpers ──────────────────────────────────────────────
 function esc(s) {
@@ -78,7 +76,7 @@ function renderArchive(reports) {
   return html;
 }
 
-// ── Build JSON-LD for reports (matches your generateReportSchema) ──
+// ── Build JSON-LD for reports ────────────────────────────
 function buildJsonLd(reports) {
   const posts = reports.map(r => {
     const folder = r.folder || r.date;
@@ -108,6 +106,21 @@ function buildJsonLd(reports) {
   return JSON.stringify({"@context":"https://schema.org","@graph":posts});
 }
 
+// ── Copy directory recursively ───────────────────────────
+function copyDir(src, dest, skipSet) {
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    if (skipSet.has(entry.name)) continue;
+    const s = path.join(src, entry.name);
+    const d = path.join(dest, entry.name);
+    if (entry.isDirectory()) {
+      fs.mkdirSync(d, { recursive: true });
+      copyDir(s, d, skipSet);
+    } else {
+      fs.copyFileSync(s, d);
+    }
+  }
+}
+
 // ── Main build ───────────────────────────────────────────
 function build() {
   console.log('🏄 Building Dog Walker Surf Report...');
@@ -116,82 +129,63 @@ function build() {
   let html = fs.readFileSync('index.html', 'utf8');
 
   if (!reports.length) {
-    console.log('⚠️  No reports — copying index.html as-is');
+    console.log('⚠️  No reports — copying as-is');
   } else {
-    // Filter to last 7 days (same logic as your loadReports JS)
     let recent = reports.filter(r => withinDays(r.date, MAX_DAYS));
     if (!recent.length) recent = reports.slice(0, 5);
 
     const latest = recent[0];
-    console.log(`📋 ${reports.length} total reports, ${recent.length} recent — latest: ${latest.date} ${latest.time}`);
+    console.log(`📋 ${reports.length} total, ${recent.length} recent — latest: ${latest.date} ${latest.time}`);
 
-    // 1. Replace "Loading report..." with static report HTML
-    const todayHtml = renderToday(latest);
+    // 1. Replace "Loading report..." with static report
     html = html.replace(
       '<div id="today-report"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading report...</div></div>',
-      `<div id="today-report">${todayHtml}</div>`
+      `<div id="today-report">${renderToday(latest)}</div>`
     );
 
-    // 2. Replace "Loading archive..." with static archive HTML
-    const archiveHtml = renderArchive(recent);
+    // 2. Replace "Loading archive..." with static archive
     html = html.replace(
       '<div id="archive-list"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading archive...</div></div>',
-      `<div id="archive-list">${archiveHtml}</div>`
+      `<div id="archive-list">${renderArchive(recent)}</div>`
     );
 
-    // 3. Update <title> with latest report date
+    // 3. Update <title>
     const dateStr = fmtDate(latest.date);
     const newTitle = `Cocoa Beach Surf Report — ${latest.day} ${dateStr} | Dog Walker Surf Report`;
-    html = html.replace(
-      /<title>[^<]*<\/title>/,
-      `<title>${esc(newTitle)}</title>`
-    );
+    html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(newTitle)}</title>`);
 
     // 4. Update meta description
     const desc = (latest.seoDescription || latest.text).substring(0, 155);
-    html = html.replace(
-      /<meta name="description" content="[^"]*">/,
-      `<meta name="description" content="${esc(desc)}">`
-    );
+    html = html.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(desc)}">`);
 
     // 5. Update OG tags
-    html = html.replace(
-      /<meta property="og:title" content="[^"]*">/,
-      `<meta property="og:title" content="${esc(newTitle)}">`
-    );
-    html = html.replace(
-      /<meta property="og:description" content="[^"]*">/,
-      `<meta property="og:description" content="${esc(desc)}">`
-    );
+    html = html.replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(newTitle)}">`);
+    html = html.replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(desc)}">`);
 
-    // 6. Add og:image with latest photo
+    // 6. Add og:image
     const ogImg = `${SITE}/photos/${latest.folder || latest.date}/1.jpg`;
     if (html.includes('og:image')) {
-      html = html.replace(
-        /<meta property="og:image" content="[^"]*">/,
-        `<meta property="og:image" content="${ogImg}">`
-      );
+      html = html.replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${ogImg}">`);
     } else {
-      html = html.replace(
-        '<meta property="og:type" content="website">',
-        `<meta property="og:type" content="website">\n<meta property="og:image" content="${ogImg}">`
-      );
+      html = html.replace('<meta property="og:type" content="website">', `<meta property="og:type" content="website">\n<meta property="og:image" content="${ogImg}">`);
     }
 
-    // 7. Inject static JSON-LD for reports before </head>
-    //    (your JS generateReportSchema will overwrite this with id="dwsr-report-schema")
+    // 7. Inject JSON-LD for reports
     const jsonLd = buildJsonLd(recent.slice(0, 10));
-    html = html.replace(
-      '</head>',
-      `<script type="application/ld+json" id="dwsr-report-schema">${jsonLd}</script>\n</head>`
-    );
+    html = html.replace('</head>', `<script type="application/ld+json" id="dwsr-report-schema">${jsonLd}</script>\n</head>`);
 
-    console.log('✅ Injected: today report, archive, meta tags, og:image, JSON-LD');
+    console.log('✅ Injected report, archive, meta tags, og:image, JSON-LD');
   }
 
-  // Write index.html back in place — Vercel serves from root
-  fs.writeFileSync('index.html', html);
-  console.log('🏄 Build complete — index.html updated in place');
+  // ── Write to public/ ──
+  fs.mkdirSync(OUT, { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'index.html'), html);
+
+  // Copy everything else to public/
+  const skip = new Set(['node_modules', OUT, '.git', '.gitignore', 'build.js', 'package.json', 'package-lock.json', 'vercel.json', '.vercel']);
+  copyDir('.', OUT, skip);
+
+  console.log(`🏄 Build complete → ${OUT}/`);
 }
 
 build();
