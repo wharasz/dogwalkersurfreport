@@ -472,7 +472,10 @@ footer a:hover{color:var(--teal)}
 async function loadReports(){
   try{
     const res=await fetch('reports.json?v='+Date.now());
-    const reports=await res.json();
+    const allReports = await res.json();
+const now = new Date();
+const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+const reports = allReports.filter(r => new Date(r.date) >= oneWeekAgo);;
     if(!reports.length)return;
     const today=reports[0];
     const pc=today.photos||1;
