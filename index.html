@@ -368,6 +368,7 @@ footer a:hover{color:var(--teal)}
 
       <div class="section-label" id="archive">Recent Reports</div>
       <div id="archive-list"><div class="report-card" style="padding:24px;text-align:center;color:var(--text-light)">Loading archive...</div></div>
+      <div style="text-align:center;margin-top:14px"><a href="archives.html" style="font-family:var(--font-display);font-size:14px;font-weight:700;letter-spacing:1px;color:var(--teal)">VIEW FULL ARCHIVE &rarr;</a></div>
     </main>
 
     <aside>
@@ -473,9 +474,9 @@ async function loadReports(){
   try{
     const res=await fetch('reports.json?v='+Date.now());
     const allReports = await res.json();
-const now = new Date();
-const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-const reports = allReports.filter(r => new Date(r.date) >= oneWeekAgo);;
+    const now = new Date(); now.setHours(0,0,0,0);
+    const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const reports = allReports.filter(r => new Date(r.date+'T00:00:00') >= oneWeekAgo);
     if(!reports.length)return;
     const today=reports[0];
     const pc=today.photos||1;
@@ -862,8 +863,13 @@ function renderLaunch(l){
   renderLaunchRaw(name,l.t0?new Date(l.t0):l.win_open?new Date(l.win_open):null);
 }
 function renderLaunchRaw(name,netDate){
+  const dateStr = netDate
+    ? netDate.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})
+      + ' · ' + netDate.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'})
+    : '';
   document.getElementById('launch-content').innerHTML=
     `<div class="launch-name">${name}</div>
+     ${dateStr ? `<div style="font-family:var(--font-mono);font-size:12px;color:var(--gold);margin-bottom:10px">${dateStr}</div>` : ''}
      <div class="countdown-grid" id="countdown-grid">
        <div class="countdown-unit"><div class="countdown-num" id="cd-d">--</div><div class="countdown-label">Days</div></div>
        <div class="countdown-unit"><div class="countdown-num" id="cd-h">--</div><div class="countdown-label">Hrs</div></div>
