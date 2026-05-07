@@ -45,9 +45,9 @@ function renderToday(r) {
   const folder = r.folder || r.date;
   const n = r.photos || 1;
   let thumbs = '';
-  for (let i = 1; i <= n; i++)
+  for (let i = 1; i <= n; i++){
   const alt = (r.photoAlts && r.photoAlts[i-1]) ? r.photoAlts[i-1] : `Cocoa Beach surf photo ${i} — ${r.headline}`;
-    thumbs += `<img src="photos/${folder}/${i}.jpg" alt="${esc(alt)}" ${i===1?'class="active"':''}>`
+    thumbs += `<img src="photos/${folder}/${i}.jpg" alt="${esc(alt)}" ${i===1?'class="active"':''}>`}
 
 const mainAlt = (r.photoAlts && r.photoAlts[0]) ? r.photoAlts[0] : `Cocoa Beach surf conditions at Picnic Tables — ${r.date}`;
   return `<div class="report-card">
