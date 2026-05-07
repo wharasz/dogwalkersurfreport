@@ -49,8 +49,9 @@ function renderToday(r) {
   const alt = (r.photoAlts && r.photoAlts[i-1]) ? r.photoAlts[i-1] : `Cocoa Beach surf photo ${i} — ${r.headline}`;
     thumbs += `<img src="photos/${folder}/${i}.jpg" alt="${esc(alt)}" ${i===1?'class="active"':''}>`
 
+const mainAlt = (r.photoAlts && r.photoAlts[0]) ? r.photoAlts[0] : `Cocoa Beach surf conditions at Picnic Tables — ${r.date}`;
   return `<div class="report-card">
-        <img src="photos/${folder}/1.jpg" alt="Cocoa Beach surf conditions at Picnic Tables — ${r.date}" class="report-photo-main" id="main-photo">
+        <img src="photos/${folder}/1.jpg" alt="${esc(mainAlt)}" class="report-photo-main" id="main-photo">
         <div class="report-thumbnails">${thumbs}</div>
         <div class="report-body">
           <div class="report-meta">${esc(r.day)}, ${fmtDate(r.date)} &middot; ${esc(r.time)}</div>
