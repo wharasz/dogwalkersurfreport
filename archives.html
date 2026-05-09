@@ -254,6 +254,7 @@
 <body>
 
 <div class="page-header">
+  <a href="/" style="text-decoration:none;color:var(--foam);font-size:0.85rem;opacity:0.7;display:block;margin-bottom:0.4rem;">&larr; Back to Today's Report</a>
   <h1>Surf Report Archives</h1>
   <p>Cocoa Beach's Best Surf Spot — Picnic Tables, South Cocoa Beach</p>
 </div>
@@ -272,7 +273,7 @@
 
 <script>
 // This fetches from your reports.json — update the path to match your site
-const REPORTS_URL = 'reports.json';
+const REPORTS_URL = '/reports.json';
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -358,7 +359,7 @@ function buildArchive(reports) {
       monthReports.forEach(r => {
         const link = document.createElement('a');
         link.className = 'report-link';
-        link.href = `#${r.folder}`;
+        link.href = `/reports/${r.folder}/`;
         // Build display text
         const dayName = r.day || '';
         const timeStr = r.time || '';
