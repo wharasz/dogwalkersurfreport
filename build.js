@@ -485,8 +485,48 @@ function build() {
   fs.writeFileSync(path.join(OUT, 'index.html'), html);
 
   // Copy everything else to public/
-  const skip = new Set(['node_modules', OUT, '.git', '.gitignore', 'build.js', 'package.json', 'package-lock.json', 'vercel.json', '.vercel','index.html','api']);
+  const skip = new Set(['node_modules', OUT, '.git', '.gitignore', 'build.js', 'package.json', 'package-lock.json', 'vercel.json', '.vercel','index.html','api','sitemap.xml']);
   copyDir('.', OUT, skip);
+
+  // ── Generate sitemap.xml ───────────────────────────────
+  const today = new Date().toISOString().split('T')[0];
+  let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${SITE}/archives.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${SITE}/advertise.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>`;
+
+  for (const r of reports) {
+    const folder = r.folder || r.date;
+    const iso = `${r.date}T${to24h(r.time)}:00-04:00`;
+    sitemap += `
+  <url>
+    <loc>${SITE}/reports/${folder}/</loc>
+    <lastmod>${r.date}</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>`;
+  }
+
+  sitemap += `
+</urlset>`;
+
+  fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemap);
+  console.log(`🗺️  Generated sitemap.xml with ${reports.length + 3} URLs`);
 
   console.log(`🏄 Build complete → ${OUT}/`);
 }
