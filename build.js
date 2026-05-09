@@ -270,10 +270,11 @@ ${styles}
 .rp-main-photo {
   width: 100%;
   border-radius: 12px;
-  aspect-ratio: 16/10;
-  object-fit: cover;
+  max-height: 520px;
+  object-fit: contain;
   display: block;
   margin-bottom: 12px;
+  background: rgba(0,0,0,0.2);
 }
 .rp-thumbs {
   display: flex;
