@@ -51,6 +51,35 @@ function reportUrl(r) {
   return `/reports/${r.folder || r.date}/`;
 }
 
+// ── Extract YouTube video ID from various URL formats ────
+function ytId(url) {
+  if (!url) return null;
+  // youtube.com/shorts/ID, youtube.com/watch?v=ID, youtu.be/ID
+  let m = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+  if (m) return m[1];
+  m = url.match(/[?&]v=([a-zA-Z0-9_-]+)/);
+  if (m) return m[1];
+  m = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+  if (m) return m[1];
+  return null;
+}
+function videoEmbed(r, isShorts) {
+  const id = ytId(r.video);
+  if (!id) return '';
+  // Detect if it's a Shorts URL for vertical aspect ratio
+  const isVertical = r.video && r.video.includes('/shorts/');
+  const aspect = isVertical ? '9/16' : '16/9';
+  const maxW = isVertical ? '350px' : '100%';
+  return `<div class="report-video" style="margin:16px auto;text-align:center;">
+    <iframe src="https://www.youtube.com/embed/${id}" 
+      title="Surf video — ${esc(r.date)}"
+      frameborder="0" allowfullscreen 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      style="width:100%;max-width:${maxW};aspect-ratio:${aspect};border-radius:8px;">
+    </iframe>
+  </div>`;
+}
+
 // ── Render today's report as static HTML ─────────────────
 function renderToday(r) {
   const folder = r.folder || r.date;
@@ -64,6 +93,7 @@ function renderToday(r) {
   return `<div class="report-card">
         <img src="/photos/${folder}/1.jpg" alt="${esc(mainAlt)}" class="report-photo-main" id="main-photo">
         <div class="report-thumbnails">${thumbs}</div>
+        ${videoEmbed(r)}
         <div class="report-body">
           <div class="report-meta">${esc(r.day)}, ${fmtDateShort(r.date)} &middot; ${esc(r.time)}</div>
           <h2 class="report-headline">${esc(r.headline)}</h2>
@@ -111,6 +141,7 @@ function buildSingleJsonLd(r) {
     "inLanguage": "en-US",
     "isAccessibleForFree": true,
     "image": imgs,
+    "video": r.video ? {"@type":"VideoObject","embedUrl":`https://www.youtube.com/embed/${ytId(r.video)}`,"contentUrl":r.video,"name":`Surf video — ${r.date}`,"description":r.text,"uploadDate":iso} : undefined,
     "author": {"@type":"Person","name":"Dog Walker — Picnic Tables, South Cocoa Beach","url":SITE},
     "publisher": {"@type":"Organization","@id":`${SITE}/#organization`,"name":"Dog Walker Surf Report","logo":{"@type":"ImageObject","url":`${SITE}/logo.png`}},
     "mainEntityOfPage": {"@type":"WebPage","@id":`${SITE}/reports/${folder}/`},
@@ -377,6 +408,7 @@ ${styles}
 <main class="rp-wrap">
   <img src="/photos/${folder}/1.jpg" alt="${esc(mainAlt)}" class="rp-main-photo" id="rp-main">
   <div class="rp-thumbs">${thumbs}</div>
+  ${videoEmbed(r)}
   <div class="rp-meta">${esc(r.day)}, ${fmtDate(r.date)} &middot; ${esc(r.time)}</div>
   <h1 class="rp-headline">${esc(r.headline)}</h1>
   <p class="rp-text">${esc(r.text)}</p>
