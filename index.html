@@ -462,6 +462,7 @@ footer a:hover{color:var(--teal)}
     </div>
     <img id="modal-main-photo" src="" alt="" class="report-photo-main">
     <div class="report-thumbnails" id="modal-thumbs"></div>
+    <div id="modal-video"></div>
     <div class="report-body"><p class="report-text" id="modal-text"></p></div>
   </div>
 </div>
@@ -487,6 +488,7 @@ async function loadReports(){
       `<div class="report-card">
         <img src="photos/${today.folder||today.date}/1.jpg" alt="Cocoa Beach surf conditions at Picnic Tables — ${today.date}" class="report-photo-main" id="main-photo">
         <div class="report-thumbnails">${thumbs}</div>
+        ${today.video ? `<div class="report-video" style="margin:16px auto;text-align:center;"><iframe src="https://www.youtube.com/embed/${(today.video.match(/shorts\/([a-zA-Z0-9_-]+)/)||today.video.match(/[?&]v=([a-zA-Z0-9_-]+)/)||[])[1]||''}" title="Surf video" frameborder="0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" style="width:100%;max-width:${today.video.includes('/shorts/')?'350px':'100%'};aspect-ratio:${today.video.includes('/shorts/')?'9/16':'16/9'};border-radius:8px;"></iframe></div>` : ''}
         <div class="report-body">
           <div class="report-meta">${today.day}, ${formatDate(today.date)} &middot; ${today.time}</div>
           <h2 class="report-headline">${today.headline}</h2>
@@ -528,6 +530,8 @@ function showArchive(idx){
   for(let i=1;i<=(r.photos||1);i++)
     thumbs+=`<img src="photos/${r.folder||r.date}/${i}.jpg" alt="Surf photo ${i}" ${i===1?'class="active"':''} onclick="switchModalPhoto(this)">`;
   document.getElementById('modal-thumbs').innerHTML=thumbs;
+  const mvEl=document.getElementById('modal-video');
+  if(r.video){const vid=r.video.match(/shorts\/([a-zA-Z0-9_-]+)/)||r.video.match(/[?&]v=([a-zA-Z0-9_-]+)/);mvEl.innerHTML=vid?`<div style="margin:16px auto;text-align:center;"><iframe src="https://www.youtube.com/embed/${vid[1]}" title="Surf video" frameborder="0" allowfullscreen style="width:100%;max-width:${r.video.includes('/shorts/')?'350px':'100%'};aspect-ratio:${r.video.includes('/shorts/')?'9/16':'16/9'};border-radius:8px;"></iframe></div>`:'';}else{mvEl.innerHTML='';}
   document.getElementById('archive-modal').classList.add('open');
 }
 function switchModalPhoto(el){
