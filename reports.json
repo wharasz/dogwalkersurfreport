@@ -2,6 +2,21 @@
   {
     "date": "2026-08-06",
     "day": "Thursday",
+    "time": "4:15 PM",
+    "folder": "2026-08-06-pm",
+    "headline": "4:15 PM midtide outgoing — 2-3' and building, east wind at 5-7 jumbling it up",
+    "text": "Afternoon check at 32nd Street and the swell finally showed up. Midtide outgoing at 4:15 with 5-7 mph of east wind putting a jumble in the lineup, so it's not pretty, but it's 2-3 feet and building through the afternoon. Waves are stacking up and breaking with some actual push behind them for the first time in days. Athena is standing there for scale if you want to size it up yourself. This is the front edge of it, so tomorrow is going to be a day. Keep an eye on the storms rolling through and stay safe out there.",
+    "photos": 4,
+    "photoAlts": [
+        "Athena the brindle surf dog standing on wet sand at 32nd Street with a 2-3 foot wave peeling behind her, whitewater running the length of the beach under overcast sky",
+        "Wide view of South Cocoa Beach with a chest-high set breaking down the line, puffy afternoon cumulus building offshore and Athena small in the foreground for scale",
+        "Textured east wind chop on the outside with a wave standing up and breaking, Athena the brindle dog watching from the dry sand at midtide outgoing",
+        "Athena the brindle surf dog in profile on the sand at 32nd Street, shoulder-high wave feathering to the right and a ship visible far out on the horizon"
+    ]
+},
+  {
+    "date": "2026-08-06",
+    "day": "Thursday",
     "time": "7:00 AM",
     "folder": "2026-08-06",
     "headline": "7 AM lowtide — 1-2' breaking right on the beach, very light NE winds and still waiting on swell",
