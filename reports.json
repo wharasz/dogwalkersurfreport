@@ -1,4 +1,20 @@
 [ 
+  [ 
+  {
+    "date": "2026-09-03",
+    "day": "Thursday",
+    "time": "6:30 AM",
+    "folder": "2026-09-02",
+    "headline": "Surf alert — 3-4' groundswell from Dolly's remnants breaking on the outside",
+    "text": "2' and breaking right off the shore at lowtide. Very small but glassy. Satellite to the south of us will still have a 2-3' shortboard wave. Get it while it lasts.",
+    "photos": 4,
+    "photoAlts": [
+        "Lines of groundswell stacking up on a silver dawn ocean seen through sea oats at 32nd Street, South Cocoa Beach, September 2026",
+        "Chest-high wave breaking outside with a clean shoulder, framed by sea oats on the dune at Picnic Tables, South Cocoa Beach",
+        "Peeling wave and glassy silver water viewed over the dune vegetation at first light, South Cocoa Beach, September 2026",
+        "Athena the brindle surf dog on the sand path through the dune, sunrise thunderhead glowing over the ocean behind her",
+    ]
+},
   {
     "date": "2026-09-02",
     "day": "Wednesday",
