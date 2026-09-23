@@ -1,5 +1,21 @@
 [ 
   {
+  "date": "2026-09-23",
+  "day": "Wednesday",
+  "time": "7:30 AM",
+  "folder": "photos/2026-09-23",
+  "headline": "Calm Before the Nor'easter",
+  "text": "0-1' with light west winds on the outgoing high tide at 7:30 am. Flat today, but a big nor'easter rolls in Friday through the weekend. So get ready.",
+  "photos": 5,
+  "photoAlts": [
+    "Glassy silver ocean beyond sea oats and sea grape on the dunes, with a small wave breaking near shore under a layered cloudy sky",
+    "Wide view of a calm, shimmering ocean framed by sea oats and green dune vegetation beneath soft white and blue clouds",
+    "Sandy path through the dunes leading to the beach, with a few people at the water's edge and towering clouds catching the morning light",
+    "Close-up of a small, clean ankle-high wave rolling in on a flat silver sea, framed by sea oats under dark gray-blue clouds",
+    "View from the wooden beach crossover down a sandy dune path, with a dog walking toward the water beneath dramatic streaked clouds and sunlight"
+  ]
+},
+  {
   "date": "2026-09-22",
   "day": "Tuesday",
   "time": "8:06 AM",
