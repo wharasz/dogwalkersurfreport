@@ -1,5 +1,23 @@
 [ 
   {
+  "date": "2026-10-01",
+  "day": "Thursday",
+  "time": "7:52 AM",
+  "folder": "2026-10-01",
+  "headline": "Blown Out and Rainy",
+  "text": "Mid-tide incoming with 1-2' waves, completely blown out by 15 mph ESE winds. Choppy, disorganized whitewater all the way to the horizon under gray skies, with a little pink breaking through the clouds to the east and rain moving through. Good day to stay dry.",
+  "photos": 7,
+  "photoAlts": [
+    "Choppy gray-green ocean with small breaking waves under heavy clouds, pink light glowing low on the eastern horizon",
+    "Wind-whipped sea oats bending over the dunes in front of messy, blown-out shorebreak",
+    "Overcast sky and choppy surf beyond the dune path, with a stretch of sand visible through the sea oats",
+    "Disorganized whitewater rolling in past sea oats, with pink-tinged clouds on the horizon to the left",
+    "Short-period wind swell breaking close to shore beneath a gray sky with faint pink clouds",
+    "Messy shorebreak and whitecaps offshore under layered storm clouds",
+    "Brindle dog sniffing the brush on the sandy dune path, gray ocean and overcast sky ahead"
+  ]
+},
+  {
   "date": "2026-09-30",
   "day": "Wednesday",
   "time": "8:40 AM",
