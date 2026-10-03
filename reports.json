@@ -1,5 +1,21 @@
 [ 
   {
+  "date": "2026-10-03",
+  "day": "Saturday",
+  "time": "8:25 AM",
+  "folder": "2026-10-03",
+  "headline": "Surf Alert! Shortboard Waves on the Incoming Tide",
+  "text": "8:25 am low tide, incoming. 2-3'+ with light 5 mph ESE winds. Very dumpy on our super shallow bars, but it looks like a decent shortboard wave. Surf alert! Get out there.",
+  "photos": 5,
+  "photoAlts": [
+    "Sea oats framing a breaking wave under puffy gray clouds with low tide foam across the inside",
+    "Two lines of waves peeling on the outer and inner bars beyond the dune crossover path",
+    "A wave pitching on the shallow bar with whitewater rolling toward the beach through the sea oats",
+    "Brown-tinged shortboard wave curling over the bar with pelicans along the horizon",
+    "Athena trotting down the sandy dune path toward the ocean between sea grapes and yellow beach flowers"
+  ]
+},
+  {
   "date": "2026-10-02",
   "day": "Friday",
   "time": "8:00 AM",
