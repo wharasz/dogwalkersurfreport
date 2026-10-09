@@ -1,5 +1,20 @@
 [ 
   {
+  "date": "2026-10-09",
+  "day": "Friday",
+  "time": "8:30 AM",
+  "folder": "2026-10-09",
+  "headline": "Choppy High Tide Bump",
+  "text": "8:30 am high tide, 2-3' and choppy with 12 mph SE winds. Still a surfable bump, but form is poor.",
+  "photos": 4,
+  "photoAlts": [
+    "Sea oats silhouetted against a choppy wave breaking into whitewater at high tide, with dune grass and beach morning glory spilling onto the sand at Cocoa Beach",
+    "Morning sun glinting silver across a wind-chopped ocean as a peeling wave breaks behind backlit sea oats, with sea grapes and dune flowers in the shadowed foreground",
+    "A rounded clump of bay cedar and sea grapes in the dune foreground, sea oats bending in the SE wind, and lines of choppy 2-3 foot surf breaking under a hazy sky",
+    "Athena trotting down a sandy dune path through sea grapes, yellow dune sunflowers, and dune grass toward the beach, with choppy surf and puffy clouds on the horizon"
+  ]
+},
+  {
   "date": "2026-10-08",
   "day": "Thursday",
   "time": "7:37 AM",
