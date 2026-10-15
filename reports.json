@@ -1,5 +1,21 @@
 [ 
   {
+  "date": "2026-10-15",
+  "day": "Thursday",
+  "time": "8:03 AM",
+  "folder": "2026-10-15",
+  "headline": "Small and bumpy on the incoming, swell on the way",
+  "text": "Low tide, incoming. 1-2' bumpy, crumbling lines with 10 mph ENE winds putting texture on everything. Not much shape this morning, but the forecast is turning: swell arrives this weekend and should hang around through next week.",
+  "photos": 5,
+  "photoAlts": [
+    "Small crumbling whitewater lines behind sea oats and dune vegetation under a partly cloudy sky",
+    "Green-tinged waves breaking in a long line across the inside, blue sky with scattered clouds",
+    "Wind-textured ocean with a small peeling wave framed by sea oats, layered clouds on the horizon",
+    "Small wave curling green through the sea oats at the end of the beach path, golden cloudy sky",
+    "Dog trotting down the sandy dune path toward the water with the morning sun glaring off the ocean"
+  ]
+},
+  {
   "date": "2026-10-14",
   "day": "Wednesday",
   "time": "7:40 AM",
