@@ -1,5 +1,21 @@
 [ 
   {
+  "date": "2026-10-19",
+  "day": "Monday",
+  "time": "7:55 AM",
+  "folder": "2026-10-19",
+  "headline": "Storm Surf: VAS Conditions Only",
+  "text": "Low tide with 5-7' VAS conditions, 25-30 mph gusts, and rain squalls moving through. Stacked rows of whitewater from the outer bar to the shore and a heavy drift running down the beach. Stay safe and wait for the winds to chill out.",
+  "photos": 5,
+  "photoAlts": [
+    "Gray, storm-churned ocean with multiple rows of breaking whitewater under an overcast sky, sea oats and a dune shrub in the foreground",
+    "Hazy golden sun glowing through rain squalls over a whitewater-covered surf zone, silhouetted sea oats along the dune",
+    "Amber-lit storm surf with a large wave curling and breaking outside and wind-bent sea oats in silhouette",
+    "Wall-to-wall whitewater with stacked, wind-torn breakers rolling toward shore beneath a pale gray sky",
+    "Ragged waves feathering in the wind over a foam-covered inside, sea oats swaying at the dune line"
+  ]
+},
+  {
   "date": "2026-10-18",
   "day": "Sunday",
   "time": "8:41 AM",
