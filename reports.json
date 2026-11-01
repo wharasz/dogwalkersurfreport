@@ -1,5 +1,22 @@
 [ 
   {
+  "date": "2026-11-01",
+  "day": "Sunday",
+  "time": "7:39 AM",
+  "folder": "2026-11-01",
+  "headline": "Bigger and Sloppier: 4-6' New Swell Gets Blown Out",
+  "text": "7:39 am low tide incoming, 4-6' sloppy new swell with 20+ mph ENE winds chopping it up. Heavy rains coming later today so stay dry.",
+  "photos": 6,
+  "photoAlts": [
+    "Five stacked lines of wind-torn whitewater rolling in under a gray sky, sea oats silhouetted in the foreground",
+    "Rows of breaking waves across the outer and inner bars with a heavy shorebreak exploding near the sand",
+    "A container ship on the horizon beyond multiple lines of choppy, breaking surf and windblown sea oats",
+    "Disorganized, wind-chopped waves stacking toward shore behind dune grass and bright green sea grape",
+    "Sea oats bending over the dune beside a seaweed-strewn beach with whitewater lines filling the surf zone",
+    "The dog sniffing along the sandy dune path toward the beach with stormy, white-capped surf beyond"
+  ]
+},
+  {
   "date": "2026-10-31",
   "day": "Saturday",
   "time": "8:26 AM",
