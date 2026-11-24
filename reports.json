@@ -1,4 +1,19 @@
-[ 
+[ {
+  "date": "2026-11-24",
+  "day": "Tuesday",
+  "time": "8:23 AM",
+  "folder": "2026-11-24",
+  "headline": "Grey Skies, Knee-High Lines, Turkey Day Swell on Deck",
+  "text": "Mid-tide and outgoing under a flat grey ceiling. Long 1-2 foot lines rolling in and breaking right on the beach, with a 7 mph NE wind putting some grain on the surface. Not much to paddle out for today, but surf is on the way later in the week for Thanksgiving.",
+  "photos": 5,
+  "photoAlts": [
+    "Overcast view over the dune grass and sea grape to a textured grey-green ocean, with a cargo ship on the horizon",
+    "Small wave feathering beyond the sea oats on a grey morning, with long lines stacked behind it",
+    "Beach access path through the sea oats opening onto calm, small shorebreak, with a ship on the horizon",
+    "Whitewater churning up the sand at the shoreline as a small line breaks just behind it",
+    "Knee-high wave peeling green with foam spread across the shoreline under grey skies"
+  ]
+},
   {
   "date": "2026-11-23",
   "day": "Monday",
